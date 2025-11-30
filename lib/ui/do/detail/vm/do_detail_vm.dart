@@ -13,11 +13,11 @@ class DoDetailVM extends _$DoDetailVM {
     return DoDetailState();
   }
 
-  Future<void> loadK3({String? resi}) async {
+  Future<void> loadK3({String? idGudang, String? idOrg}) async {
     try {
       final repo = await ref.read(doRepoProvider.future);
-      final res = await repo.getK3();
-      state = state.copyWith(status: DoDetailStatus.success);
+      final res = await repo.getK3(idGudang: idGudang, idOrg: idOrg);
+      state = state.copyWith(status: DoDetailStatus.success, data: res);
     } on ApiException catch (e, st) {
       debugPrint('ApiException: ${e.message}');
       state = state.copyWith(message: e.message, status: DoDetailStatus.error);

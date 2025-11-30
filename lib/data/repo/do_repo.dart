@@ -101,13 +101,13 @@ class DoRepo {
     }
   }
 
-  Future<K3Safety> getK3() async {
+  Future<K3Safety> getK3({String? idGudang, String? idOrg}) async {
     try {
       String? tokenFcm = await session.getFcmToken();
 
       var params = {"token": tokenFcm};
 
-      final res = await client.post("${api.urlGetK3Driver}/$tokenFcm/182/144");
+      final res = await client.post("${api.urlGetK3Driver}/$tokenFcm/$idGudang/$idOrg");
 
       if (res.statusCode == 200) {
         Map<String, dynamic> json = {'code': '0'};
