@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:approval/data/model/login/login_user.dart';
+import 'package:approval/data/model/user/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SessionManager {
   final String _isLogin = "is_login";
-  final String _userid = "userid";
   final String _user = "user";
+  final String _userData = "user_data";
   final String _token = "token";
   final String _fcmToken = "fcm_token";
 
@@ -20,10 +21,16 @@ class SessionManager {
     return _prefsInstance!;
   }
 
-  Future<bool> setUser(LoginUser login) async {
-    log("$runtimeType: setUser: ${login.toJson()}");
+  Future<bool> setUserLogin(LoginUser login) async {
+    log("$runtimeType: setUserLogin: ${login.toJson()}");
     final prefs = await instance;
     return prefs.setString(_user, json.encode(login));
+  }
+
+  Future<bool> setUserData(User login) async {
+    log("$runtimeType: setUserData: ${login.toJson()}");
+    final prefs = await instance;
+    return prefs.setString(_userData, json.encode(login));
   }
 
   Future<LoginUser?> getLoginUser() async {
@@ -38,6 +45,18 @@ class SessionManager {
     }
   }
 
+  Future<User?> getLoginData() async {
+    final prefs = await instance;
+    var data = prefs.getString(_userData);
+    if (data != null) {
+      var map = json.decode(data);
+      log("$runtimeType: getUserData: $map");
+      return User.fromJson(map);
+    } else {
+      return null;
+    }
+  }
+
   Future<bool> isLogin() async {
     final prefs = await instance;
     return prefs.getBool(_isLogin) ?? false;
@@ -47,19 +66,6 @@ class SessionManager {
     log("$runtimeType: setIsLogin: $value");
     final prefs = await instance;
     return prefs.setBool(_isLogin, value);
-  }
-
-  Future<String?> getUserId() async {
-    final prefs = await instance;
-    final res = prefs.getString(_userid);
-    log("$runtimeType: getUserId: $res");
-    return res;
-  }
-
-  Future<bool> setUserId(String value) async {
-    log("$runtimeType: setIsLogin: $value");
-    final prefs = await instance;
-    return prefs.setString(_userid, value);
   }
 
   Future<String?> getFcmToken() async {

@@ -56,8 +56,7 @@ class DialogConfirm extends StatelessWidget {
       case DialogConfirmType.warning:
         return Colors.orange;
       case DialogConfirmType.info:
-      default:
-        return Theme.of(context).colorScheme.primary;
+      return Theme.of(context).colorScheme.primary;
     }
   }
 
@@ -70,8 +69,7 @@ class DialogConfirm extends StatelessWidget {
       case DialogConfirmType.warning:
         return Icons.warning;
       case DialogConfirmType.info:
-      default:
-        return Icons.info;
+      return Icons.info;
     }
   }
 

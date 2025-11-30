@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DoState {
 
- bool get isError; String? get message; List<DeliveryOrder?> get data;
+ DoStatus get status; String? get message; List<DeliveryOrder?> get data; String? get search; String? get plant; String? get organizetion;
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $DoStateCopyWith<DoState> get copyWith => _$DoStateCopyWithImpl<DoState>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoState&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.data, data));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.organizetion, organizetion) || other.organizetion == organizetion));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isError,message,const DeepCollectionEquality().hash(data));
+int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(data),search,plant,organizetion);
 
 @override
 String toString() {
-  return 'DoState(isError: $isError, message: $message, data: $data)';
+  return 'DoState(status: $status, message: $message, data: $data, search: $search, plant: $plant, organizetion: $organizetion)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $DoStateCopyWith<$Res>  {
   factory $DoStateCopyWith(DoState value, $Res Function(DoState) _then) = _$DoStateCopyWithImpl;
 @useResult
 $Res call({
- bool isError, String? message, List<DeliveryOrder?> data
+ DoStatus status, String? message, List<DeliveryOrder?> data, String? search, String? plant, String? organizetion
 });
 
 
@@ -65,12 +65,15 @@ class _$DoStateCopyWithImpl<$Res>
 
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isError = null,Object? message = freezed,Object? data = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? search = freezed,Object? plant = freezed,Object? organizetion = freezed,}) {
   return _then(_self.copyWith(
-isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
-as bool,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as DoStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as List<DeliveryOrder?>,
+as List<DeliveryOrder?>,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
+as String?,plant: freezed == plant ? _self.plant : plant // ignore: cast_nullable_to_non_nullable
+as String?,organizetion: freezed == organizetion ? _self.organizetion : organizetion // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -155,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isError,  String? message,  List<DeliveryOrder?> data)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  String? search,  String? plant,  String? organizetion)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DoState() when $default != null:
-return $default(_that.isError,_that.message,_that.data);case _:
+return $default(_that.status,_that.message,_that.data,_that.search,_that.plant,_that.organizetion);case _:
   return orElse();
 
 }
@@ -176,10 +179,10 @@ return $default(_that.isError,_that.message,_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isError,  String? message,  List<DeliveryOrder?> data)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  String? search,  String? plant,  String? organizetion)  $default,) {final _that = this;
 switch (_that) {
 case _DoState():
-return $default(_that.isError,_that.message,_that.data);case _:
+return $default(_that.status,_that.message,_that.data,_that.search,_that.plant,_that.organizetion);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +199,10 @@ return $default(_that.isError,_that.message,_that.data);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isError,  String? message,  List<DeliveryOrder?> data)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  String? search,  String? plant,  String? organizetion)?  $default,) {final _that = this;
 switch (_that) {
 case _DoState() when $default != null:
-return $default(_that.isError,_that.message,_that.data);case _:
+return $default(_that.status,_that.message,_that.data,_that.search,_that.plant,_that.organizetion);case _:
   return null;
 
 }
@@ -211,10 +214,10 @@ return $default(_that.isError,_that.message,_that.data);case _:
 @JsonSerializable()
 
 class _DoState implements DoState {
-  const _DoState({this.isError = false, this.message, final  List<DeliveryOrder?> data = const []}): _data = data;
+  const _DoState({this.status = DoStatus.initial, this.message, final  List<DeliveryOrder?> data = const [], this.search, this.plant, this.organizetion}): _data = data;
   factory _DoState.fromJson(Map<String, dynamic> json) => _$DoStateFromJson(json);
 
-@override@JsonKey() final  bool isError;
+@override@JsonKey() final  DoStatus status;
 @override final  String? message;
  final  List<DeliveryOrder?> _data;
 @override@JsonKey() List<DeliveryOrder?> get data {
@@ -223,6 +226,9 @@ class _DoState implements DoState {
   return EqualUnmodifiableListView(_data);
 }
 
+@override final  String? search;
+@override final  String? plant;
+@override final  String? organizetion;
 
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
@@ -237,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoState&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._data, _data));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.organizetion, organizetion) || other.organizetion == organizetion));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isError,message,const DeepCollectionEquality().hash(_data));
+int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(_data),search,plant,organizetion);
 
 @override
 String toString() {
-  return 'DoState(isError: $isError, message: $message, data: $data)';
+  return 'DoState(status: $status, message: $message, data: $data, search: $search, plant: $plant, organizetion: $organizetion)';
 }
 
 
@@ -257,7 +263,7 @@ abstract mixin class _$DoStateCopyWith<$Res> implements $DoStateCopyWith<$Res> {
   factory _$DoStateCopyWith(_DoState value, $Res Function(_DoState) _then) = __$DoStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isError, String? message, List<DeliveryOrder?> data
+ DoStatus status, String? message, List<DeliveryOrder?> data, String? search, String? plant, String? organizetion
 });
 
 
@@ -274,12 +280,15 @@ class __$DoStateCopyWithImpl<$Res>
 
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isError = null,Object? message = freezed,Object? data = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? search = freezed,Object? plant = freezed,Object? organizetion = freezed,}) {
   return _then(_DoState(
-isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
-as bool,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as DoStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
-as List<DeliveryOrder?>,
+as List<DeliveryOrder?>,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
+as String?,plant: freezed == plant ? _self.plant : plant // ignore: cast_nullable_to_non_nullable
+as String?,organizetion: freezed == organizetion ? _self.organizetion : organizetion // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

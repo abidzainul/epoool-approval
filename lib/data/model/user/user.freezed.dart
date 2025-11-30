@@ -1,0 +1,301 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'user.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// dart format off
+T _$identity<T>(T value) => value;
+
+/// @nodoc
+mixin _$User {
+
+@JsonKey(name: 'id_driver') String get idDriver;@JsonKey(name: 'nama_driver') String get namaDriver;@JsonKey(name: 'id_transporter') String get idTransporter;@JsonKey(name: 'nama_transporter') String get namaTransporter;@JsonKey(name: 'telpon') String get telpon;@JsonKey(name: 'email') dynamic get email;@JsonKey(name: 'poin') String get poin;@JsonKey(name: 'foto') String get foto;@JsonKey(name: 'urlfoto') String get urlFoto;
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$identity);
+
+  /// Serializes this User to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.idDriver, idDriver) || other.idDriver == idDriver)&&(identical(other.namaDriver, namaDriver) || other.namaDriver == namaDriver)&&(identical(other.idTransporter, idTransporter) || other.idTransporter == idTransporter)&&(identical(other.namaTransporter, namaTransporter) || other.namaTransporter == namaTransporter)&&(identical(other.telpon, telpon) || other.telpon == telpon)&&const DeepCollectionEquality().equals(other.email, email)&&(identical(other.poin, poin) || other.poin == poin)&&(identical(other.foto, foto) || other.foto == foto)&&(identical(other.urlFoto, urlFoto) || other.urlFoto == urlFoto));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,idDriver,namaDriver,idTransporter,namaTransporter,telpon,const DeepCollectionEquality().hash(email),poin,foto,urlFoto);
+
+@override
+String toString() {
+  return 'User(idDriver: $idDriver, namaDriver: $namaDriver, idTransporter: $idTransporter, namaTransporter: $namaTransporter, telpon: $telpon, email: $email, poin: $poin, foto: $foto, urlFoto: $urlFoto)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UserCopyWith<$Res>  {
+  factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'id_driver') String idDriver,@JsonKey(name: 'nama_driver') String namaDriver,@JsonKey(name: 'id_transporter') String idTransporter,@JsonKey(name: 'nama_transporter') String namaTransporter,@JsonKey(name: 'telpon') String telpon,@JsonKey(name: 'email') dynamic email,@JsonKey(name: 'poin') String poin,@JsonKey(name: 'foto') String foto,@JsonKey(name: 'urlfoto') String urlFoto
+});
+
+
+
+
+}
+/// @nodoc
+class _$UserCopyWithImpl<$Res>
+    implements $UserCopyWith<$Res> {
+  _$UserCopyWithImpl(this._self, this._then);
+
+  final User _self;
+  final $Res Function(User) _then;
+
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? idDriver = null,Object? namaDriver = null,Object? idTransporter = null,Object? namaTransporter = null,Object? telpon = null,Object? email = freezed,Object? poin = null,Object? foto = null,Object? urlFoto = null,}) {
+  return _then(_self.copyWith(
+idDriver: null == idDriver ? _self.idDriver : idDriver // ignore: cast_nullable_to_non_nullable
+as String,namaDriver: null == namaDriver ? _self.namaDriver : namaDriver // ignore: cast_nullable_to_non_nullable
+as String,idTransporter: null == idTransporter ? _self.idTransporter : idTransporter // ignore: cast_nullable_to_non_nullable
+as String,namaTransporter: null == namaTransporter ? _self.namaTransporter : namaTransporter // ignore: cast_nullable_to_non_nullable
+as String,telpon: null == telpon ? _self.telpon : telpon // ignore: cast_nullable_to_non_nullable
+as String,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as dynamic,poin: null == poin ? _self.poin : poin // ignore: cast_nullable_to_non_nullable
+as String,foto: null == foto ? _self.foto : foto // ignore: cast_nullable_to_non_nullable
+as String,urlFoto: null == urlFoto ? _self.urlFoto : urlFoto // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [User].
+extension UserPatterns on User {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _User value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _User value)  $default,){
+final _that = this;
+switch (_that) {
+case _User():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _User value)?  $default,){
+final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_driver')  String idDriver, @JsonKey(name: 'nama_driver')  String namaDriver, @JsonKey(name: 'id_transporter')  String idTransporter, @JsonKey(name: 'nama_transporter')  String namaTransporter, @JsonKey(name: 'telpon')  String telpon, @JsonKey(name: 'email')  dynamic email, @JsonKey(name: 'poin')  String poin, @JsonKey(name: 'foto')  String foto, @JsonKey(name: 'urlfoto')  String urlFoto)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that.idDriver,_that.namaDriver,_that.idTransporter,_that.namaTransporter,_that.telpon,_that.email,_that.poin,_that.foto,_that.urlFoto);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_driver')  String idDriver, @JsonKey(name: 'nama_driver')  String namaDriver, @JsonKey(name: 'id_transporter')  String idTransporter, @JsonKey(name: 'nama_transporter')  String namaTransporter, @JsonKey(name: 'telpon')  String telpon, @JsonKey(name: 'email')  dynamic email, @JsonKey(name: 'poin')  String poin, @JsonKey(name: 'foto')  String foto, @JsonKey(name: 'urlfoto')  String urlFoto)  $default,) {final _that = this;
+switch (_that) {
+case _User():
+return $default(_that.idDriver,_that.namaDriver,_that.idTransporter,_that.namaTransporter,_that.telpon,_that.email,_that.poin,_that.foto,_that.urlFoto);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id_driver')  String idDriver, @JsonKey(name: 'nama_driver')  String namaDriver, @JsonKey(name: 'id_transporter')  String idTransporter, @JsonKey(name: 'nama_transporter')  String namaTransporter, @JsonKey(name: 'telpon')  String telpon, @JsonKey(name: 'email')  dynamic email, @JsonKey(name: 'poin')  String poin, @JsonKey(name: 'foto')  String foto, @JsonKey(name: 'urlfoto')  String urlFoto)?  $default,) {final _that = this;
+switch (_that) {
+case _User() when $default != null:
+return $default(_that.idDriver,_that.namaDriver,_that.idTransporter,_that.namaTransporter,_that.telpon,_that.email,_that.poin,_that.foto,_that.urlFoto);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _User implements User {
+  const _User({@JsonKey(name: 'id_driver') this.idDriver = '', @JsonKey(name: 'nama_driver') this.namaDriver = '', @JsonKey(name: 'id_transporter') this.idTransporter = '', @JsonKey(name: 'nama_transporter') this.namaTransporter = '', @JsonKey(name: 'telpon') this.telpon = '', @JsonKey(name: 'email') this.email, @JsonKey(name: 'poin') this.poin = '', @JsonKey(name: 'foto') this.foto = '', @JsonKey(name: 'urlfoto') this.urlFoto = ''});
+  factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+@override@JsonKey(name: 'id_driver') final  String idDriver;
+@override@JsonKey(name: 'nama_driver') final  String namaDriver;
+@override@JsonKey(name: 'id_transporter') final  String idTransporter;
+@override@JsonKey(name: 'nama_transporter') final  String namaTransporter;
+@override@JsonKey(name: 'telpon') final  String telpon;
+@override@JsonKey(name: 'email') final  dynamic email;
+@override@JsonKey(name: 'poin') final  String poin;
+@override@JsonKey(name: 'foto') final  String foto;
+@override@JsonKey(name: 'urlfoto') final  String urlFoto;
+
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UserCopyWith<_User> get copyWith => __$UserCopyWithImpl<_User>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$UserToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.idDriver, idDriver) || other.idDriver == idDriver)&&(identical(other.namaDriver, namaDriver) || other.namaDriver == namaDriver)&&(identical(other.idTransporter, idTransporter) || other.idTransporter == idTransporter)&&(identical(other.namaTransporter, namaTransporter) || other.namaTransporter == namaTransporter)&&(identical(other.telpon, telpon) || other.telpon == telpon)&&const DeepCollectionEquality().equals(other.email, email)&&(identical(other.poin, poin) || other.poin == poin)&&(identical(other.foto, foto) || other.foto == foto)&&(identical(other.urlFoto, urlFoto) || other.urlFoto == urlFoto));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,idDriver,namaDriver,idTransporter,namaTransporter,telpon,const DeepCollectionEquality().hash(email),poin,foto,urlFoto);
+
+@override
+String toString() {
+  return 'User(idDriver: $idDriver, namaDriver: $namaDriver, idTransporter: $idTransporter, namaTransporter: $namaTransporter, telpon: $telpon, email: $email, poin: $poin, foto: $foto, urlFoto: $urlFoto)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
+  factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: 'id_driver') String idDriver,@JsonKey(name: 'nama_driver') String namaDriver,@JsonKey(name: 'id_transporter') String idTransporter,@JsonKey(name: 'nama_transporter') String namaTransporter,@JsonKey(name: 'telpon') String telpon,@JsonKey(name: 'email') dynamic email,@JsonKey(name: 'poin') String poin,@JsonKey(name: 'foto') String foto,@JsonKey(name: 'urlfoto') String urlFoto
+});
+
+
+
+
+}
+/// @nodoc
+class __$UserCopyWithImpl<$Res>
+    implements _$UserCopyWith<$Res> {
+  __$UserCopyWithImpl(this._self, this._then);
+
+  final _User _self;
+  final $Res Function(_User) _then;
+
+/// Create a copy of User
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? idDriver = null,Object? namaDriver = null,Object? idTransporter = null,Object? namaTransporter = null,Object? telpon = null,Object? email = freezed,Object? poin = null,Object? foto = null,Object? urlFoto = null,}) {
+  return _then(_User(
+idDriver: null == idDriver ? _self.idDriver : idDriver // ignore: cast_nullable_to_non_nullable
+as String,namaDriver: null == namaDriver ? _self.namaDriver : namaDriver // ignore: cast_nullable_to_non_nullable
+as String,idTransporter: null == idTransporter ? _self.idTransporter : idTransporter // ignore: cast_nullable_to_non_nullable
+as String,namaTransporter: null == namaTransporter ? _self.namaTransporter : namaTransporter // ignore: cast_nullable_to_non_nullable
+as String,telpon: null == telpon ? _self.telpon : telpon // ignore: cast_nullable_to_non_nullable
+as String,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as dynamic,poin: null == poin ? _self.poin : poin // ignore: cast_nullable_to_non_nullable
+as String,foto: null == foto ? _self.foto : foto // ignore: cast_nullable_to_non_nullable
+as String,urlFoto: null == urlFoto ? _self.urlFoto : urlFoto // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+// dart format on

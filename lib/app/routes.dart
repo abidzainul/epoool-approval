@@ -1,4 +1,6 @@
-import 'package:approval/ui/do/do_page.dart';
+import 'package:approval/data/model/do/delivery_order.dart';
+import 'package:approval/ui/do/detail/do_detail_page.dart';
+import 'package:approval/ui/do/list/do_page.dart';
 import 'package:approval/ui/drawer_nav/drawer_nav_page.dart';
 import 'package:approval/ui/login/login_page.dart';
 import 'package:approval/ui/splashscreen/splashscreen.dart';
@@ -11,6 +13,7 @@ class AppRoute {
   static final register = '/register';
   static final navBarHome = '/home_drawer';
   static final doPage = '/do';
+  static final doDetailPage = '/do_detail';
 
   @override
   String toString() {
@@ -34,14 +37,6 @@ class Routes {
         path: AppRoute.login,
         builder: (_, state) => const LoginPage(),
       ),
-      // GoRoute(
-      //   name: AppRoute.register.toString(),
-      //   path: AppRoute.register,
-      //   builder: (_, state) {
-      //     final data = state.extra as String;
-      //     return RegisterPage(phone: data);
-      //   },
-      // ),
       GoRoute(
         name: AppRoute.navBarHome.toString(),
         path: AppRoute.navBarHome,
@@ -51,6 +46,14 @@ class Routes {
         name: AppRoute.doPage.toString(),
         path: AppRoute.doPage,
         builder: (_, state) => const DoPage(),
+      ),
+      GoRoute(
+        name: AppRoute.doDetailPage.toString(),
+        path: AppRoute.doDetailPage,
+          builder: (_, state) {
+            final data = state.extra as DeliveryOrder;
+            return DoDetailPage(data: data);
+          },
       ),
     ],
   );

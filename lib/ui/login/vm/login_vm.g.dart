@@ -32,7 +32,7 @@ final class LoginVMProvider extends $AsyncNotifierProvider<LoginVM, LoginUser> {
   LoginVM create() => LoginVM();
 }
 
-String _$loginVMHash() => r'40d8a682ba611ae07e73e463354e82f438b9bed5';
+String _$loginVMHash() => r'15943e63427e5152e504374e32942e5a13d4ec1a';
 
 abstract class _$LoginVM extends $AsyncNotifier<LoginUser> {
   FutureOr<LoginUser> build();

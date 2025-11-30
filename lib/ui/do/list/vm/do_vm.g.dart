@@ -12,7 +12,7 @@ part of 'do_vm.dart';
 @ProviderFor(DoVM)
 const doVMProvider = DoVMProvider._();
 
-final class DoVMProvider extends $AsyncNotifierProvider<DoVM, DoState> {
+final class DoVMProvider extends $NotifierProvider<DoVM, DoState> {
   const DoVMProvider._()
     : super(
         from: null,
@@ -30,22 +30,30 @@ final class DoVMProvider extends $AsyncNotifierProvider<DoVM, DoState> {
   @$internal
   @override
   DoVM create() => DoVM();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DoState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DoState>(value),
+    );
+  }
 }
 
-String _$doVMHash() => r'b3b15e0f3caac63bacd15c79736893783ce4199f';
+String _$doVMHash() => r'd1662af274e8e7048701de5708a6b8f098339792';
 
-abstract class _$DoVM extends $AsyncNotifier<DoState> {
-  FutureOr<DoState> build();
+abstract class _$DoVM extends $Notifier<DoState> {
+  DoState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<DoState>, DoState>;
+    final ref = this.ref as $Ref<DoState, DoState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<DoState>, DoState>,
-              AsyncValue<DoState>,
+              AnyNotifier<DoState, DoState>,
+              DoState,
               Object?,
               Object?
             >;

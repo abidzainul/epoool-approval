@@ -1,0 +1,233 @@
+import 'package:approval/app/routes.dart';
+import 'package:approval/ui/do/list/state/do_state.dart';
+import 'package:approval/ui/do/list/vm/do_vm.dart';
+import 'package:approval/ui/do/list/widget/do_lv_item.dart';
+import 'package:approval/utils/widget/layout/layout_widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+class DoPage extends ConsumerStatefulWidget {
+  const DoPage({super.key});
+
+  @override
+  ConsumerState<DoPage> createState() => _DoPageState();
+}
+
+class _DoPageState extends ConsumerState<DoPage> {
+  final TextEditingController _tecNopol = TextEditingController();
+  final TextEditingController _tecPlant = TextEditingController();
+  final TextEditingController _tecOrg = TextEditingController();
+  String? selectedPlant;
+  String? selectedOrg;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _tecNopol.dispose();
+    _tecPlant.dispose();
+    _tecOrg.dispose();
+    super.dispose();
+  }
+
+  void _performSearch() {
+    final nopol = _tecNopol.text.trim();
+    final plant = _tecPlant.text.trim();
+    final org = _tecOrg.text.trim();
+    ref
+        .read(doVMProvider.notifier)
+        .searchOrder(nopol: nopol, plant: plant, org: org);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(doVMProvider);
+
+    return Scaffold(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _tecPlant,
+                        decoration: InputDecoration(
+                          hintText: 'Plant',
+                          prefixIcon: const Icon(Icons.factory),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 12.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        controller: _tecOrg,
+                        decoration: InputDecoration(
+                          hintText: 'Organization',
+                          prefixIcon: const Icon(Icons.credit_card_sharp),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 12.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _tecNopol,
+                        decoration: InputDecoration(
+                          hintText: 'Cari berdasarkan no plat...',
+                          prefixIcon: const Icon(Icons.local_shipping),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 12.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8.0),
+                    ElevatedButton.icon(
+                      onPressed: _performSearch,
+                      icon: const Icon(Icons.search),
+                      label: const Text('Cari'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Builder(
+              builder: (context) {
+                if (state.status == DoStatus.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (state.status == DoStatus.error) {
+                  return ErrorLayout(
+                    title: 'Failed to Load Orders',
+                    description: state.message ?? 'Unknown error',
+                    onRetry: () {
+                      ref
+                          .read(doVMProvider.notifier)
+                          .loadOrders(
+                            search: state.search,
+                            plant: state.plant,
+                            organizetion: state.organizetion,
+                          );
+                    },
+                  );
+                }
+
+                if (state.data.isEmpty) {
+                  return EmptyLayout(
+                    title: 'No Delivery Orders',
+                    icon: Icons.local_shipping,
+                    onRefresh: () {
+                      ref
+                          .read(doVMProvider.notifier)
+                          .loadOrders(
+                            search: state.search,
+                            plant: state.plant,
+                            organizetion: state.organizetion,
+                          );
+                    },
+                  );
+                }
+
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    await ref
+                        .read(doVMProvider.notifier)
+                        .loadOrders(
+                          search: state.search,
+                          plant: state.plant,
+                          organizetion: state.organizetion,
+                        );
+                  },
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    itemCount: state.data.length,
+                    itemBuilder: (c, i) {
+                      final item = state.data[i];
+                      return DoLvItem(
+                        title: item?.resi,
+                        subtitle: item?.namaJamMuat,
+                        resi: item?.totalQty,
+                        date: item?.dateAdd,
+                        isApprove: item?.safetyCheck == "1",
+                        onTap: () {
+                          context.push(AppRoute.doDetailPage, extra: item);
+                        },
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // void _showDialogApprove(String noResi) {
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (ctx) => DialogConfirm(
+  //       title: 'Approve',
+  //       message: 'Are you sure you want to approve?',
+  //       positiveText: 'Approve',
+  //       negativeText: 'Cancel',
+  //       onPositive: () async {
+  //         await ref.read(doVMProvider.notifier).approveOrder(noResi);
+  //
+  //         // check approve status and show error if needed
+  //         final newState = ref.read(doVMProvider);
+  //         if (newState.statusApprove == DoStatusApprove.error) {
+  //           // show error using a simple dialog info (you may replace with DialogInfo)
+  //           showDialog(
+  //             context: context,
+  //             builder: (_) => AlertDialog(
+  //               title: const Text('Error'),
+  //               content: Text(newState.message ?? 'Approve failed'),
+  //               actions: [
+  //                 TextButton(onPressed: () => context.pop(), child: const Text('OK')),
+  //               ],
+  //             ),
+  //           );
+  //         } else {
+  //           // close confirm dialog
+  //           context.pop();
+  //         }
+  //       },
+  //     ),
+  //   );
+  // }
+}

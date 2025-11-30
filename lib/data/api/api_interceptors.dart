@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -29,8 +28,7 @@ Future<RequestOptions> requestOptions(RequestOptions options) async {
 }
 
 class ApiInterceptors extends Interceptor {
-  Dio _dio;
-  ApiInterceptors(this._dio);
+  ApiInterceptors();
 
   @override
   void onRequest(

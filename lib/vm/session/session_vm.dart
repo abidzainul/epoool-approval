@@ -1,5 +1,8 @@
 import 'package:approval/data/model/login/login_user.dart';
+import 'package:approval/data/model/user/user.dart';
+import 'package:approval/data/repo/auth_repo.dart';
 import 'package:approval/data/session/session_manager.dart';
+import 'package:approval/vm/session/state/session_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'session_vm.g.dart';
@@ -7,32 +10,55 @@ part 'session_vm.g.dart';
 @riverpod
 class SessionVM extends _$SessionVM {
   @override
-  Future<LoginUser?> build() async {
+  Future<SessionState> build() async {
     final sessionManager = ref.read(sessionProvider);
-    return await sessionManager.getLoginUser();
+
+    final loginUser = await sessionManager.getLoginUser();
+    final userData = await sessionManager.getLoginData();
+    final isLoggedIn = await sessionManager.isLogin();
+
+    return SessionState(
+      login: loginUser,
+      user: userData,
+      isLoggedIn: isLoggedIn,
+    );
   }
 
   Future<void> logout() async {
     final sessionManager = ref.read(sessionProvider);
-    await sessionManager.destroy();
+    final authRepo = await ref.read(authRepoProvider.future);
+    try {
+      await authRepo.logout();
+      await sessionManager.destroy();
+    } catch (e) {
+
+    }
 
     ref.invalidateSelf();
   }
 
-  String getUserName(LoginUser? user) {
-    return user?.username ?? 'User';
+  String? getUserPhoto() {
+    final currentState = state.value;
+    if (currentState?.user?.urlFoto.isNotEmpty == true) {
+      return currentState!.user!.urlFoto;
+    }
+    return null;
   }
 
-  String getUserEmail(LoginUser? user) {
-    return user?.noHp ?? 'No phone number';
-  }
-
-  String? getUserPhoto(LoginUser? user) {
-    return user?.versiFoto;
-  }
-
-  bool hasUserPhoto(LoginUser? user) {
-    final photo = getUserPhoto(user);
+  bool hasUserPhoto() {
+    final photo = getUserPhoto();
     return photo != null && photo.isNotEmpty;
+  }
+
+  bool get isLoggedIn {
+    return state.value?.isLoggedIn ?? false;
+  }
+
+  LoginUser? get login {
+    return state.value?.login;
+  }
+
+  User? get user {
+    return state.value?.user;
   }
 }

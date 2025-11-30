@@ -1,5 +1,5 @@
 import 'package:approval/app/routes.dart';
-import 'package:approval/ui/do/do_page.dart';
+import 'package:approval/ui/do/list/do_page.dart';
 import 'package:approval/ui/drawer_nav/vm/drawer_nav_vm.dart';
 import 'package:approval/utils/widget/dialog/dialog_confirm.dart';
 import 'package:approval/vm/session/session_vm.dart';
@@ -18,23 +18,29 @@ class DrawerNavigationPage extends ConsumerWidget {
     final drawerVM = ref.read(drawerNavigationVMProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(drawerState.selectedItem.title),
-      ),
+      appBar: AppBar(title: Text(drawerState.selectedItem.title)),
       drawer: sessionAsyncValue.when(
         data: (user) {
-          final userName = sessionVM.getUserName(user);
-          final userEmail = sessionVM.getUserEmail(user);
-          final userPhoto = sessionVM.getUserPhoto(user);
-          final hasPhoto = sessionVM.hasUserPhoto(user);
+          final user = sessionVM.login;
+          final hasPhoto = sessionVM.hasUserPhoto();
+          final userPhoto = sessionVM.getUserPhoto();
 
           return Drawer(
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
                 UserAccountsDrawerHeader(
-                  accountName: Text(userName),
-                  accountEmail: Text(userEmail),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/bg_nav.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  accountName: Text(
+                    user?.username ?? '',
+                    style: TextStyle(fontSize: 18, fontWeight: .bold),
+                  ),
+                  accountEmail: Text(user?.noHp ?? ''),
                   currentAccountPicture: CircleAvatar(
                     backgroundColor: Colors.white,
                     child: hasPhoto
@@ -54,10 +60,14 @@ class DrawerNavigationPage extends ConsumerWidget {
                               },
                             ),
                           )
-                        : const Icon(
-                            Icons.person,
-                            size: 40,
-                            color: Colors.grey,
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.asset(
+                              "assets/icons/app_icon.png",
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                   ),
                 ),
@@ -75,13 +85,6 @@ class DrawerNavigationPage extends ConsumerWidget {
                   onTap: () {
                     drawerVM.selectMenuByKey('do');
                     Navigator.pop(context); // Close the drawer
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.settings),
-                  title: const Text('Settings'),
-                  onTap: () {
-                    Navigator.pop(context);
                   },
                 ),
                 const Divider(),
@@ -112,11 +115,8 @@ class DrawerNavigationPage extends ConsumerWidget {
             ),
           );
         },
-        loading: () => const Drawer(
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
+        loading: () =>
+            const Drawer(child: Center(child: CircularProgressIndicator())),
         error: (error, stackTrace) => Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -126,11 +126,7 @@ class DrawerNavigationPage extends ConsumerWidget {
                 accountEmail: Text('Failed to load user data'),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.error,
-                    size: 40,
-                    color: Colors.red,
-                  ),
+                  child: Icon(Icons.error, size: 40, color: Colors.red),
                 ),
               ),
               ListTile(
@@ -138,13 +134,6 @@ class DrawerNavigationPage extends ConsumerWidget {
                 title: const Text('Home'),
                 onTap: () {
                   drawerVM.selectMenuByKey('home');
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text('Settings'),
-                onTap: () {
                   Navigator.pop(context);
                 },
               ),
@@ -165,9 +154,7 @@ class DrawerNavigationPage extends ConsumerWidget {
       ),
       body: drawerState.selectedItem.key == 'do'
           ? const DoPage()
-          : const Center(
-              child: Text('Welcome to the Home Page!'),
-            ),
+          : const Center(child: Text('Welcome to the Home Page!')),
     );
   }
 }

@@ -45,7 +45,7 @@ class DioHelper {
       },
     );
 
-    dio.interceptors.add(ApiInterceptors(dio));
+    dio.interceptors.add(ApiInterceptors());
     if(kDebugMode){
       dio.interceptors.add(LogInterceptor(responseBody: true));
       dio.interceptors.add(PrettyDioLogger());

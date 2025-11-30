@@ -13,7 +13,7 @@ part of 'session_vm.dart';
 const sessionVMProvider = SessionVMProvider._();
 
 final class SessionVMProvider
-    extends $AsyncNotifierProvider<SessionVM, LoginUser?> {
+    extends $AsyncNotifierProvider<SessionVM, SessionState> {
   const SessionVMProvider._()
     : super(
         from: null,
@@ -33,20 +33,20 @@ final class SessionVMProvider
   SessionVM create() => SessionVM();
 }
 
-String _$sessionVMHash() => r'235765b638137931552ad2a33337cd61f2ab4651';
+String _$sessionVMHash() => r'24cae5a9bd20eee90ad340e379e9f3f12d97d13d';
 
-abstract class _$SessionVM extends $AsyncNotifier<LoginUser?> {
-  FutureOr<LoginUser?> build();
+abstract class _$SessionVM extends $AsyncNotifier<SessionState> {
+  FutureOr<SessionState> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<LoginUser?>, LoginUser?>;
+    final ref = this.ref as $Ref<AsyncValue<SessionState>, SessionState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<LoginUser?>, LoginUser?>,
-              AsyncValue<LoginUser?>,
+              AnyNotifier<AsyncValue<SessionState>, SessionState>,
+              AsyncValue<SessionState>,
               Object?,
               Object?
             >;

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:approval/app/my_app.dart';
 import 'package:approval/data/api/api_services.dart' as api;
 import 'package:approval/data/api/client/api_client.dart';
+import 'package:approval/firebase_options.dart';
 import 'package:approval/services/my_http_overrides.dart';
 import 'package:approval/services/notification_service.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,12 +19,7 @@ void main() async {
 
   // Firebase
   await Firebase.initializeApp(
-    options: FirebaseOptions(
-      apiKey: "AIzaSyBYmzv11PX-VrNhJShn7Vt5ZuSTEkCzS8E",
-      appId: "879836875249-7f4b26e18m1jbr8ihiq9co3njh3880vc.apps.googleusercontent.com",
-      messagingSenderId: "879836875249-7f4b26e18m1jbr8ihiq9co3njh3880vc.apps.googleusercontent.com",
-      projectId: "my-project-1480997601519",
-    ),
+    options: DefaultFirebaseOptions.currentPlatform,
   );
 
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);

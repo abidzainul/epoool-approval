@@ -1,13 +1,13 @@
 import 'package:approval/app/routes.dart';
+import 'package:approval/data/api/api_exception.dart';
 import 'package:approval/data/model/login/login_user.dart';
 import 'package:approval/utils/widget/dialog/dialog_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'vm/login_vm.dart';
-import 'package:approval/data/api/api_exception.dart';
-import 'state/login_state.dart';
 import 'package:go_router/go_router.dart';
+
+import 'vm/login_vm.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
@@ -46,7 +46,9 @@ class LoginPage extends ConsumerWidget {
 
     if (kDebugMode) {
       // usernameController.text = '202306080239589427';
-      usernameController.text = 'MUS28127';
+      // usernameController.text = 'mega_distributor7900';
+      usernameController.text = 'akbar_sg';
+      // usernameController.text = 'MUS28127';
       passwordController.text = 'admin';
     }
 

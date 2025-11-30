@@ -33,10 +33,13 @@ class SplashScreen extends ConsumerWidget {
             fit: BoxFit.cover,
           ),
           Center(
-            child: Image.asset(
-              'assets/images/logo_epoool.png',
-              width: 200,
-              height: 200,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.asset(
+                'assets/icons/app_icon.png',
+                width: 200,
+                height: 200,
+              ),
             ),
           ),
         ],
