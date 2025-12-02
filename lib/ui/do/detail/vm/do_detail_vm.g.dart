@@ -41,7 +41,7 @@ final class DoDetailVMProvider
   }
 }
 
-String _$doDetailVMHash() => r'fda86d4e6c54aa6c6ceadf1f56edef7f28dad507';
+String _$doDetailVMHash() => r'6fd674ffcb49dcf2f6a9cf7498966ebfe4a006de';
 
 abstract class _$DoDetailVM extends $Notifier<DoDetailState> {
   DoDetailState build();

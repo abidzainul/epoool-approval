@@ -1,14 +1,19 @@
+import 'dart:developer';
+
 import 'package:approval/data/model/do/delivery_order.dart';
 import 'package:approval/ui/do/detail/state/do_detail_state.dart';
 import 'package:approval/ui/do/detail/vm/do_detail_vm.dart';
 import 'package:approval/ui/do/detail/widget/k3_checklist_item.dart';
 import 'package:approval/utils/widget/dialog/dialog_confirm.dart';
+import 'package:approval/utils/widget/dialog/dialog_confirm_custom.dart';
 import 'package:approval/utils/widget/layout/layout_widgets.dart';
 import 'package:approval/vm/image_picker/image_picker_vm.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as p;
 
 class DoDetailPage extends ConsumerStatefulWidget {
   final DeliveryOrder? data;
@@ -21,13 +26,19 @@ class DoDetailPage extends ConsumerStatefulWidget {
 class _DoDetailPageState extends ConsumerState<DoDetailPage> {
   @override
   void initState() {
+    loadData();
+    super.initState();
+  }
+
+  Future<void> loadData() async {
+    log("${widget.data?.toJson()}");
     ref
         .read(doDetailVMProvider.notifier)
         .loadK3(
-          idGudang: widget.data?.idGudang,
-          idOrg: widget.data?.idOriginator,
+          idGudang: widget.data?.transaction?.idGudang,
+          idOrg: widget.data?.transaction?.idOriginator,
+          listFoto: widget.data?.safetyCheck ?? [],
         );
-    super.initState();
   }
 
   @override
@@ -43,7 +54,8 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
       appBar: AppBar(title: Text("Detail")),
       body: Builder(
         builder: (context) {
-          if (state.status == DoDetailStatus.loading) {
+          if (state.status == DoDetailStatus.initial ||
+              state.status == DoDetailStatus.loading) {
             return const Center(child: CircularProgressIndicator());
           }
 
@@ -52,48 +64,157 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
               title: 'Failed to Load Orders',
               description: state.message ?? 'Unknown error',
               onRetry: () {
-                ref
-                    .read(doDetailVMProvider.notifier)
-                    .loadK3(
-                      idGudang: widget.data?.idGudang,
-                      idOrg: widget.data?.idOriginator,
-                    );
+                loadData();
               },
             );
           }
 
-          if (state.data == null) {
+          if (state.checklist.isEmpty) {
             return EmptyLayout(
               title: 'No Delivery Orders',
               icon: Icons.local_shipping,
               onRefresh: () {
-                ref
-                    .read(doDetailVMProvider.notifier)
-                    .loadK3(
-                      idGudang: widget.data?.idGudang,
-                      idOrg: widget.data?.idOriginator,
-                    );
+                loadData();
               },
             );
           }
 
           return RefreshIndicator(
             onRefresh: () async {
-              await ref
-                  .read(doDetailVMProvider.notifier)
-                  .loadK3(
-                    idGudang: widget.data?.idGudang,
-                    idOrg: widget.data?.idOriginator,
-                  );
+              await loadData();
             },
             child: ListView(
               children: [
+                // ListView.separated(
+                //   itemCount: state.checklist
+                //       .where((e) => e?.type == "driver")
+                //       .length,
+                //   shrinkWrap: true,
+                //   physics: ScrollPhysics(),
+                //   itemBuilder: (c, i) {
+                //     final item = state.checklist[i];
+                //
+                //     return Padding(
+                //       padding: const EdgeInsets.symmetric(
+                //         horizontal: 16,
+                //         vertical: 8,
+                //       ),
+                //       child: Column(
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           K3ChecklistItem(
+                //             title: item?.title ?? '',
+                //             controller: item!.tecDescOrg,
+                //             imageOrg: _buildImageOrg(i, null),
+                //           ),
+                //         ],
+                //       ),
+                //     );
+                //   },
+                //   separatorBuilder: (c, i) {
+                //     return Divider(height: 1, color: Colors.grey);
+                //   },
+                // ),
+                // ListView.separated(
+                //   itemCount: state.checklist
+                //       .where((e) => e?.type == "truck")
+                //       .length,
+                //   shrinkWrap: true,
+                //   physics: ScrollPhysics(),
+                //   itemBuilder: (c, i) {
+                //     final item = state.checklist[i];
+                //
+                //     return Padding(
+                //       padding: const EdgeInsets.symmetric(
+                //         horizontal: 16,
+                //         vertical: 8,
+                //       ),
+                //       child: K3ChecklistItem(
+                //         title: item?.title ?? '',
+                //         controller: item!.tecDescOrg,
+                //       ),
+                //     );
+                //   },
+                //   separatorBuilder: (c, i) {
+                //     return Divider(height: 1, color: Colors.grey);
+                //   },
+                // ),
                 ListView.separated(
-                  itemCount: state.data?.k3Driver?.length ?? 0,
+                  itemCount: state.checklist.length,
                   shrinkWrap: true,
                   physics: ScrollPhysics(),
                   itemBuilder: (c, i) {
-                    final item = state.data?.k3Driver![i];
+                    final item = state.checklist[i];
+                    final approved =
+                        widget.data?.transaction?.safetyCheckOriginator == "1";
+                    final key = "${item?.id}_${item?.type}";
+
+                    if (approved) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            K3ChecklistItemView(
+                              title: item?.title,
+                              desc: item?.ketOrg,
+                              imageUrlDriver: item?.urlImageDriver,
+                              imageOrg: Builder(
+                                builder: (c) {
+                                  if (item?.urlImageOrg != null &&
+                                      item!.urlImageOrg!.isNotEmpty) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.grey,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                          8.0,
+                                        ),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                          8.0,
+                                        ),
+                                        child: Image.network(
+                                          item!.urlImageOrg!,
+                                          width: 100, // Set desired image width
+                                          height:
+                                              100, // Set desired image height
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/add_gallery.png',
+                                        width: 100, // Set desired image width
+                                        height: 100, // Set desired image height
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(
@@ -104,30 +225,12 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           K3ChecklistItem(
-                            title: item?.namaChecklist ?? '',
-                            imageOrg: _buildImageOrg(i, null),
+                            title: item?.title,
+                            controller: item!.tecDescOrg,
+                            imageUrlDriver: item.urlImageDriver,
+                            imageOrg: _buildImageOrg(key, null),
                           ),
                         ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (c, i) {
-                    return Divider(height: 1, color: Colors.grey);
-                  },
-                ),
-                ListView.separated(
-                  itemCount: state.data?.k3Truck?.length ?? 0,
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  itemBuilder: (c, i) {
-                    final item = state.data?.k3Truck![i];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      child: K3ChecklistItem(
-                        title: item?.namaChecklistTruck ?? '',
                       ),
                     );
                   },
@@ -140,7 +243,12 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
                     horizontal: 16,
                     vertical: 8.0,
                   ),
-                  child: FilledButton(onPressed: () {}, child: Text("Approve")),
+                  child: FilledButton(
+                    onPressed: () {
+                      _showDialogApprove();
+                    },
+                    child: Text("Approve"),
+                  ),
                 ),
               ],
             ),
@@ -150,8 +258,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
     );
   }
 
-  Widget _buildImageOrg(int i, String? imageUrl) {
-    final key = i + 1000;
+  Widget _buildImageOrg(String key, String? imageUrl) {
     final picked = ref.watch(imagePickerProvider)[key];
     return Builder(
       builder: (context) {
@@ -164,7 +271,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Image.network(
-                '',
+                imageUrl,
                 width: 100, // Set desired image width
                 height: 100, // Set desired image height
                 fit: BoxFit.cover,
@@ -192,7 +299,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
                 Positioned(
                   bottom: 0,
                   child: InkWell(
-                    onTap: (){
+                    onTap: () {
                       ref.read(imagePickerProvider.notifier).remove(key);
                     },
                     child: Container(
@@ -240,7 +347,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
     );
   }
 
-  void _showDialogApprove(String noResi) {
+  void _showDialogApprove() {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -249,13 +356,68 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
         message: 'Are you sure you want to approve?',
         positiveText: 'Approve',
         negativeText: 'Cancel',
-        onPositive: _actionApprove,
+        onPositive: () {
+          _actionApprove("approve");
+        },
       ),
     );
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: false,
+    //   builder: (ctx) => DialogConfirmCustom(
+    //     title: 'Approve/Reject',
+    //     message: 'Are you sure you want to approve or reject?',
+    //     positiveText: 'Approve',
+    //     negativeText: 'Reject',
+    //     onPositive: () {
+    //       _actionApprove("approve");
+    //     },
+    //     onNegative: () {
+    //       _actionApprove("reject");
+    //     },
+    //   ),
+    // );
   }
 
-  Future<void> _actionApprove() async {
-    await ref.read(doDetailVMProvider.notifier).approveOrder('');
+  Future<void> _actionApprove(String status) async {
+    final state = ref.watch(doDetailVMProvider);
+    final picked = ref.watch(imagePickerProvider);
+
+    var mapFile = <String, dynamic>{};
+    var mapDesc = <String, String?>{};
+    for (var e in state.checklist) {
+      // log("id:" + (e?.id ?? ''));
+      // log("title:" + (e?.title ?? ''));
+      // log("type:" + (e?.type ?? ''));
+      // log("tecDescOrg:" + (e?.tecDescOrg.text ?? ''));
+      // log("fileImageOrg:" + (e?.fileImageOrg?.path ?? ''));
+
+      final file = picked["${e?.id}_${e?.type}"];
+      log("picked file:" + (file?.path ?? ''));
+
+      if (file != null) {
+        final multipart = await MultipartFile.fromFile(
+          file.path,
+          filename: p.basename(file.path),
+        );
+
+        mapFile.addAll({"foto_${e?.id}_${e?.type}": multipart});
+      }
+      if (e?.tecDescOrg.text != null && e!.tecDescOrg.text.isNotEmpty) {
+        mapDesc.addAll({"keterangan_${e.id}_${e.type}": e.tecDescOrg.text});
+      }
+    }
+
+    Map<String, dynamic> params = {
+      'resi': widget.data?.transaction?.resi,
+      // 'status': status,
+    };
+    params.addAll(mapFile);
+    params.addAll(mapDesc);
+
+    log("picked file:$params");
+
+    await ref.read(doDetailVMProvider.notifier).approveOrder(params);
 
     final newState = ref.read(doDetailVMProvider);
     if (newState.statusApprove == DoApproveStatus.error) {
@@ -263,14 +425,29 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
         context: context,
         builder: (_) => AlertDialog(
           title: const Text('Error'),
-          content: Text(newState.message ?? 'Approve failed'),
+          content: Text(newState.messageApprove ?? 'Approve failed'),
           actions: [
             TextButton(onPressed: () => context.pop(), child: const Text('OK')),
           ],
         ),
       );
     } else {
-      context.pop();
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Success'),
+          content: Text(newState.messageApprove ?? '$status success'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                context.pop();
+                context.pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
     }
   }
 }

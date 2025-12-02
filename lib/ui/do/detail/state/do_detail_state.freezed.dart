@@ -11,33 +11,30 @@ part of 'do_detail_state.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$DoDetailState {
 
- DoDetailStatus get status; DoApproveStatus get statusApprove; String? get message; String? get messageApprove; List<K3Safety?> get list; K3Safety? get data;
+ DoDetailStatus get status; DoApproveStatus get statusApprove; String? get message; String? get messageApprove; List<K3Safety?> get list; List<K3Checklist?> get checklist; K3Safety? get data;
 /// Create a copy of DoDetailState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $DoDetailStateCopyWith<DoDetailState> get copyWith => _$DoDetailStateCopyWithImpl<DoDetailState>(this as DoDetailState, _$identity);
 
-  /// Serializes this DoDetailState to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoDetailState&&(identical(other.status, status) || other.status == status)&&(identical(other.statusApprove, statusApprove) || other.statusApprove == statusApprove)&&(identical(other.message, message) || other.message == message)&&(identical(other.messageApprove, messageApprove) || other.messageApprove == messageApprove)&&const DeepCollectionEquality().equals(other.list, list)&&(identical(other.data, data) || other.data == data));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoDetailState&&(identical(other.status, status) || other.status == status)&&(identical(other.statusApprove, statusApprove) || other.statusApprove == statusApprove)&&(identical(other.message, message) || other.message == message)&&(identical(other.messageApprove, messageApprove) || other.messageApprove == messageApprove)&&const DeepCollectionEquality().equals(other.list, list)&&const DeepCollectionEquality().equals(other.checklist, checklist)&&(identical(other.data, data) || other.data == data));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,status,statusApprove,message,messageApprove,const DeepCollectionEquality().hash(list),data);
+int get hashCode => Object.hash(runtimeType,status,statusApprove,message,messageApprove,const DeepCollectionEquality().hash(list),const DeepCollectionEquality().hash(checklist),data);
 
 @override
 String toString() {
-  return 'DoDetailState(status: $status, statusApprove: $statusApprove, message: $message, messageApprove: $messageApprove, list: $list, data: $data)';
+  return 'DoDetailState(status: $status, statusApprove: $statusApprove, message: $message, messageApprove: $messageApprove, list: $list, checklist: $checklist, data: $data)';
 }
 
 
@@ -48,7 +45,7 @@ abstract mixin class $DoDetailStateCopyWith<$Res>  {
   factory $DoDetailStateCopyWith(DoDetailState value, $Res Function(DoDetailState) _then) = _$DoDetailStateCopyWithImpl;
 @useResult
 $Res call({
- DoDetailStatus status, DoApproveStatus statusApprove, String? message, String? messageApprove, List<K3Safety?> list, K3Safety? data
+ DoDetailStatus status, DoApproveStatus statusApprove, String? message, String? messageApprove, List<K3Safety?> list, List<K3Checklist?> checklist, K3Safety? data
 });
 
 
@@ -65,14 +62,15 @@ class _$DoDetailStateCopyWithImpl<$Res>
 
 /// Create a copy of DoDetailState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? statusApprove = null,Object? message = freezed,Object? messageApprove = freezed,Object? list = null,Object? data = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? statusApprove = null,Object? message = freezed,Object? messageApprove = freezed,Object? list = null,Object? checklist = null,Object? data = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as DoDetailStatus,statusApprove: null == statusApprove ? _self.statusApprove : statusApprove // ignore: cast_nullable_to_non_nullable
 as DoApproveStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,messageApprove: freezed == messageApprove ? _self.messageApprove : messageApprove // ignore: cast_nullable_to_non_nullable
 as String?,list: null == list ? _self.list : list // ignore: cast_nullable_to_non_nullable
-as List<K3Safety?>,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as List<K3Safety?>,checklist: null == checklist ? _self.checklist : checklist // ignore: cast_nullable_to_non_nullable
+as List<K3Checklist?>,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as K3Safety?,
   ));
 }
@@ -170,10 +168,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Safety?> list,  K3Safety? data)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Safety?> list,  List<K3Checklist?> checklist,  K3Safety? data)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DoDetailState() when $default != null:
-return $default(_that.status,_that.statusApprove,_that.message,_that.messageApprove,_that.list,_that.data);case _:
+return $default(_that.status,_that.statusApprove,_that.message,_that.messageApprove,_that.list,_that.checklist,_that.data);case _:
   return orElse();
 
 }
@@ -191,10 +189,10 @@ return $default(_that.status,_that.statusApprove,_that.message,_that.messageAppr
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Safety?> list,  K3Safety? data)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Safety?> list,  List<K3Checklist?> checklist,  K3Safety? data)  $default,) {final _that = this;
 switch (_that) {
 case _DoDetailState():
-return $default(_that.status,_that.statusApprove,_that.message,_that.messageApprove,_that.list,_that.data);case _:
+return $default(_that.status,_that.statusApprove,_that.message,_that.messageApprove,_that.list,_that.checklist,_that.data);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -211,10 +209,10 @@ return $default(_that.status,_that.statusApprove,_that.message,_that.messageAppr
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Safety?> list,  K3Safety? data)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Safety?> list,  List<K3Checklist?> checklist,  K3Safety? data)?  $default,) {final _that = this;
 switch (_that) {
 case _DoDetailState() when $default != null:
-return $default(_that.status,_that.statusApprove,_that.message,_that.messageApprove,_that.list,_that.data);case _:
+return $default(_that.status,_that.statusApprove,_that.message,_that.messageApprove,_that.list,_that.checklist,_that.data);case _:
   return null;
 
 }
@@ -223,11 +221,11 @@ return $default(_that.status,_that.statusApprove,_that.message,_that.messageAppr
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _DoDetailState implements DoDetailState {
-  const _DoDetailState({this.status = DoDetailStatus.initial, this.statusApprove = DoApproveStatus.initial, this.message, this.messageApprove, final  List<K3Safety?> list = const [], this.data}): _list = list;
-  factory _DoDetailState.fromJson(Map<String, dynamic> json) => _$DoDetailStateFromJson(json);
+  const _DoDetailState({this.status = DoDetailStatus.initial, this.statusApprove = DoApproveStatus.initial, this.message, this.messageApprove, final  List<K3Safety?> list = const [], final  List<K3Checklist?> checklist = const [], this.data}): _list = list,_checklist = checklist;
+  
 
 @override@JsonKey() final  DoDetailStatus status;
 @override@JsonKey() final  DoApproveStatus statusApprove;
@@ -240,6 +238,13 @@ class _DoDetailState implements DoDetailState {
   return EqualUnmodifiableListView(_list);
 }
 
+ final  List<K3Checklist?> _checklist;
+@override@JsonKey() List<K3Checklist?> get checklist {
+  if (_checklist is EqualUnmodifiableListView) return _checklist;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_checklist);
+}
+
 @override final  K3Safety? data;
 
 /// Create a copy of DoDetailState
@@ -248,23 +253,20 @@ class _DoDetailState implements DoDetailState {
 @pragma('vm:prefer-inline')
 _$DoDetailStateCopyWith<_DoDetailState> get copyWith => __$DoDetailStateCopyWithImpl<_DoDetailState>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$DoDetailStateToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoDetailState&&(identical(other.status, status) || other.status == status)&&(identical(other.statusApprove, statusApprove) || other.statusApprove == statusApprove)&&(identical(other.message, message) || other.message == message)&&(identical(other.messageApprove, messageApprove) || other.messageApprove == messageApprove)&&const DeepCollectionEquality().equals(other._list, _list)&&(identical(other.data, data) || other.data == data));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoDetailState&&(identical(other.status, status) || other.status == status)&&(identical(other.statusApprove, statusApprove) || other.statusApprove == statusApprove)&&(identical(other.message, message) || other.message == message)&&(identical(other.messageApprove, messageApprove) || other.messageApprove == messageApprove)&&const DeepCollectionEquality().equals(other._list, _list)&&const DeepCollectionEquality().equals(other._checklist, _checklist)&&(identical(other.data, data) || other.data == data));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,status,statusApprove,message,messageApprove,const DeepCollectionEquality().hash(_list),data);
+int get hashCode => Object.hash(runtimeType,status,statusApprove,message,messageApprove,const DeepCollectionEquality().hash(_list),const DeepCollectionEquality().hash(_checklist),data);
 
 @override
 String toString() {
-  return 'DoDetailState(status: $status, statusApprove: $statusApprove, message: $message, messageApprove: $messageApprove, list: $list, data: $data)';
+  return 'DoDetailState(status: $status, statusApprove: $statusApprove, message: $message, messageApprove: $messageApprove, list: $list, checklist: $checklist, data: $data)';
 }
 
 
@@ -275,7 +277,7 @@ abstract mixin class _$DoDetailStateCopyWith<$Res> implements $DoDetailStateCopy
   factory _$DoDetailStateCopyWith(_DoDetailState value, $Res Function(_DoDetailState) _then) = __$DoDetailStateCopyWithImpl;
 @override @useResult
 $Res call({
- DoDetailStatus status, DoApproveStatus statusApprove, String? message, String? messageApprove, List<K3Safety?> list, K3Safety? data
+ DoDetailStatus status, DoApproveStatus statusApprove, String? message, String? messageApprove, List<K3Safety?> list, List<K3Checklist?> checklist, K3Safety? data
 });
 
 
@@ -292,14 +294,15 @@ class __$DoDetailStateCopyWithImpl<$Res>
 
 /// Create a copy of DoDetailState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? statusApprove = null,Object? message = freezed,Object? messageApprove = freezed,Object? list = null,Object? data = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? statusApprove = null,Object? message = freezed,Object? messageApprove = freezed,Object? list = null,Object? checklist = null,Object? data = freezed,}) {
   return _then(_DoDetailState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as DoDetailStatus,statusApprove: null == statusApprove ? _self.statusApprove : statusApprove // ignore: cast_nullable_to_non_nullable
 as DoApproveStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,messageApprove: freezed == messageApprove ? _self.messageApprove : messageApprove // ignore: cast_nullable_to_non_nullable
 as String?,list: null == list ? _self._list : list // ignore: cast_nullable_to_non_nullable
-as List<K3Safety?>,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as List<K3Safety?>,checklist: null == checklist ? _self._checklist : checklist // ignore: cast_nullable_to_non_nullable
+as List<K3Checklist?>,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as K3Safety?,
   ));
 }

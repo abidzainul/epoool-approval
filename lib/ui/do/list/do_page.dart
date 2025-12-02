@@ -174,15 +174,18 @@ class _DoPageState extends ConsumerState<DoPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     itemCount: state.data.length,
                     itemBuilder: (c, i) {
-                      final item = state.data[i];
+                      final item = state.data[i]?.transaction;
                       return DoLvItem(
                         title: item?.resi,
                         subtitle: item?.namaJamMuat,
                         resi: item?.totalQty,
                         date: item?.dateAdd,
-                        isApprove: item?.safetyCheck == "1",
+                        isApprove: item?.safetyCheckOriginator == "1",
                         onTap: () {
-                          context.push(AppRoute.doDetailPage, extra: item);
+                          context.push(
+                            AppRoute.doDetailPage,
+                            extra: state.data[i],
+                          );
                         },
                       );
                     },

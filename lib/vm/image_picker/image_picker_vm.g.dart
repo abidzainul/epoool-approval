@@ -13,7 +13,7 @@ part of 'image_picker_vm.dart';
 const imagePickerProvider = ImagePickerNotifierProvider._();
 
 final class ImagePickerNotifierProvider
-    extends $NotifierProvider<ImagePickerNotifier, Map<int, File?>> {
+    extends $NotifierProvider<ImagePickerNotifier, Map<String, File?>> {
   const ImagePickerNotifierProvider._()
     : super(
         from: null,
@@ -33,29 +33,29 @@ final class ImagePickerNotifierProvider
   ImagePickerNotifier create() => ImagePickerNotifier();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Map<int, File?> value) {
+  Override overrideWithValue(Map<String, File?> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Map<int, File?>>(value),
+      providerOverride: $SyncValueProvider<Map<String, File?>>(value),
     );
   }
 }
 
 String _$imagePickerNotifierHash() =>
-    r'a53981b2804d4d0f90668d3bbe217bb468cb7022';
+    r'fde88220a44c05f00b0cad593d22c66ecd5f3a8c';
 
-abstract class _$ImagePickerNotifier extends $Notifier<Map<int, File?>> {
-  Map<int, File?> build();
+abstract class _$ImagePickerNotifier extends $Notifier<Map<String, File?>> {
+  Map<String, File?> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<Map<int, File?>, Map<int, File?>>;
+    final ref = this.ref as $Ref<Map<String, File?>, Map<String, File?>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<Map<int, File?>, Map<int, File?>>,
-              Map<int, File?>,
+              AnyNotifier<Map<String, File?>, Map<String, File?>>,
+              Map<String, File?>,
               Object?,
               Object?
             >;

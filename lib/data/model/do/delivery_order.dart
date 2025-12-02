@@ -1,3 +1,4 @@
+import 'package:approval/data/model/k3/k3_foto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'delivery_order.freezed.dart';
@@ -6,6 +7,16 @@ part 'delivery_order.g.dart';
 @freezed
 abstract class DeliveryOrder with _$DeliveryOrder {
   const factory DeliveryOrder({
+    @JsonKey(name: 'transaksi') TransactionOrder? transaction,
+    @JsonKey(name: 'safety_check') List<K3Foto>? safetyCheck,
+  }) = _DeliveryOrder;
+
+  factory DeliveryOrder.fromJson(Map<String, Object?> json) => _$DeliveryOrderFromJson(json);
+}
+
+@freezed
+abstract class TransactionOrder with _$TransactionOrder {
+  const factory TransactionOrder({
     @JsonKey(name: 'id_do_main') @Default('') String idDoMain,
     @JsonKey(name: 'id_originator') @Default('') String idOriginator,
     @JsonKey(name: 'id_truck') @Default('') String idTruck,
@@ -102,8 +113,10 @@ abstract class DeliveryOrder with _$DeliveryOrder {
     @JsonKey(name: 'id_do_main_swap') @Default('') String idDoMainSwap,
     @JsonKey(name: 'id_diversion') @Default('') String idDiversion,
     @JsonKey(name: 'is_conditional_fot') @Default('') String isConditionalFot,
-  }) = _DeliveryOrder;
+    @JsonKey(name: 'safety_check_originator') @Default('') String safetyCheckOriginator,
+    @JsonKey(name: 'safety_check_originator_by') @Default('') String safetyCheckOriginatorBy,
+  }) = _TransactionOrder;
 
-  factory DeliveryOrder.fromJson(Map<String, Object?> json) => _$DeliveryOrderFromJson(json);
+  factory TransactionOrder.fromJson(Map<String, Object?> json) => _$TransactionOrderFromJson(json);
 }
 

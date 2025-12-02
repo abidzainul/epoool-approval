@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:approval/data/api/api_exception.dart';
 import 'package:approval/data/api/api_services.dart' as api;
@@ -70,14 +71,15 @@ class DoRepo {
     }
   }
 
-  Future<String> approveOrder(String? resi) async {
+  Future<String> approveOrder(Map<String, dynamic> params) async {
     try {
       String? tokenFcm = await session.getFcmToken();
 
-      var params = {"token": tokenFcm, "resi": resi};
+      params.addAll({'token': tokenFcm});
 
+      // log("params: $params");
+      // return "success";
       final res = await client.post(api.urlApproveOrder, data: params);
-
       if (res.statusCode == 200) {
         Map<String, dynamic> json = {'code': '0'};
         try{
@@ -104,8 +106,6 @@ class DoRepo {
   Future<K3Safety> getK3({String? idGudang, String? idOrg}) async {
     try {
       String? tokenFcm = await session.getFcmToken();
-
-      var params = {"token": tokenFcm};
 
       final res = await client.post("${api.urlGetK3Driver}/$tokenFcm/$idGudang/$idOrg");
 
