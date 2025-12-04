@@ -1,4 +1,5 @@
 import 'package:approval/data/model/k3/k3_checklist.dart';
+import 'package:approval/data/model/k3/k3_foto.dart';
 import 'package:approval/data/model/k3/k3_safety.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -14,7 +15,8 @@ abstract class DoDetailState with _$DoDetailState {
     @Default(DoApproveStatus.initial) DoApproveStatus statusApprove,
     String? message,
     String? messageApprove,
-    @Default([]) List<K3Safety?> list,
+    // @Default([]) List<K3Safety?> list,
+    @Default([]) List<K3Foto?> list,
     @Default([]) List<K3Checklist?> checklist,
     K3Safety? data,
   }) = _DoDetailState;

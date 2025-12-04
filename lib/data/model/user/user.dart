@@ -11,7 +11,7 @@ abstract class User with _$User {
     @JsonKey(name: 'id_transporter') @Default('') String idTransporter,
     @JsonKey(name: 'nama_transporter') @Default('') String namaTransporter,
     @JsonKey(name: 'telpon') @Default('') String telpon,
-    @JsonKey(name: 'email') dynamic email,
+    @JsonKey(name: 'email') @Default('') String email,
     @JsonKey(name: 'poin') @Default('') String poin,
     @JsonKey(name: 'foto') @Default('') String foto,
     @JsonKey(name: 'urlfoto') @Default('') String urlFoto,

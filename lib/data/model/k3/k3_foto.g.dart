@@ -14,10 +14,10 @@ _K3Foto _$K3FotoFromJson(Map<String, dynamic> json) => _K3Foto(
   deleted: json['deleted'] as String? ?? '',
   addBy: json['add_by'] as String? ?? '',
   dateAdd: json['date_add'] as String? ?? '',
-  editedBy: json['edited_by'],
-  lastEdited: json['last_edited'],
-  keteranganOriginator: json['keterangan_originator'],
-  fotoOriginator: json['foto_originator'],
+  editedBy: json['edited_by'] as String? ?? '',
+  lastEdited: json['last_edited'] as String? ?? '',
+  keteranganOriginator: json['keterangan_originator'] as String? ?? '',
+  fotoOriginator: json['foto_originator'] as String? ?? '',
 );
 
 Map<String, dynamic> _$K3FotoToJson(_K3Foto instance) => <String, dynamic>{

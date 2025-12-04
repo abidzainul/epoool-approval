@@ -12,9 +12,12 @@ abstract class DoState with _$DoState {
     @Default(DoStatus.initial) DoStatus status,
     String? message,
     @Default([]) List<DeliveryOrder?> data,
+    @Default([]) List<DeliveryOrder?> dataFiltered,
+    @Default([]) List<DeliveryOrder?> dataPending,
+    @Default([]) List<DeliveryOrder?> dataApproved,
     String? search,
     String? plant,
-    String? organizetion,
+    String? originator,
   }) = _DoState;
 
   factory DoState.fromJson(Map<String, Object?> json) =>

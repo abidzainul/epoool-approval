@@ -113,8 +113,8 @@ abstract class TransactionOrder with _$TransactionOrder {
     @JsonKey(name: 'id_do_main_swap') @Default('') String idDoMainSwap,
     @JsonKey(name: 'id_diversion') @Default('') String idDiversion,
     @JsonKey(name: 'is_conditional_fot') @Default('') String isConditionalFot,
-    @JsonKey(name: 'safety_check_originator') @Default('') String safetyCheckOriginator,
-    @JsonKey(name: 'safety_check_originator_by') @Default('') String safetyCheckOriginatorBy,
+    @JsonKey(name: 'safety_check_originator') String? safetyCheckOriginator,
+    @JsonKey(name: 'safety_check_originator_by') String? safetyCheckOriginatorBy,
   }) = _TransactionOrder;
 
   factory TransactionOrder.fromJson(Map<String, Object?> json) => _$TransactionOrderFromJson(json);

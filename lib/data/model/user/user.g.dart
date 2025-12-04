@@ -12,7 +12,7 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
   idTransporter: json['id_transporter'] as String? ?? '',
   namaTransporter: json['nama_transporter'] as String? ?? '',
   telpon: json['telpon'] as String? ?? '',
-  email: json['email'],
+  email: json['email'] as String? ?? '',
   poin: json['poin'] as String? ?? '',
   foto: json['foto'] as String? ?? '',
   urlFoto: json['urlfoto'] as String? ?? '',

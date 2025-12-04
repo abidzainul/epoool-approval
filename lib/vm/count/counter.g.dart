@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'do_vm.dart';
+part of 'counter.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,51 +9,51 @@ part of 'do_vm.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(DoVM)
-const doVMProvider = DoVMProvider._();
+@ProviderFor(Counter)
+const counterProvider = CounterProvider._();
 
-final class DoVMProvider extends $NotifierProvider<DoVM, DoState> {
-  const DoVMProvider._()
+final class CounterProvider extends $NotifierProvider<Counter, int> {
+  const CounterProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'doVMProvider',
+        name: r'counterProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$doVMHash();
+  String debugGetCreateSourceHash() => _$counterHash();
 
   @$internal
   @override
-  DoVM create() => DoVM();
+  Counter create() => Counter();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(DoState value) {
+  Override overrideWithValue(int value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<DoState>(value),
+      providerOverride: $SyncValueProvider<int>(value),
     );
   }
 }
 
-String _$doVMHash() => r'34f52cd7209dd7c838217120f9e74092d256c5fb';
+String _$counterHash() => r'cb0b0efaed42d4d579c0a5da3e2afec4758faaab';
 
-abstract class _$DoVM extends $Notifier<DoState> {
-  DoState build();
+abstract class _$Counter extends $Notifier<int> {
+  int build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<DoState, DoState>;
+    final ref = this.ref as $Ref<int, int>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<DoState, DoState>,
-              DoState,
+              AnyNotifier<int, int>,
+              int,
               Object?,
               Object?
             >;

@@ -2,7 +2,10 @@ import 'package:approval/app/routes.dart';
 import 'package:approval/ui/do/list/state/do_state.dart';
 import 'package:approval/ui/do/list/vm/do_vm.dart';
 import 'package:approval/ui/do/list/widget/do_lv_item.dart';
+import 'package:approval/utils/widget/button/filled_material_button.dart';
 import 'package:approval/utils/widget/layout/layout_widgets.dart';
+import 'package:approval/vm/count/counter.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -46,81 +49,14 @@ class _DoPageState extends ConsumerState<DoPage> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(doVMProvider);
+    final vm = ref.read(doVMProvider.notifier);
+
+    final counterState = ref.watch(counterProvider);
 
     return Scaffold(
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _tecPlant,
-                        decoration: InputDecoration(
-                          hintText: 'Plant',
-                          prefixIcon: const Icon(Icons.factory),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 12.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: TextField(
-                        controller: _tecOrg,
-                        decoration: InputDecoration(
-                          hintText: 'Organization',
-                          prefixIcon: const Icon(Icons.credit_card_sharp),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 12.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 8),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _tecNopol,
-                        decoration: InputDecoration(
-                          hintText: 'Cari berdasarkan no plat...',
-                          prefixIcon: const Icon(Icons.local_shipping),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 12.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8.0),
-                    ElevatedButton.icon(
-                      onPressed: _performSearch,
-                      icon: const Icon(Icons.search),
-                      label: const Text('Cari'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          _buildFilter(),
           Expanded(
             child: Builder(
               builder: (context) {
@@ -133,13 +69,11 @@ class _DoPageState extends ConsumerState<DoPage> {
                     title: 'Failed to Load Orders',
                     description: state.message ?? 'Unknown error',
                     onRetry: () {
-                      ref
-                          .read(doVMProvider.notifier)
-                          .loadOrders(
-                            search: state.search,
-                            plant: state.plant,
-                            organizetion: state.organizetion,
-                          );
+                      vm.loadOrders(
+                        search: state.search,
+                        plant: state.plant,
+                        org: state.originator,
+                      );
                     },
                   );
                 }
@@ -149,50 +83,168 @@ class _DoPageState extends ConsumerState<DoPage> {
                     title: 'No Delivery Orders',
                     icon: Icons.local_shipping,
                     onRefresh: () {
-                      ref
-                          .read(doVMProvider.notifier)
-                          .loadOrders(
-                            search: state.search,
-                            plant: state.plant,
-                            organizetion: state.organizetion,
-                          );
+                      vm.loadOrders(
+                        search: state.search,
+                        plant: state.plant,
+                        org: state.originator,
+                      );
                     },
                   );
                 }
 
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    await ref
-                        .read(doVMProvider.notifier)
-                        .loadOrders(
-                          search: state.search,
-                          plant: state.plant,
-                          organizetion: state.organizetion,
-                        );
-                  },
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    itemCount: state.data.length,
-                    itemBuilder: (c, i) {
-                      final item = state.data[i]?.transaction;
-                      return DoLvItem(
-                        title: item?.resi,
-                        subtitle: item?.namaJamMuat,
-                        resi: item?.totalQty,
-                        date: item?.dateAdd,
-                        isApprove: item?.safetyCheckOriginator == "1",
-                        onTap: () {
-                          context.push(
-                            AppRoute.doDetailPage,
-                            extra: state.data[i],
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const .symmetric(horizontal: 16, vertical: 8),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: FilterButton(
+                              title: "Pending",
+                              color: Colors.red.shade700,
+                              isSelected: counterState == 0,
+                              onPressed: () {
+                                ref.read(counterProvider.notifier).change(0);
+                                vm.filterTab(DoStatusTab.pending);
+                              },
+                              position: FilterButtonPosition.left,
+                            ),
+                          ),
+                          Expanded(
+                            child: FilterButton(
+                              title: "Selesai",
+                              color: Colors.green.shade700,
+                              isSelected: counterState == 1,
+                              onPressed: () {
+                                ref.read(counterProvider.notifier).change(1);
+                                vm.filterTab(DoStatusTab.approved);
+                              },
+                              position: FilterButtonPosition.right,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          await vm.loadOrders(
+                            search: state.search,
+                            plant: state.plant,
+                            org: state.originator,
                           );
                         },
-                      );
-                    },
-                  ),
+                        child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          itemCount: state.dataFiltered.length,
+                          itemBuilder: (c, i) {
+                            final item = state.dataFiltered[i]?.transaction;
+                            return DoLvItem(
+                              title: item?.resi,
+                              subtitle: item?.namaJamMuat,
+                              resi: item?.totalQty,
+                              date: item?.dateAdd,
+                              status: item?.safetyCheckOriginatorBy == null
+                                  ? DoLvStatus.open
+                                  : item?.safetyCheckOriginator == "1"
+                                  ? DoLvStatus.approved
+                                  : DoLvStatus.rejected,
+                              onTap: () async {
+                                var res = await context.push(
+                                  AppRoute.doDetailPage,
+                                  extra: state.dataFiltered[i],
+                                );
+                                if (res == "refresh") {
+                                  vm.loadOrders(
+                                    search: state.search,
+                                    plant: state.plant,
+                                    org: state.originator,
+                                  );
+                                }
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               },
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFilter() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _tecPlant,
+                  decoration: InputDecoration(
+                    hintText: 'Plant',
+                    prefixIcon: const Icon(Icons.factory),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 12.0,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: TextField(
+                  controller: _tecOrg,
+                  decoration: InputDecoration(
+                    hintText: 'Originator',
+                    prefixIcon: const Icon(Icons.credit_card_sharp),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 12.0,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _tecNopol,
+                  decoration: InputDecoration(
+                    hintText: 'Cari berdasarkan no plat...',
+                    prefixIcon: const Icon(Icons.local_shipping),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 12.0,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8.0),
+              ElevatedButton.icon(
+                onPressed: _performSearch,
+                icon: const Icon(Icons.search),
+                label: const Text('Cari'),
+              ),
+            ],
           ),
         ],
       ),

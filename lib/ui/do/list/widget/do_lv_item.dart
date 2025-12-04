@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+enum DoLvStatus { open, approved, rejected }
+
 class DoLvItem extends StatelessWidget {
   final String? title;
   final String? subtitle;
@@ -9,7 +11,7 @@ class DoLvItem extends StatelessWidget {
   final Color? avatarColor;
   final IconData? avatarIcon;
   final bool checked;
-  final bool isApprove;
+  final DoLvStatus status;
   final Function(bool?)? onChecked;
 
   const DoLvItem({
@@ -22,7 +24,7 @@ class DoLvItem extends StatelessWidget {
     this.avatarColor,
     this.avatarIcon,
     this.checked = false,
-    this.isApprove = false,
+    this.status = DoLvStatus.open,
     this.onChecked,
   }) : super(key: key);
 
@@ -33,7 +35,11 @@ class DoLvItem extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Card(
-        color: isApprove ? Colors.green.shade100 : Colors.grey.shade100,
+        color: status == DoLvStatus.approved
+            ? Colors.green.shade100
+            : status == DoLvStatus.rejected
+            ? Colors.red.shade100
+            : Colors.grey.shade100,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(

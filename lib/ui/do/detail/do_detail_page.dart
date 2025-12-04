@@ -1,11 +1,11 @@
 import 'dart:developer';
 
+import 'package:approval/app/routes.dart';
 import 'package:approval/data/model/do/delivery_order.dart';
 import 'package:approval/ui/do/detail/state/do_detail_state.dart';
 import 'package:approval/ui/do/detail/vm/do_detail_vm.dart';
 import 'package:approval/ui/do/detail/widget/k3_checklist_item.dart';
 import 'package:approval/utils/widget/dialog/dialog_confirm.dart';
-import 'package:approval/utils/widget/dialog/dialog_confirm_custom.dart';
 import 'package:approval/utils/widget/layout/layout_widgets.dart';
 import 'package:approval/vm/image_picker/image_picker_vm.dart';
 import 'package:dio/dio.dart';
@@ -162,6 +162,14 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
                               title: item?.title,
                               desc: item?.ketOrg,
                               imageUrlDriver: item?.urlImageDriver,
+                              onTapImage: () {
+                                if (item?.urlImageDriver != null) {
+                                  context.push(
+                                    AppRoute.imageViewer,
+                                    extra: NetworkImage(item!.urlImageDriver!),
+                                  );
+                                }
+                              },
                               imageOrg: Builder(
                                 builder: (c) {
                                   if (item?.urlImageOrg != null &&
@@ -228,6 +236,14 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
                             title: item?.title,
                             controller: item!.tecDescOrg,
                             imageUrlDriver: item.urlImageDriver,
+                            onTapImage: () {
+                              if (item.urlImageDriver != null) {
+                                context.push(
+                                  AppRoute.imageViewer,
+                                  extra: NetworkImage(item.urlImageDriver!),
+                                );
+                              }
+                            },
                             imageOrg: _buildImageOrg(key, null),
                           ),
                         ],
@@ -238,16 +254,38 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
                     return Divider(height: 1, color: Colors.grey);
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8.0,
-                  ),
-                  child: FilledButton(
-                    onPressed: () {
-                      _showDialogApprove();
-                    },
-                    child: Text("Approve"),
+                Visibility(
+                  visible:
+                      widget.data?.transaction?.safetyCheckOriginatorBy == null,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8.0,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: FilledButton(
+                            style: FilledButton.styleFrom(
+                              backgroundColor: Colors.red.shade700,
+                            ),
+                            onPressed: () {
+                              _showDialogReject();
+                            },
+                            child: Text("Reject"),
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: FilledButton(
+                            onPressed: () {
+                              _showDialogApprove();
+                            },
+                            child: Text("Approve"),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -268,13 +306,21 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
               border: Border.all(color: Colors.grey, width: 1.0),
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                imageUrl,
-                width: 100, // Set desired image width
-                height: 100, // Set desired image height
-                fit: BoxFit.cover,
+            child: InkWell(
+              onTap: () {
+                context.push(
+                  AppRoute.imageViewer,
+                  extra: NetworkImage(imageUrl),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  imageUrl,
+                  width: 100, // Set desired image width
+                  height: 100, // Set desired image height
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           );
@@ -287,13 +333,21 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
             ),
             child: Stack(
               children: [
-                ClipRRect(
-                  borderRadius: .circular(8.0),
-                  child: Image.file(
-                    picked,
-                    width: 100, // Set desired image width
-                    height: 100, // Set desired image height
-                    fit: BoxFit.cover,
+                InkWell(
+                  onTap: () {
+                    context.push(
+                      AppRoute.imageViewer,
+                      extra: FileImage(picked),
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: .circular(8.0),
+                    child: Image.file(
+                      picked,
+                      width: 100, // Set desired image width
+                      height: 100, // Set desired image height
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
@@ -361,22 +415,23 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
         },
       ),
     );
-    // showDialog(
-    //   context: context,
-    //   barrierDismissible: false,
-    //   builder: (ctx) => DialogConfirmCustom(
-    //     title: 'Approve/Reject',
-    //     message: 'Are you sure you want to approve or reject?',
-    //     positiveText: 'Approve',
-    //     negativeText: 'Reject',
-    //     onPositive: () {
-    //       _actionApprove("approve");
-    //     },
-    //     onNegative: () {
-    //       _actionApprove("reject");
-    //     },
-    //   ),
-    // );
+  }
+
+  void _showDialogReject() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => DialogConfirm(
+        type: DialogConfirmType.error,
+        title: 'Reject',
+        message: 'Are you sure you want to reject?',
+        positiveText: 'Reject',
+        negativeText: 'Cancel',
+        onPositive: () {
+          _actionApprove("reject");
+        },
+      ),
+    );
   }
 
   Future<void> _actionApprove(String status) async {
@@ -402,6 +457,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
         );
 
         mapFile.addAll({"foto_${e?.id}_${e?.type}": multipart});
+        // mapFile.addAll({"foto_20_driver": multipart});
       }
       if (e?.tecDescOrg.text != null && e!.tecDescOrg.text.isNotEmpty) {
         mapDesc.addAll({"keterangan_${e.id}_${e.type}": e.tecDescOrg.text});
@@ -410,7 +466,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
 
     Map<String, dynamic> params = {
       'resi': widget.data?.transaction?.resi,
-      // 'status': status,
+      'status': status == "approve" ? "1" : "0",
     };
     params.addAll(mapFile);
     params.addAll(mapDesc);

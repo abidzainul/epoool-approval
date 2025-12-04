@@ -42,7 +42,7 @@ final class ImagePickerNotifierProvider
 }
 
 String _$imagePickerNotifierHash() =>
-    r'fde88220a44c05f00b0cad593d22c66ecd5f3a8c';
+    r'37d0c6d9164b06fdddeb6398b3181820a6a68d69';
 
 abstract class _$ImagePickerNotifier extends $Notifier<Map<String, File?>> {
   Map<String, File?> build();

@@ -51,6 +51,16 @@ class K3ChecklistItem extends StatelessWidget {
                     width: 100, // Set desired image width
                     height: 100, // Set desired image height
                     fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                      return Container(
+                        color: Colors.grey[300], // Background color for the error placeholder
+                        child: Icon(
+                          Icons.broken_image,
+                          color: Colors.red.shade400,
+                          size: 100,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
@@ -130,6 +140,16 @@ class K3ChecklistItemView extends StatelessWidget {
                     width: 100, // Set desired image width
                     height: 100, // Set desired image height
                     fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                      return Container(
+                        color: Colors.grey[300], // Background color for the error placeholder
+                        child: Icon(
+                          Icons.broken_image,
+                          color: Colors.red.shade400,
+                          size: 100,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),

@@ -13,10 +13,10 @@ abstract class K3Foto with _$K3Foto {
     @JsonKey(name: 'deleted') @Default('') String deleted,
     @JsonKey(name: 'add_by') @Default('') String addBy,
     @JsonKey(name: 'date_add') @Default('') String dateAdd,
-    @JsonKey(name: 'edited_by') dynamic editedBy,
-    @JsonKey(name: 'last_edited') dynamic lastEdited,
-    @JsonKey(name: 'keterangan_originator') dynamic keteranganOriginator,
-    @JsonKey(name: 'foto_originator') dynamic fotoOriginator,
+    @JsonKey(name: 'edited_by') @Default('') String editedBy,
+    @JsonKey(name: 'last_edited') @Default('') String lastEdited,
+    @JsonKey(name: 'keterangan_originator') @Default('') String keteranganOriginator,
+    @JsonKey(name: 'foto_originator') @Default('') String fotoOriginator,
   }) = _K3Foto;
 
   factory K3Foto.fromJson(Map<String, Object?> json) => _$K3FotoFromJson(json);

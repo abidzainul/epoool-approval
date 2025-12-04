@@ -6,6 +6,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'do_vm.g.dart';
 
+enum DoStatusTab { pending, approved }
+
 @riverpod
 class DoVM extends _$DoVM {
   @override
@@ -13,19 +15,15 @@ class DoVM extends _$DoVM {
     return DoState();
   }
 
-  Future<void> loadOrders({
-    String? search,
-    String? plant,
-    String? organizetion,
-  }) async {
+  Future<void> loadOrders({String? search, String? plant, String? org}) async {
     final s = search ?? state.search;
     final p = plant ?? state.plant;
-    final o = organizetion ?? state.organizetion;
+    final o = org ?? state.originator;
 
     state = state.copyWith(
       search: s,
       plant: p,
-      organizetion: o,
+      originator: o,
       status: DoStatus.loading,
     );
 
@@ -34,19 +32,43 @@ class DoVM extends _$DoVM {
       final list = await repo.getOrder(nopol: s, plant: p, org: o);
       state = state.copyWith(
         data: list,
+        dataFiltered: list
+            .where((e) => e.transaction?.safetyCheckOriginatorBy == null)
+            .toList(),
+        dataPending: list
+            .where((e) => e.transaction?.safetyCheckOriginator == null)
+            .toList(),
+        dataApproved: list
+            .where((e) => e.transaction?.safetyCheckOriginator != null)
+            .toList(),
         status: DoStatus.success,
         message: null,
       );
     } on ApiException catch (e, st) {
       debugPrint('ApiException: ${e.message}');
-      state = state.copyWith(
-        message: e.message,
-        status: DoStatus.error,
-      );
+      state = state.copyWith(message: e.message, status: DoStatus.error);
     } catch (e, st) {
       debugPrint('Exception: $e');
       state = state.copyWith(message: 'Exception: $e', status: DoStatus.error);
     }
+  }
+
+  void filterTab(DoStatusTab status) {
+    state = state.copyWith(
+      dataFiltered: state.data
+          .where(
+            (e) => status == DoStatusTab.pending
+                ? e?.transaction?.safetyCheckOriginatorBy == null
+                : e?.transaction?.safetyCheckOriginatorBy != null,
+          )
+          .toList(),
+      dataPending: state.data
+          .where((e) => e?.transaction?.safetyCheckOriginator == null)
+          .toList(),
+      dataApproved: state.data
+          .where((e) => e?.transaction?.safetyCheckOriginator != null)
+          .toList(),
+    );
   }
 
   Future<void> setSearch(String? s) async {
@@ -59,15 +81,15 @@ class DoVM extends _$DoVM {
     state = state.copyWith(plant: normalized);
   }
 
-  Future<void> setOrganizetion(String? o) async {
+  Future<void> setOrg(String? o) async {
     final normalized = (o == null || o.trim().isEmpty) ? null : o.trim();
-    state = state.copyWith(organizetion: normalized);
+    state = state.copyWith(originator: normalized);
   }
 
   Future<void> searchOrder({String? nopol, String? plant, String? org}) async {
     await setSearch(nopol);
     await setPlant(plant);
-    await setOrganizetion(org);
+    await setOrg(org);
     loadOrders();
   }
 }

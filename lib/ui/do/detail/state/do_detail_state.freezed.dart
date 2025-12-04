@@ -14,7 +14,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DoDetailState {
 
- DoDetailStatus get status; DoApproveStatus get statusApprove; String? get message; String? get messageApprove; List<K3Safety?> get list; List<K3Checklist?> get checklist; K3Safety? get data;
+ DoDetailStatus get status; DoApproveStatus get statusApprove; String? get message; String? get messageApprove;// @Default([]) List<K3Safety?> list,
+ List<K3Foto?> get list; List<K3Checklist?> get checklist; K3Safety? get data;
 /// Create a copy of DoDetailState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +46,7 @@ abstract mixin class $DoDetailStateCopyWith<$Res>  {
   factory $DoDetailStateCopyWith(DoDetailState value, $Res Function(DoDetailState) _then) = _$DoDetailStateCopyWithImpl;
 @useResult
 $Res call({
- DoDetailStatus status, DoApproveStatus statusApprove, String? message, String? messageApprove, List<K3Safety?> list, List<K3Checklist?> checklist, K3Safety? data
+ DoDetailStatus status, DoApproveStatus statusApprove, String? message, String? messageApprove, List<K3Foto?> list, List<K3Checklist?> checklist, K3Safety? data
 });
 
 
@@ -69,7 +70,7 @@ as DoDetailStatus,statusApprove: null == statusApprove ? _self.statusApprove : s
 as DoApproveStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,messageApprove: freezed == messageApprove ? _self.messageApprove : messageApprove // ignore: cast_nullable_to_non_nullable
 as String?,list: null == list ? _self.list : list // ignore: cast_nullable_to_non_nullable
-as List<K3Safety?>,checklist: null == checklist ? _self.checklist : checklist // ignore: cast_nullable_to_non_nullable
+as List<K3Foto?>,checklist: null == checklist ? _self.checklist : checklist // ignore: cast_nullable_to_non_nullable
 as List<K3Checklist?>,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as K3Safety?,
   ));
@@ -168,7 +169,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Safety?> list,  List<K3Checklist?> checklist,  K3Safety? data)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Foto?> list,  List<K3Checklist?> checklist,  K3Safety? data)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DoDetailState() when $default != null:
 return $default(_that.status,_that.statusApprove,_that.message,_that.messageApprove,_that.list,_that.checklist,_that.data);case _:
@@ -189,7 +190,7 @@ return $default(_that.status,_that.statusApprove,_that.message,_that.messageAppr
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Safety?> list,  List<K3Checklist?> checklist,  K3Safety? data)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Foto?> list,  List<K3Checklist?> checklist,  K3Safety? data)  $default,) {final _that = this;
 switch (_that) {
 case _DoDetailState():
 return $default(_that.status,_that.statusApprove,_that.message,_that.messageApprove,_that.list,_that.checklist,_that.data);case _:
@@ -209,7 +210,7 @@ return $default(_that.status,_that.statusApprove,_that.message,_that.messageAppr
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Safety?> list,  List<K3Checklist?> checklist,  K3Safety? data)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DoDetailStatus status,  DoApproveStatus statusApprove,  String? message,  String? messageApprove,  List<K3Foto?> list,  List<K3Checklist?> checklist,  K3Safety? data)?  $default,) {final _that = this;
 switch (_that) {
 case _DoDetailState() when $default != null:
 return $default(_that.status,_that.statusApprove,_that.message,_that.messageApprove,_that.list,_that.checklist,_that.data);case _:
@@ -224,15 +225,17 @@ return $default(_that.status,_that.statusApprove,_that.message,_that.messageAppr
 
 
 class _DoDetailState implements DoDetailState {
-  const _DoDetailState({this.status = DoDetailStatus.initial, this.statusApprove = DoApproveStatus.initial, this.message, this.messageApprove, final  List<K3Safety?> list = const [], final  List<K3Checklist?> checklist = const [], this.data}): _list = list,_checklist = checklist;
+  const _DoDetailState({this.status = DoDetailStatus.initial, this.statusApprove = DoApproveStatus.initial, this.message, this.messageApprove, final  List<K3Foto?> list = const [], final  List<K3Checklist?> checklist = const [], this.data}): _list = list,_checklist = checklist;
   
 
 @override@JsonKey() final  DoDetailStatus status;
 @override@JsonKey() final  DoApproveStatus statusApprove;
 @override final  String? message;
 @override final  String? messageApprove;
- final  List<K3Safety?> _list;
-@override@JsonKey() List<K3Safety?> get list {
+// @Default([]) List<K3Safety?> list,
+ final  List<K3Foto?> _list;
+// @Default([]) List<K3Safety?> list,
+@override@JsonKey() List<K3Foto?> get list {
   if (_list is EqualUnmodifiableListView) return _list;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_list);
@@ -277,7 +280,7 @@ abstract mixin class _$DoDetailStateCopyWith<$Res> implements $DoDetailStateCopy
   factory _$DoDetailStateCopyWith(_DoDetailState value, $Res Function(_DoDetailState) _then) = __$DoDetailStateCopyWithImpl;
 @override @useResult
 $Res call({
- DoDetailStatus status, DoApproveStatus statusApprove, String? message, String? messageApprove, List<K3Safety?> list, List<K3Checklist?> checklist, K3Safety? data
+ DoDetailStatus status, DoApproveStatus statusApprove, String? message, String? messageApprove, List<K3Foto?> list, List<K3Checklist?> checklist, K3Safety? data
 });
 
 
@@ -301,7 +304,7 @@ as DoDetailStatus,statusApprove: null == statusApprove ? _self.statusApprove : s
 as DoApproveStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,messageApprove: freezed == messageApprove ? _self.messageApprove : messageApprove // ignore: cast_nullable_to_non_nullable
 as String?,list: null == list ? _self._list : list // ignore: cast_nullable_to_non_nullable
-as List<K3Safety?>,checklist: null == checklist ? _self._checklist : checklist // ignore: cast_nullable_to_non_nullable
+as List<K3Foto?>,checklist: null == checklist ? _self._checklist : checklist // ignore: cast_nullable_to_non_nullable
 as List<K3Checklist?>,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as K3Safety?,
   ));

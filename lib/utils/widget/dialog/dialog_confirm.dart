@@ -50,11 +50,11 @@ class DialogConfirm extends StatelessWidget {
   Color _getTypeColor(BuildContext context) {
     switch (type) {
       case DialogConfirmType.error:
-        return Colors.red;
+        return Colors.red.shade700;
       case DialogConfirmType.success:
-        return Colors.green;
+        return Colors.green.shade700;
       case DialogConfirmType.warning:
-        return Colors.orange;
+        return Colors.orange.shade700;
       case DialogConfirmType.info:
       return Theme.of(context).colorScheme.primary;
     }
