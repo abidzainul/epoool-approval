@@ -1,10 +1,10 @@
-import 'package:approval/data/model/do/delivery_order.dart';
-import 'package:approval/ui/do/detail/do_detail_page.dart';
-import 'package:approval/ui/do/list/do_page.dart';
-import 'package:approval/ui/drawer_nav/drawer_nav_page.dart';
-import 'package:approval/ui/login/login_page.dart';
-import 'package:approval/ui/splashscreen/splashscreen.dart';
-import 'package:approval/utils/widget/image_viewer.dart';
+import 'package:osi/data/model/do/delivery_order.dart';
+import 'package:osi/ui/do/detail/do_detail_page.dart';
+import 'package:osi/ui/do/list/do_page.dart';
+import 'package:osi/ui/drawer_nav/drawer_nav_page.dart';
+import 'package:osi/ui/login/login_page.dart';
+import 'package:osi/ui/splashscreen/splashscreen.dart';
+import 'package:osi/utils/widget/image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

@@ -1,4 +1,4 @@
-import 'package:approval/data/model/k3/k3_foto.dart';
+import 'package:osi/data/model/k3/k3_foto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'delivery_order.freezed.dart';

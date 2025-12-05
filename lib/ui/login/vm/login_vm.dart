@@ -1,7 +1,7 @@
-import 'package:approval/data/api/api_exception.dart';
-import 'package:approval/data/model/login/login_user.dart';
-import 'package:approval/data/repo/auth_repo.dart';
-import 'package:approval/data/session/session_manager.dart';
+import 'package:osi/data/api/api_exception.dart';
+import 'package:osi/data/model/login/login_user.dart';
+import 'package:osi/data/repo/auth_repo.dart';
+import 'package:osi/data/session/session_manager.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

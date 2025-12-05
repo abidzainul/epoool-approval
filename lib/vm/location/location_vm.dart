@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:approval/services/location_services.dart';
-import 'package:approval/vm/location/state/location_state.dart';
+import 'package:osi/services/location_services.dart';
+import 'package:osi/vm/location/state/location_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:geolocator/geolocator.dart';
 

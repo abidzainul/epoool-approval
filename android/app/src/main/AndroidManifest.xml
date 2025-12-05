@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:label="Epoool"
+        android:label="Epoool OSI"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

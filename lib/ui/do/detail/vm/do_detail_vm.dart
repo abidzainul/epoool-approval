@@ -1,15 +1,15 @@
 import 'dart:developer';
 
-import 'package:approval/data/api/api_exception.dart';
-import 'package:approval/data/model/k3/k3_checklist.dart';
-import 'package:approval/data/model/k3/k3_foto.dart';
-import 'package:approval/data/model/k3/k3_safety.dart';
-import 'package:approval/data/repo/do_repo.dart';
-import 'package:approval/ui/do/detail/state/do_detail_state.dart';
+import 'package:osi/data/api/api_exception.dart';
+import 'package:osi/data/model/k3/k3_checklist.dart';
+import 'package:osi/data/model/k3/k3_foto.dart';
+import 'package:osi/data/model/k3/k3_safety.dart';
+import 'package:osi/data/repo/do_repo.dart';
+import 'package:osi/ui/do/detail/state/do_detail_state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:approval/data/api/api_services.dart' as api;
+import 'package:osi/data/api/api_services.dart' as api;
 
 part 'do_detail_vm.g.dart';
 

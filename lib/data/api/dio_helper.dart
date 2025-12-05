@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:approval/data/api/api_interceptors.dart';
+import 'package:osi/data/api/api_interceptors.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';

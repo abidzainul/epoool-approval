@@ -34,6 +34,8 @@ _LoginUser _$LoginUserFromJson(Map<String, dynamic> json) => _LoginUser(
   androidSn: json['android_sn'] as String? ?? '',
   subUser: json['sub_user'] as String? ?? '',
   idParent: json['id_parent'] as String? ?? '',
+  idOriginator: json['id_originator'] as String? ?? '',
+  idGudang: json['id_gudang'] as String? ?? '',
   versiFoto: json['versi_foto'] as String? ?? '',
 );
 
@@ -56,5 +58,7 @@ Map<String, dynamic> _$LoginUserToJson(_LoginUser instance) =>
       'android_sn': instance.androidSn,
       'sub_user': instance.subUser,
       'id_parent': instance.idParent,
+      'id_originator': instance.idOriginator,
+      'id_gudang': instance.idGudang,
       'versi_foto': instance.versiFoto,
     };

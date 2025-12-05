@@ -1,14 +1,14 @@
-import 'package:approval/app/routes.dart';
-import 'package:approval/ui/do/list/state/do_state.dart';
-import 'package:approval/ui/do/list/vm/do_vm.dart';
-import 'package:approval/ui/do/list/widget/do_lv_item.dart';
-import 'package:approval/utils/widget/button/filled_material_button.dart';
-import 'package:approval/utils/widget/layout/layout_widgets.dart';
-import 'package:approval/vm/count/counter.dart';
-import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:osi/app/routes.dart';
+import 'package:osi/ui/do/list/state/do_state.dart';
+import 'package:osi/ui/do/list/vm/do_vm.dart';
+import 'package:osi/ui/do/list/widget/do_lv_item.dart';
+import 'package:osi/utils/widget/button/filled_material_button.dart';
+import 'package:osi/utils/widget/layout/layout_widgets.dart';
+import 'package:osi/vm/count/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:osi/vm/session/session_vm.dart';
 
 class DoPage extends ConsumerStatefulWidget {
   const DoPage({super.key});
@@ -27,6 +27,11 @@ class _DoPageState extends ConsumerState<DoPage> {
   @override
   void initState() {
     super.initState();
+    var sessionState = ref.watch(sessionVMProvider);
+    sessionState.whenData((session) {
+      _tecPlant.text = session.login?.idGudang ?? '';
+      _tecOrg.text = session.login?.idReference ?? '';
+    });
   }
 
   @override

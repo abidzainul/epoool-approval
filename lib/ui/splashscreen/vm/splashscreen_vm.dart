@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:approval/data/session/session_manager.dart';
+import 'package:osi/data/session/session_manager.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'splashscreen_vm.g.dart';

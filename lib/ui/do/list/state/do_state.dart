@@ -1,4 +1,4 @@
-import 'package:approval/data/model/do/delivery_order.dart';
+import 'package:osi/data/model/do/delivery_order.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'do_state.freezed.dart';

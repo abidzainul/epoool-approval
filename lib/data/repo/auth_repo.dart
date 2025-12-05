@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:approval/data/api/api_exception.dart';
-import 'package:approval/data/api/client/api_client.dart';
-import 'package:approval/data/model/login/login_user.dart';
-import 'package:approval/data/model/user/user.dart';
-import 'package:approval/data/session/session_manager.dart';
-import 'package:approval/utils/values/res_string.dart';
+import 'package:osi/data/api/api_exception.dart';
+import 'package:osi/data/api/client/api_client.dart';
+import 'package:osi/data/model/login/login_user.dart';
+import 'package:osi/data/model/user/user.dart';
+import 'package:osi/data/session/session_manager.dart';
+import 'package:osi/utils/values/res_string.dart';
 import 'package:logging/logging.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:approval/data/api/api_services.dart' as api;
+import 'package:osi/data/api/api_services.dart' as api;
 
 part 'auth_repo.g.dart';
 

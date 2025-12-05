@@ -1,4 +1,4 @@
-import 'package:approval/app/routes.dart';
+import 'package:osi/app/routes.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {

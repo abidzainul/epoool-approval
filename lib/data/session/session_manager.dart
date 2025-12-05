@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:approval/data/model/login/login_user.dart';
-import 'package:approval/data/model/user/user.dart';
+import 'package:osi/data/model/login/login_user.dart';
+import 'package:osi/data/model/user/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

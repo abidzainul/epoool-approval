@@ -1,8 +1,8 @@
-import 'package:approval/data/model/login/login_user.dart';
-import 'package:approval/data/model/user/user.dart';
-import 'package:approval/data/repo/auth_repo.dart';
-import 'package:approval/data/session/session_manager.dart';
-import 'package:approval/vm/session/state/session_state.dart';
+import 'package:osi/data/model/login/login_user.dart';
+import 'package:osi/data/model/user/user.dart';
+import 'package:osi/data/repo/auth_repo.dart';
+import 'package:osi/data/session/session_manager.dart';
+import 'package:osi/vm/session/state/session_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'session_vm.g.dart';

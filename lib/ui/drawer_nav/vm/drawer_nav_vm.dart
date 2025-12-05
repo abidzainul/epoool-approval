@@ -1,5 +1,5 @@
-import 'package:approval/ui/drawer_nav/model/drawer_menu_item.dart';
-import 'package:approval/ui/drawer_nav/state/drawer_nav_state.dart';
+import 'package:osi/ui/drawer_nav/model/drawer_menu_item.dart';
+import 'package:osi/ui/drawer_nav/state/drawer_nav_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'drawer_nav_vm.g.dart';

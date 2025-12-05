@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:approval/app/my_app.dart';
-import 'package:approval/data/api/api_services.dart' as api;
-import 'package:approval/data/api/client/api_client.dart';
-import 'package:approval/firebase_options.dart';
-import 'package:approval/services/my_http_overrides.dart';
-import 'package:approval/services/notification_service.dart';
+import 'package:osi/app/my_app.dart';
+import 'package:osi/data/api/api_services.dart' as api;
+import 'package:osi/data/api/client/api_client.dart';
+import 'package:osi/firebase_options.dart';
+import 'package:osi/services/my_http_overrides.dart';
+import 'package:osi/services/notification_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

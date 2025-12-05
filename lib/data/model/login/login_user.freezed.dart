@@ -305,7 +305,7 @@ $LoginUserCopyWith<$Res>? get data {
 /// @nodoc
 mixin _$LoginUser {
 
-@JsonKey(name: 'id_username') String get idUsername;@JsonKey(name: 'username') String get username;@JsonKey(name: 'password') String get password;@JsonKey(name: 'no_hp') String get noHp;@JsonKey(name: 'tipe') String? get tipe;@JsonKey(name: 'id_reference') String get idReference;@JsonKey(name: 'deleted') String get deleted;@JsonKey(name: 'add_by') String get addBy;@JsonKey(name: 'edited_by') String get editedBy;@JsonKey(name: 'date_add') String get dateAdd;@JsonKey(name: 'last_edited') String get lastEdited;@JsonKey(name: 'token_fcm') String get tokenFcm;@JsonKey(name: 'status_login') String get statusLogin;@JsonKey(name: 'android_imei') String get androidImei;@JsonKey(name: 'android_sn') String get androidSn;@JsonKey(name: 'sub_user') String get subUser;@JsonKey(name: 'id_parent') String get idParent;@JsonKey(name: 'versi_foto') String get versiFoto;
+@JsonKey(name: 'id_username') String get idUsername;@JsonKey(name: 'username') String get username;@JsonKey(name: 'password') String get password;@JsonKey(name: 'no_hp') String get noHp;@JsonKey(name: 'tipe') String? get tipe;@JsonKey(name: 'id_reference') String get idReference;@JsonKey(name: 'deleted') String get deleted;@JsonKey(name: 'add_by') String get addBy;@JsonKey(name: 'edited_by') String get editedBy;@JsonKey(name: 'date_add') String get dateAdd;@JsonKey(name: 'last_edited') String get lastEdited;@JsonKey(name: 'token_fcm') String get tokenFcm;@JsonKey(name: 'status_login') String get statusLogin;@JsonKey(name: 'android_imei') String get androidImei;@JsonKey(name: 'android_sn') String get androidSn;@JsonKey(name: 'sub_user') String get subUser;@JsonKey(name: 'id_parent') String get idParent;@JsonKey(name: 'id_originator') String get idOriginator;@JsonKey(name: 'id_gudang') String get idGudang;@JsonKey(name: 'versi_foto') String get versiFoto;
 /// Create a copy of LoginUser
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -318,16 +318,16 @@ $LoginUserCopyWith<LoginUser> get copyWith => _$LoginUserCopyWithImpl<LoginUser>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginUser&&(identical(other.idUsername, idUsername) || other.idUsername == idUsername)&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password)&&(identical(other.noHp, noHp) || other.noHp == noHp)&&(identical(other.tipe, tipe) || other.tipe == tipe)&&(identical(other.idReference, idReference) || other.idReference == idReference)&&(identical(other.deleted, deleted) || other.deleted == deleted)&&(identical(other.addBy, addBy) || other.addBy == addBy)&&(identical(other.editedBy, editedBy) || other.editedBy == editedBy)&&(identical(other.dateAdd, dateAdd) || other.dateAdd == dateAdd)&&(identical(other.lastEdited, lastEdited) || other.lastEdited == lastEdited)&&(identical(other.tokenFcm, tokenFcm) || other.tokenFcm == tokenFcm)&&(identical(other.statusLogin, statusLogin) || other.statusLogin == statusLogin)&&(identical(other.androidImei, androidImei) || other.androidImei == androidImei)&&(identical(other.androidSn, androidSn) || other.androidSn == androidSn)&&(identical(other.subUser, subUser) || other.subUser == subUser)&&(identical(other.idParent, idParent) || other.idParent == idParent)&&(identical(other.versiFoto, versiFoto) || other.versiFoto == versiFoto));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginUser&&(identical(other.idUsername, idUsername) || other.idUsername == idUsername)&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password)&&(identical(other.noHp, noHp) || other.noHp == noHp)&&(identical(other.tipe, tipe) || other.tipe == tipe)&&(identical(other.idReference, idReference) || other.idReference == idReference)&&(identical(other.deleted, deleted) || other.deleted == deleted)&&(identical(other.addBy, addBy) || other.addBy == addBy)&&(identical(other.editedBy, editedBy) || other.editedBy == editedBy)&&(identical(other.dateAdd, dateAdd) || other.dateAdd == dateAdd)&&(identical(other.lastEdited, lastEdited) || other.lastEdited == lastEdited)&&(identical(other.tokenFcm, tokenFcm) || other.tokenFcm == tokenFcm)&&(identical(other.statusLogin, statusLogin) || other.statusLogin == statusLogin)&&(identical(other.androidImei, androidImei) || other.androidImei == androidImei)&&(identical(other.androidSn, androidSn) || other.androidSn == androidSn)&&(identical(other.subUser, subUser) || other.subUser == subUser)&&(identical(other.idParent, idParent) || other.idParent == idParent)&&(identical(other.idOriginator, idOriginator) || other.idOriginator == idOriginator)&&(identical(other.idGudang, idGudang) || other.idGudang == idGudang)&&(identical(other.versiFoto, versiFoto) || other.versiFoto == versiFoto));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,idUsername,username,password,noHp,tipe,idReference,deleted,addBy,editedBy,dateAdd,lastEdited,tokenFcm,statusLogin,androidImei,androidSn,subUser,idParent,versiFoto);
+int get hashCode => Object.hashAll([runtimeType,idUsername,username,password,noHp,tipe,idReference,deleted,addBy,editedBy,dateAdd,lastEdited,tokenFcm,statusLogin,androidImei,androidSn,subUser,idParent,idOriginator,idGudang,versiFoto]);
 
 @override
 String toString() {
-  return 'LoginUser(idUsername: $idUsername, username: $username, password: $password, noHp: $noHp, tipe: $tipe, idReference: $idReference, deleted: $deleted, addBy: $addBy, editedBy: $editedBy, dateAdd: $dateAdd, lastEdited: $lastEdited, tokenFcm: $tokenFcm, statusLogin: $statusLogin, androidImei: $androidImei, androidSn: $androidSn, subUser: $subUser, idParent: $idParent, versiFoto: $versiFoto)';
+  return 'LoginUser(idUsername: $idUsername, username: $username, password: $password, noHp: $noHp, tipe: $tipe, idReference: $idReference, deleted: $deleted, addBy: $addBy, editedBy: $editedBy, dateAdd: $dateAdd, lastEdited: $lastEdited, tokenFcm: $tokenFcm, statusLogin: $statusLogin, androidImei: $androidImei, androidSn: $androidSn, subUser: $subUser, idParent: $idParent, idOriginator: $idOriginator, idGudang: $idGudang, versiFoto: $versiFoto)';
 }
 
 
@@ -338,7 +338,7 @@ abstract mixin class $LoginUserCopyWith<$Res>  {
   factory $LoginUserCopyWith(LoginUser value, $Res Function(LoginUser) _then) = _$LoginUserCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'id_username') String idUsername,@JsonKey(name: 'username') String username,@JsonKey(name: 'password') String password,@JsonKey(name: 'no_hp') String noHp,@JsonKey(name: 'tipe') String? tipe,@JsonKey(name: 'id_reference') String idReference,@JsonKey(name: 'deleted') String deleted,@JsonKey(name: 'add_by') String addBy,@JsonKey(name: 'edited_by') String editedBy,@JsonKey(name: 'date_add') String dateAdd,@JsonKey(name: 'last_edited') String lastEdited,@JsonKey(name: 'token_fcm') String tokenFcm,@JsonKey(name: 'status_login') String statusLogin,@JsonKey(name: 'android_imei') String androidImei,@JsonKey(name: 'android_sn') String androidSn,@JsonKey(name: 'sub_user') String subUser,@JsonKey(name: 'id_parent') String idParent,@JsonKey(name: 'versi_foto') String versiFoto
+@JsonKey(name: 'id_username') String idUsername,@JsonKey(name: 'username') String username,@JsonKey(name: 'password') String password,@JsonKey(name: 'no_hp') String noHp,@JsonKey(name: 'tipe') String? tipe,@JsonKey(name: 'id_reference') String idReference,@JsonKey(name: 'deleted') String deleted,@JsonKey(name: 'add_by') String addBy,@JsonKey(name: 'edited_by') String editedBy,@JsonKey(name: 'date_add') String dateAdd,@JsonKey(name: 'last_edited') String lastEdited,@JsonKey(name: 'token_fcm') String tokenFcm,@JsonKey(name: 'status_login') String statusLogin,@JsonKey(name: 'android_imei') String androidImei,@JsonKey(name: 'android_sn') String androidSn,@JsonKey(name: 'sub_user') String subUser,@JsonKey(name: 'id_parent') String idParent,@JsonKey(name: 'id_originator') String idOriginator,@JsonKey(name: 'id_gudang') String idGudang,@JsonKey(name: 'versi_foto') String versiFoto
 });
 
 
@@ -355,7 +355,7 @@ class _$LoginUserCopyWithImpl<$Res>
 
 /// Create a copy of LoginUser
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? idUsername = null,Object? username = null,Object? password = null,Object? noHp = null,Object? tipe = freezed,Object? idReference = null,Object? deleted = null,Object? addBy = null,Object? editedBy = null,Object? dateAdd = null,Object? lastEdited = null,Object? tokenFcm = null,Object? statusLogin = null,Object? androidImei = null,Object? androidSn = null,Object? subUser = null,Object? idParent = null,Object? versiFoto = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? idUsername = null,Object? username = null,Object? password = null,Object? noHp = null,Object? tipe = freezed,Object? idReference = null,Object? deleted = null,Object? addBy = null,Object? editedBy = null,Object? dateAdd = null,Object? lastEdited = null,Object? tokenFcm = null,Object? statusLogin = null,Object? androidImei = null,Object? androidSn = null,Object? subUser = null,Object? idParent = null,Object? idOriginator = null,Object? idGudang = null,Object? versiFoto = null,}) {
   return _then(_self.copyWith(
 idUsername: null == idUsername ? _self.idUsername : idUsername // ignore: cast_nullable_to_non_nullable
 as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
@@ -374,6 +374,8 @@ as String,androidImei: null == androidImei ? _self.androidImei : androidImei // 
 as String,androidSn: null == androidSn ? _self.androidSn : androidSn // ignore: cast_nullable_to_non_nullable
 as String,subUser: null == subUser ? _self.subUser : subUser // ignore: cast_nullable_to_non_nullable
 as String,idParent: null == idParent ? _self.idParent : idParent // ignore: cast_nullable_to_non_nullable
+as String,idOriginator: null == idOriginator ? _self.idOriginator : idOriginator // ignore: cast_nullable_to_non_nullable
+as String,idGudang: null == idGudang ? _self.idGudang : idGudang // ignore: cast_nullable_to_non_nullable
 as String,versiFoto: null == versiFoto ? _self.versiFoto : versiFoto // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -460,10 +462,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_username')  String idUsername, @JsonKey(name: 'username')  String username, @JsonKey(name: 'password')  String password, @JsonKey(name: 'no_hp')  String noHp, @JsonKey(name: 'tipe')  String? tipe, @JsonKey(name: 'id_reference')  String idReference, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'token_fcm')  String tokenFcm, @JsonKey(name: 'status_login')  String statusLogin, @JsonKey(name: 'android_imei')  String androidImei, @JsonKey(name: 'android_sn')  String androidSn, @JsonKey(name: 'sub_user')  String subUser, @JsonKey(name: 'id_parent')  String idParent, @JsonKey(name: 'versi_foto')  String versiFoto)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_username')  String idUsername, @JsonKey(name: 'username')  String username, @JsonKey(name: 'password')  String password, @JsonKey(name: 'no_hp')  String noHp, @JsonKey(name: 'tipe')  String? tipe, @JsonKey(name: 'id_reference')  String idReference, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'token_fcm')  String tokenFcm, @JsonKey(name: 'status_login')  String statusLogin, @JsonKey(name: 'android_imei')  String androidImei, @JsonKey(name: 'android_sn')  String androidSn, @JsonKey(name: 'sub_user')  String subUser, @JsonKey(name: 'id_parent')  String idParent, @JsonKey(name: 'id_originator')  String idOriginator, @JsonKey(name: 'id_gudang')  String idGudang, @JsonKey(name: 'versi_foto')  String versiFoto)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginUser() when $default != null:
-return $default(_that.idUsername,_that.username,_that.password,_that.noHp,_that.tipe,_that.idReference,_that.deleted,_that.addBy,_that.editedBy,_that.dateAdd,_that.lastEdited,_that.tokenFcm,_that.statusLogin,_that.androidImei,_that.androidSn,_that.subUser,_that.idParent,_that.versiFoto);case _:
+return $default(_that.idUsername,_that.username,_that.password,_that.noHp,_that.tipe,_that.idReference,_that.deleted,_that.addBy,_that.editedBy,_that.dateAdd,_that.lastEdited,_that.tokenFcm,_that.statusLogin,_that.androidImei,_that.androidSn,_that.subUser,_that.idParent,_that.idOriginator,_that.idGudang,_that.versiFoto);case _:
   return orElse();
 
 }
@@ -481,10 +483,10 @@ return $default(_that.idUsername,_that.username,_that.password,_that.noHp,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_username')  String idUsername, @JsonKey(name: 'username')  String username, @JsonKey(name: 'password')  String password, @JsonKey(name: 'no_hp')  String noHp, @JsonKey(name: 'tipe')  String? tipe, @JsonKey(name: 'id_reference')  String idReference, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'token_fcm')  String tokenFcm, @JsonKey(name: 'status_login')  String statusLogin, @JsonKey(name: 'android_imei')  String androidImei, @JsonKey(name: 'android_sn')  String androidSn, @JsonKey(name: 'sub_user')  String subUser, @JsonKey(name: 'id_parent')  String idParent, @JsonKey(name: 'versi_foto')  String versiFoto)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_username')  String idUsername, @JsonKey(name: 'username')  String username, @JsonKey(name: 'password')  String password, @JsonKey(name: 'no_hp')  String noHp, @JsonKey(name: 'tipe')  String? tipe, @JsonKey(name: 'id_reference')  String idReference, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'token_fcm')  String tokenFcm, @JsonKey(name: 'status_login')  String statusLogin, @JsonKey(name: 'android_imei')  String androidImei, @JsonKey(name: 'android_sn')  String androidSn, @JsonKey(name: 'sub_user')  String subUser, @JsonKey(name: 'id_parent')  String idParent, @JsonKey(name: 'id_originator')  String idOriginator, @JsonKey(name: 'id_gudang')  String idGudang, @JsonKey(name: 'versi_foto')  String versiFoto)  $default,) {final _that = this;
 switch (_that) {
 case _LoginUser():
-return $default(_that.idUsername,_that.username,_that.password,_that.noHp,_that.tipe,_that.idReference,_that.deleted,_that.addBy,_that.editedBy,_that.dateAdd,_that.lastEdited,_that.tokenFcm,_that.statusLogin,_that.androidImei,_that.androidSn,_that.subUser,_that.idParent,_that.versiFoto);case _:
+return $default(_that.idUsername,_that.username,_that.password,_that.noHp,_that.tipe,_that.idReference,_that.deleted,_that.addBy,_that.editedBy,_that.dateAdd,_that.lastEdited,_that.tokenFcm,_that.statusLogin,_that.androidImei,_that.androidSn,_that.subUser,_that.idParent,_that.idOriginator,_that.idGudang,_that.versiFoto);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -501,10 +503,10 @@ return $default(_that.idUsername,_that.username,_that.password,_that.noHp,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id_username')  String idUsername, @JsonKey(name: 'username')  String username, @JsonKey(name: 'password')  String password, @JsonKey(name: 'no_hp')  String noHp, @JsonKey(name: 'tipe')  String? tipe, @JsonKey(name: 'id_reference')  String idReference, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'token_fcm')  String tokenFcm, @JsonKey(name: 'status_login')  String statusLogin, @JsonKey(name: 'android_imei')  String androidImei, @JsonKey(name: 'android_sn')  String androidSn, @JsonKey(name: 'sub_user')  String subUser, @JsonKey(name: 'id_parent')  String idParent, @JsonKey(name: 'versi_foto')  String versiFoto)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id_username')  String idUsername, @JsonKey(name: 'username')  String username, @JsonKey(name: 'password')  String password, @JsonKey(name: 'no_hp')  String noHp, @JsonKey(name: 'tipe')  String? tipe, @JsonKey(name: 'id_reference')  String idReference, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'token_fcm')  String tokenFcm, @JsonKey(name: 'status_login')  String statusLogin, @JsonKey(name: 'android_imei')  String androidImei, @JsonKey(name: 'android_sn')  String androidSn, @JsonKey(name: 'sub_user')  String subUser, @JsonKey(name: 'id_parent')  String idParent, @JsonKey(name: 'id_originator')  String idOriginator, @JsonKey(name: 'id_gudang')  String idGudang, @JsonKey(name: 'versi_foto')  String versiFoto)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginUser() when $default != null:
-return $default(_that.idUsername,_that.username,_that.password,_that.noHp,_that.tipe,_that.idReference,_that.deleted,_that.addBy,_that.editedBy,_that.dateAdd,_that.lastEdited,_that.tokenFcm,_that.statusLogin,_that.androidImei,_that.androidSn,_that.subUser,_that.idParent,_that.versiFoto);case _:
+return $default(_that.idUsername,_that.username,_that.password,_that.noHp,_that.tipe,_that.idReference,_that.deleted,_that.addBy,_that.editedBy,_that.dateAdd,_that.lastEdited,_that.tokenFcm,_that.statusLogin,_that.androidImei,_that.androidSn,_that.subUser,_that.idParent,_that.idOriginator,_that.idGudang,_that.versiFoto);case _:
   return null;
 
 }
@@ -516,7 +518,7 @@ return $default(_that.idUsername,_that.username,_that.password,_that.noHp,_that.
 @JsonSerializable()
 
 class _LoginUser implements LoginUser {
-  const _LoginUser({@JsonKey(name: 'id_username') this.idUsername = '', @JsonKey(name: 'username') this.username = '', @JsonKey(name: 'password') this.password = '', @JsonKey(name: 'no_hp') this.noHp = '', @JsonKey(name: 'tipe') this.tipe, @JsonKey(name: 'id_reference') this.idReference = '', @JsonKey(name: 'deleted') this.deleted = '', @JsonKey(name: 'add_by') this.addBy = '', @JsonKey(name: 'edited_by') this.editedBy = '', @JsonKey(name: 'date_add') this.dateAdd = '', @JsonKey(name: 'last_edited') this.lastEdited = '', @JsonKey(name: 'token_fcm') this.tokenFcm = '', @JsonKey(name: 'status_login') this.statusLogin = '', @JsonKey(name: 'android_imei') this.androidImei = '', @JsonKey(name: 'android_sn') this.androidSn = '', @JsonKey(name: 'sub_user') this.subUser = '', @JsonKey(name: 'id_parent') this.idParent = '', @JsonKey(name: 'versi_foto') this.versiFoto = ''});
+  const _LoginUser({@JsonKey(name: 'id_username') this.idUsername = '', @JsonKey(name: 'username') this.username = '', @JsonKey(name: 'password') this.password = '', @JsonKey(name: 'no_hp') this.noHp = '', @JsonKey(name: 'tipe') this.tipe, @JsonKey(name: 'id_reference') this.idReference = '', @JsonKey(name: 'deleted') this.deleted = '', @JsonKey(name: 'add_by') this.addBy = '', @JsonKey(name: 'edited_by') this.editedBy = '', @JsonKey(name: 'date_add') this.dateAdd = '', @JsonKey(name: 'last_edited') this.lastEdited = '', @JsonKey(name: 'token_fcm') this.tokenFcm = '', @JsonKey(name: 'status_login') this.statusLogin = '', @JsonKey(name: 'android_imei') this.androidImei = '', @JsonKey(name: 'android_sn') this.androidSn = '', @JsonKey(name: 'sub_user') this.subUser = '', @JsonKey(name: 'id_parent') this.idParent = '', @JsonKey(name: 'id_originator') this.idOriginator = '', @JsonKey(name: 'id_gudang') this.idGudang = '', @JsonKey(name: 'versi_foto') this.versiFoto = ''});
   factory _LoginUser.fromJson(Map<String, dynamic> json) => _$LoginUserFromJson(json);
 
 @override@JsonKey(name: 'id_username') final  String idUsername;
@@ -536,6 +538,8 @@ class _LoginUser implements LoginUser {
 @override@JsonKey(name: 'android_sn') final  String androidSn;
 @override@JsonKey(name: 'sub_user') final  String subUser;
 @override@JsonKey(name: 'id_parent') final  String idParent;
+@override@JsonKey(name: 'id_originator') final  String idOriginator;
+@override@JsonKey(name: 'id_gudang') final  String idGudang;
 @override@JsonKey(name: 'versi_foto') final  String versiFoto;
 
 /// Create a copy of LoginUser
@@ -551,16 +555,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginUser&&(identical(other.idUsername, idUsername) || other.idUsername == idUsername)&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password)&&(identical(other.noHp, noHp) || other.noHp == noHp)&&(identical(other.tipe, tipe) || other.tipe == tipe)&&(identical(other.idReference, idReference) || other.idReference == idReference)&&(identical(other.deleted, deleted) || other.deleted == deleted)&&(identical(other.addBy, addBy) || other.addBy == addBy)&&(identical(other.editedBy, editedBy) || other.editedBy == editedBy)&&(identical(other.dateAdd, dateAdd) || other.dateAdd == dateAdd)&&(identical(other.lastEdited, lastEdited) || other.lastEdited == lastEdited)&&(identical(other.tokenFcm, tokenFcm) || other.tokenFcm == tokenFcm)&&(identical(other.statusLogin, statusLogin) || other.statusLogin == statusLogin)&&(identical(other.androidImei, androidImei) || other.androidImei == androidImei)&&(identical(other.androidSn, androidSn) || other.androidSn == androidSn)&&(identical(other.subUser, subUser) || other.subUser == subUser)&&(identical(other.idParent, idParent) || other.idParent == idParent)&&(identical(other.versiFoto, versiFoto) || other.versiFoto == versiFoto));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginUser&&(identical(other.idUsername, idUsername) || other.idUsername == idUsername)&&(identical(other.username, username) || other.username == username)&&(identical(other.password, password) || other.password == password)&&(identical(other.noHp, noHp) || other.noHp == noHp)&&(identical(other.tipe, tipe) || other.tipe == tipe)&&(identical(other.idReference, idReference) || other.idReference == idReference)&&(identical(other.deleted, deleted) || other.deleted == deleted)&&(identical(other.addBy, addBy) || other.addBy == addBy)&&(identical(other.editedBy, editedBy) || other.editedBy == editedBy)&&(identical(other.dateAdd, dateAdd) || other.dateAdd == dateAdd)&&(identical(other.lastEdited, lastEdited) || other.lastEdited == lastEdited)&&(identical(other.tokenFcm, tokenFcm) || other.tokenFcm == tokenFcm)&&(identical(other.statusLogin, statusLogin) || other.statusLogin == statusLogin)&&(identical(other.androidImei, androidImei) || other.androidImei == androidImei)&&(identical(other.androidSn, androidSn) || other.androidSn == androidSn)&&(identical(other.subUser, subUser) || other.subUser == subUser)&&(identical(other.idParent, idParent) || other.idParent == idParent)&&(identical(other.idOriginator, idOriginator) || other.idOriginator == idOriginator)&&(identical(other.idGudang, idGudang) || other.idGudang == idGudang)&&(identical(other.versiFoto, versiFoto) || other.versiFoto == versiFoto));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,idUsername,username,password,noHp,tipe,idReference,deleted,addBy,editedBy,dateAdd,lastEdited,tokenFcm,statusLogin,androidImei,androidSn,subUser,idParent,versiFoto);
+int get hashCode => Object.hashAll([runtimeType,idUsername,username,password,noHp,tipe,idReference,deleted,addBy,editedBy,dateAdd,lastEdited,tokenFcm,statusLogin,androidImei,androidSn,subUser,idParent,idOriginator,idGudang,versiFoto]);
 
 @override
 String toString() {
-  return 'LoginUser(idUsername: $idUsername, username: $username, password: $password, noHp: $noHp, tipe: $tipe, idReference: $idReference, deleted: $deleted, addBy: $addBy, editedBy: $editedBy, dateAdd: $dateAdd, lastEdited: $lastEdited, tokenFcm: $tokenFcm, statusLogin: $statusLogin, androidImei: $androidImei, androidSn: $androidSn, subUser: $subUser, idParent: $idParent, versiFoto: $versiFoto)';
+  return 'LoginUser(idUsername: $idUsername, username: $username, password: $password, noHp: $noHp, tipe: $tipe, idReference: $idReference, deleted: $deleted, addBy: $addBy, editedBy: $editedBy, dateAdd: $dateAdd, lastEdited: $lastEdited, tokenFcm: $tokenFcm, statusLogin: $statusLogin, androidImei: $androidImei, androidSn: $androidSn, subUser: $subUser, idParent: $idParent, idOriginator: $idOriginator, idGudang: $idGudang, versiFoto: $versiFoto)';
 }
 
 
@@ -571,7 +575,7 @@ abstract mixin class _$LoginUserCopyWith<$Res> implements $LoginUserCopyWith<$Re
   factory _$LoginUserCopyWith(_LoginUser value, $Res Function(_LoginUser) _then) = __$LoginUserCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id_username') String idUsername,@JsonKey(name: 'username') String username,@JsonKey(name: 'password') String password,@JsonKey(name: 'no_hp') String noHp,@JsonKey(name: 'tipe') String? tipe,@JsonKey(name: 'id_reference') String idReference,@JsonKey(name: 'deleted') String deleted,@JsonKey(name: 'add_by') String addBy,@JsonKey(name: 'edited_by') String editedBy,@JsonKey(name: 'date_add') String dateAdd,@JsonKey(name: 'last_edited') String lastEdited,@JsonKey(name: 'token_fcm') String tokenFcm,@JsonKey(name: 'status_login') String statusLogin,@JsonKey(name: 'android_imei') String androidImei,@JsonKey(name: 'android_sn') String androidSn,@JsonKey(name: 'sub_user') String subUser,@JsonKey(name: 'id_parent') String idParent,@JsonKey(name: 'versi_foto') String versiFoto
+@JsonKey(name: 'id_username') String idUsername,@JsonKey(name: 'username') String username,@JsonKey(name: 'password') String password,@JsonKey(name: 'no_hp') String noHp,@JsonKey(name: 'tipe') String? tipe,@JsonKey(name: 'id_reference') String idReference,@JsonKey(name: 'deleted') String deleted,@JsonKey(name: 'add_by') String addBy,@JsonKey(name: 'edited_by') String editedBy,@JsonKey(name: 'date_add') String dateAdd,@JsonKey(name: 'last_edited') String lastEdited,@JsonKey(name: 'token_fcm') String tokenFcm,@JsonKey(name: 'status_login') String statusLogin,@JsonKey(name: 'android_imei') String androidImei,@JsonKey(name: 'android_sn') String androidSn,@JsonKey(name: 'sub_user') String subUser,@JsonKey(name: 'id_parent') String idParent,@JsonKey(name: 'id_originator') String idOriginator,@JsonKey(name: 'id_gudang') String idGudang,@JsonKey(name: 'versi_foto') String versiFoto
 });
 
 
@@ -588,7 +592,7 @@ class __$LoginUserCopyWithImpl<$Res>
 
 /// Create a copy of LoginUser
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? idUsername = null,Object? username = null,Object? password = null,Object? noHp = null,Object? tipe = freezed,Object? idReference = null,Object? deleted = null,Object? addBy = null,Object? editedBy = null,Object? dateAdd = null,Object? lastEdited = null,Object? tokenFcm = null,Object? statusLogin = null,Object? androidImei = null,Object? androidSn = null,Object? subUser = null,Object? idParent = null,Object? versiFoto = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? idUsername = null,Object? username = null,Object? password = null,Object? noHp = null,Object? tipe = freezed,Object? idReference = null,Object? deleted = null,Object? addBy = null,Object? editedBy = null,Object? dateAdd = null,Object? lastEdited = null,Object? tokenFcm = null,Object? statusLogin = null,Object? androidImei = null,Object? androidSn = null,Object? subUser = null,Object? idParent = null,Object? idOriginator = null,Object? idGudang = null,Object? versiFoto = null,}) {
   return _then(_LoginUser(
 idUsername: null == idUsername ? _self.idUsername : idUsername // ignore: cast_nullable_to_non_nullable
 as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
@@ -607,6 +611,8 @@ as String,androidImei: null == androidImei ? _self.androidImei : androidImei // 
 as String,androidSn: null == androidSn ? _self.androidSn : androidSn // ignore: cast_nullable_to_non_nullable
 as String,subUser: null == subUser ? _self.subUser : subUser // ignore: cast_nullable_to_non_nullable
 as String,idParent: null == idParent ? _self.idParent : idParent // ignore: cast_nullable_to_non_nullable
+as String,idOriginator: null == idOriginator ? _self.idOriginator : idOriginator // ignore: cast_nullable_to_non_nullable
+as String,idGudang: null == idGudang ? _self.idGudang : idGudang // ignore: cast_nullable_to_non_nullable
 as String,versiFoto: null == versiFoto ? _self.versiFoto : versiFoto // ignore: cast_nullable_to_non_nullable
 as String,
   ));

@@ -1,6 +1,6 @@
-import 'package:approval/data/api/api_exception.dart';
-import 'package:approval/data/repo/do_repo.dart';
-import 'package:approval/ui/do/list/state/do_state.dart';
+import 'package:osi/data/api/api_exception.dart';
+import 'package:osi/data/repo/do_repo.dart';
+import 'package:osi/ui/do/list/state/do_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

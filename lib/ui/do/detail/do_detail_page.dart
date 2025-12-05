@@ -1,13 +1,13 @@
 import 'dart:developer';
 
-import 'package:approval/app/routes.dart';
-import 'package:approval/data/model/do/delivery_order.dart';
-import 'package:approval/ui/do/detail/state/do_detail_state.dart';
-import 'package:approval/ui/do/detail/vm/do_detail_vm.dart';
-import 'package:approval/ui/do/detail/widget/k3_checklist_item.dart';
-import 'package:approval/utils/widget/dialog/dialog_confirm.dart';
-import 'package:approval/utils/widget/layout/layout_widgets.dart';
-import 'package:approval/vm/image_picker/image_picker_vm.dart';
+import 'package:osi/app/routes.dart';
+import 'package:osi/data/model/do/delivery_order.dart';
+import 'package:osi/ui/do/detail/state/do_detail_state.dart';
+import 'package:osi/ui/do/detail/vm/do_detail_vm.dart';
+import 'package:osi/ui/do/detail/widget/k3_checklist_item.dart';
+import 'package:osi/utils/widget/dialog/dialog_confirm.dart';
+import 'package:osi/utils/widget/layout/layout_widgets.dart';
+import 'package:osi/vm/image_picker/image_picker_vm.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

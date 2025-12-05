@@ -1,7 +1,7 @@
-import 'package:approval/app/routes.dart';
-import 'package:approval/data/api/api_exception.dart';
-import 'package:approval/data/model/login/login_user.dart';
-import 'package:approval/utils/widget/dialog/dialog_info.dart';
+import 'package:osi/app/routes.dart';
+import 'package:osi/data/api/api_exception.dart';
+import 'package:osi/data/model/login/login_user.dart';
+import 'package:osi/utils/widget/dialog/dialog_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:approval/data/api/dio_helper.dart';
-import 'package:approval/data/api/api_services.dart' as api;
+import 'package:osi/data/api/dio_helper.dart';
+import 'package:osi/data/api/api_services.dart' as api;
 import 'package:dio/dio.dart';
 import 'package:riverpod/riverpod.dart';
 

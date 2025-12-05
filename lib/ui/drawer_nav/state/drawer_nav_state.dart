@@ -1,4 +1,4 @@
-import 'package:approval/ui/drawer_nav/model/drawer_menu_item.dart';
+import 'package:osi/ui/drawer_nav/model/drawer_menu_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'drawer_nav_state.freezed.dart';

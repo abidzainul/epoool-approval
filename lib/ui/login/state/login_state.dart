@@ -1,5 +1,5 @@
 
-import 'package:approval/data/model/login/login_user.dart';
+import 'package:osi/data/model/login/login_user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'login_state.freezed.dart';

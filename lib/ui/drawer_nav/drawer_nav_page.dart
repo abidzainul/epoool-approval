@@ -1,8 +1,8 @@
-import 'package:approval/app/routes.dart';
-import 'package:approval/ui/do/list/do_page.dart';
-import 'package:approval/ui/drawer_nav/vm/drawer_nav_vm.dart';
-import 'package:approval/utils/widget/dialog/dialog_confirm.dart';
-import 'package:approval/vm/session/session_vm.dart';
+import 'package:osi/app/routes.dart';
+import 'package:osi/ui/do/list/do_page.dart';
+import 'package:osi/ui/drawer_nav/vm/drawer_nav_vm.dart';
+import 'package:osi/utils/widget/dialog/dialog_confirm.dart';
+import 'package:osi/vm/session/session_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

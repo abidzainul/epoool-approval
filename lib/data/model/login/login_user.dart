@@ -33,6 +33,8 @@ abstract class LoginUser with _$LoginUser {
     @JsonKey(name: 'android_sn') @Default('') String androidSn,
     @JsonKey(name: 'sub_user') @Default('') String subUser,
     @JsonKey(name: 'id_parent') @Default('') String idParent,
+    @JsonKey(name: 'id_originator') @Default('') String idOriginator,
+    @JsonKey(name: 'id_gudang') @Default('') String idGudang,
     @JsonKey(name: 'versi_foto') @Default('') String versiFoto,
   }) = _LoginUser;
 

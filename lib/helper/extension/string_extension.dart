@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:approval/utils/values/res_format.dart';
-import 'package:approval/utils/values/res_string.dart';
+import 'package:osi/utils/values/res_format.dart';
+import 'package:osi/utils/values/res_string.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
