@@ -19,8 +19,8 @@ class LoginPage extends ConsumerWidget {
 
     ref.listen<AsyncValue<LoginUser>>(loginVMProvider, (previous, next) async {
       next.when(
-        data: (user) async {
-          if (user.idUsername.isNotEmpty) {
+        data: (login) async {
+          if (login.user?.idUsername != null) {
             if (context.mounted) {
               context.go(AppRoute.navBarHome);
             }
@@ -107,11 +107,11 @@ class LoginPage extends ConsumerWidget {
                     ),
                     const SizedBox(height: 24),
                     state.when(
-                      data: (user) {
-                        if (user.username.isNotEmpty) {
+                      data: (login) {
+                        if (login.user?.username.isNotEmpty ?? false) {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 12.0),
-                            child: Text(user.username),
+                            child: Text(login.user!.username),
                           );
                         } else {
                           return const SizedBox.shrink();

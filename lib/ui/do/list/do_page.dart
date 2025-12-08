@@ -27,11 +27,6 @@ class _DoPageState extends ConsumerState<DoPage> {
   @override
   void initState() {
     super.initState();
-    var sessionState = ref.watch(sessionVMProvider);
-    sessionState.whenData((session) {
-      _tecPlant.text = session.login?.idGudang ?? '';
-      _tecOrg.text = session.login?.idReference ?? '';
-    });
   }
 
   @override
@@ -56,7 +51,23 @@ class _DoPageState extends ConsumerState<DoPage> {
     final state = ref.watch(doVMProvider);
     final vm = ref.read(doVMProvider.notifier);
 
+    vm.setFilterDefault();
+
     final counterState = ref.watch(counterProvider);
+
+    if(state.originator != null){
+      _tecOrg.text = state.originator!;
+    }
+
+    if(state.plant != null){
+      _tecPlant.text = state.plant!;
+    }
+
+    // var sessionState = ref.watch(sessionVMProvider);
+    // sessionState.whenData((session) {
+    //   _tecPlant.text = session.login?.idGudang ?? '';
+    //   _tecOrg.text = session.login?.idReference ?? '';
+    // });
 
     return Scaffold(
       body: Column(
@@ -231,7 +242,7 @@ class _DoPageState extends ConsumerState<DoPage> {
                 child: TextField(
                   controller: _tecNopol,
                   decoration: InputDecoration(
-                    hintText: 'Cari berdasarkan no plat...',
+                    hintText: 'No Plat',
                     prefixIcon: const Icon(Icons.local_shipping),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),

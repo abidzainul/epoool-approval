@@ -1,5 +1,4 @@
 import 'package:osi/data/model/login/login_user.dart';
-import 'package:osi/data/model/user/user.dart';
 import 'package:osi/data/repo/auth_repo.dart';
 import 'package:osi/data/session/session_manager.dart';
 import 'package:osi/vm/session/state/session_state.dart';
@@ -14,7 +13,7 @@ class SessionVM extends _$SessionVM {
     final sessionManager = ref.read(sessionProvider);
 
     final loginUser = await sessionManager.getLoginUser();
-    final userData = await sessionManager.getLoginData();
+    final userData = await sessionManager.getUserData();
     final isLoggedIn = await sessionManager.isLogin();
 
     return SessionState(
@@ -39,8 +38,8 @@ class SessionVM extends _$SessionVM {
 
   String? getUserPhoto() {
     final currentState = state.value;
-    if (currentState?.user?.urlFoto.isNotEmpty == true) {
-      return currentState!.user!.urlFoto;
+    if (currentState?.user?.foto.isNotEmpty == true) {
+      return currentState!.user!.foto;
     }
     return null;
   }
@@ -58,7 +57,7 @@ class SessionVM extends _$SessionVM {
     return state.value?.login;
   }
 
-  User? get user {
-    return state.value?.user;
+  UserData? get user {
+    return state.value?.login?.user;
   }
 }

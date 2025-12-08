@@ -7,7 +7,7 @@ const baseUrlApi = "$baseUrl/index.php/mobile";
 const baseUrlApiDev = "$baseUrlDev/index.php/mobile";
 
 /// ====================== AUTH ======================
-const urlLogin = "/pengalihan/Api_pengalihan/login_originator_as_am";
+const urlLogin = "/originator/Service_k3/login";
 const urlLoginById = "/api_android_driver/login_by_id";
 const urlLogout = "/api_android_driver/logout";
 const urlGetUser = "/baru_15042020/api_driver/get_driver_login";

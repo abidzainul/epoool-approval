@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DoState {
 
- DoStatus get status; String? get message; List<DeliveryOrder?> get data; List<DeliveryOrder?> get dataFiltered; List<DeliveryOrder?> get dataPending; List<DeliveryOrder?> get dataApproved; String? get search; String? get plant; String? get originator;
+ DoStatus get status; String? get message; List<DeliveryOrder?> get data; List<DeliveryOrder?> get dataFiltered; String? get search; String? get plant; String? get originator;
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $DoStateCopyWith<DoState> get copyWith => _$DoStateCopyWithImpl<DoState>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.data, data)&&const DeepCollectionEquality().equals(other.dataFiltered, dataFiltered)&&const DeepCollectionEquality().equals(other.dataPending, dataPending)&&const DeepCollectionEquality().equals(other.dataApproved, dataApproved)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.originator, originator) || other.originator == originator));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.data, data)&&const DeepCollectionEquality().equals(other.dataFiltered, dataFiltered)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.originator, originator) || other.originator == originator));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(data),const DeepCollectionEquality().hash(dataFiltered),const DeepCollectionEquality().hash(dataPending),const DeepCollectionEquality().hash(dataApproved),search,plant,originator);
+int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(data),const DeepCollectionEquality().hash(dataFiltered),search,plant,originator);
 
 @override
 String toString() {
-  return 'DoState(status: $status, message: $message, data: $data, dataFiltered: $dataFiltered, dataPending: $dataPending, dataApproved: $dataApproved, search: $search, plant: $plant, originator: $originator)';
+  return 'DoState(status: $status, message: $message, data: $data, dataFiltered: $dataFiltered, search: $search, plant: $plant, originator: $originator)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $DoStateCopyWith<$Res>  {
   factory $DoStateCopyWith(DoState value, $Res Function(DoState) _then) = _$DoStateCopyWithImpl;
 @useResult
 $Res call({
- DoStatus status, String? message, List<DeliveryOrder?> data, List<DeliveryOrder?> dataFiltered, List<DeliveryOrder?> dataPending, List<DeliveryOrder?> dataApproved, String? search, String? plant, String? originator
+ DoStatus status, String? message, List<DeliveryOrder?> data, List<DeliveryOrder?> dataFiltered, String? search, String? plant, String? originator
 });
 
 
@@ -65,14 +65,12 @@ class _$DoStateCopyWithImpl<$Res>
 
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? dataFiltered = null,Object? dataPending = null,Object? dataApproved = null,Object? search = freezed,Object? plant = freezed,Object? originator = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? dataFiltered = null,Object? search = freezed,Object? plant = freezed,Object? originator = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as DoStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as List<DeliveryOrder?>,dataFiltered: null == dataFiltered ? _self.dataFiltered : dataFiltered // ignore: cast_nullable_to_non_nullable
-as List<DeliveryOrder?>,dataPending: null == dataPending ? _self.dataPending : dataPending // ignore: cast_nullable_to_non_nullable
-as List<DeliveryOrder?>,dataApproved: null == dataApproved ? _self.dataApproved : dataApproved // ignore: cast_nullable_to_non_nullable
 as List<DeliveryOrder?>,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
 as String?,plant: freezed == plant ? _self.plant : plant // ignore: cast_nullable_to_non_nullable
 as String?,originator: freezed == originator ? _self.originator : originator // ignore: cast_nullable_to_non_nullable
@@ -161,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  List<DeliveryOrder?> dataPending,  List<DeliveryOrder?> dataApproved,  String? search,  String? plant,  String? originator)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  String? search,  String? plant,  String? originator)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DoState() when $default != null:
-return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.dataPending,_that.dataApproved,_that.search,_that.plant,_that.originator);case _:
+return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.search,_that.plant,_that.originator);case _:
   return orElse();
 
 }
@@ -182,10 +180,10 @@ return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.d
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  List<DeliveryOrder?> dataPending,  List<DeliveryOrder?> dataApproved,  String? search,  String? plant,  String? originator)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  String? search,  String? plant,  String? originator)  $default,) {final _that = this;
 switch (_that) {
 case _DoState():
-return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.dataPending,_that.dataApproved,_that.search,_that.plant,_that.originator);case _:
+return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.search,_that.plant,_that.originator);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +200,10 @@ return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.d
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  List<DeliveryOrder?> dataPending,  List<DeliveryOrder?> dataApproved,  String? search,  String? plant,  String? originator)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  String? search,  String? plant,  String? originator)?  $default,) {final _that = this;
 switch (_that) {
 case _DoState() when $default != null:
-return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.dataPending,_that.dataApproved,_that.search,_that.plant,_that.originator);case _:
+return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.search,_that.plant,_that.originator);case _:
   return null;
 
 }
@@ -217,7 +215,7 @@ return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.d
 @JsonSerializable()
 
 class _DoState implements DoState {
-  const _DoState({this.status = DoStatus.initial, this.message, final  List<DeliveryOrder?> data = const [], final  List<DeliveryOrder?> dataFiltered = const [], final  List<DeliveryOrder?> dataPending = const [], final  List<DeliveryOrder?> dataApproved = const [], this.search, this.plant, this.originator}): _data = data,_dataFiltered = dataFiltered,_dataPending = dataPending,_dataApproved = dataApproved;
+  const _DoState({this.status = DoStatus.initial, this.message, final  List<DeliveryOrder?> data = const [], final  List<DeliveryOrder?> dataFiltered = const [], this.search, this.plant, this.originator}): _data = data,_dataFiltered = dataFiltered;
   factory _DoState.fromJson(Map<String, dynamic> json) => _$DoStateFromJson(json);
 
 @override@JsonKey() final  DoStatus status;
@@ -234,20 +232,6 @@ class _DoState implements DoState {
   if (_dataFiltered is EqualUnmodifiableListView) return _dataFiltered;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_dataFiltered);
-}
-
- final  List<DeliveryOrder?> _dataPending;
-@override@JsonKey() List<DeliveryOrder?> get dataPending {
-  if (_dataPending is EqualUnmodifiableListView) return _dataPending;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_dataPending);
-}
-
- final  List<DeliveryOrder?> _dataApproved;
-@override@JsonKey() List<DeliveryOrder?> get dataApproved {
-  if (_dataApproved is EqualUnmodifiableListView) return _dataApproved;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_dataApproved);
 }
 
 @override final  String? search;
@@ -267,16 +251,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._data, _data)&&const DeepCollectionEquality().equals(other._dataFiltered, _dataFiltered)&&const DeepCollectionEquality().equals(other._dataPending, _dataPending)&&const DeepCollectionEquality().equals(other._dataApproved, _dataApproved)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.originator, originator) || other.originator == originator));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._data, _data)&&const DeepCollectionEquality().equals(other._dataFiltered, _dataFiltered)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.originator, originator) || other.originator == originator));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_dataFiltered),const DeepCollectionEquality().hash(_dataPending),const DeepCollectionEquality().hash(_dataApproved),search,plant,originator);
+int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_dataFiltered),search,plant,originator);
 
 @override
 String toString() {
-  return 'DoState(status: $status, message: $message, data: $data, dataFiltered: $dataFiltered, dataPending: $dataPending, dataApproved: $dataApproved, search: $search, plant: $plant, originator: $originator)';
+  return 'DoState(status: $status, message: $message, data: $data, dataFiltered: $dataFiltered, search: $search, plant: $plant, originator: $originator)';
 }
 
 
@@ -287,7 +271,7 @@ abstract mixin class _$DoStateCopyWith<$Res> implements $DoStateCopyWith<$Res> {
   factory _$DoStateCopyWith(_DoState value, $Res Function(_DoState) _then) = __$DoStateCopyWithImpl;
 @override @useResult
 $Res call({
- DoStatus status, String? message, List<DeliveryOrder?> data, List<DeliveryOrder?> dataFiltered, List<DeliveryOrder?> dataPending, List<DeliveryOrder?> dataApproved, String? search, String? plant, String? originator
+ DoStatus status, String? message, List<DeliveryOrder?> data, List<DeliveryOrder?> dataFiltered, String? search, String? plant, String? originator
 });
 
 
@@ -304,14 +288,12 @@ class __$DoStateCopyWithImpl<$Res>
 
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? dataFiltered = null,Object? dataPending = null,Object? dataApproved = null,Object? search = freezed,Object? plant = freezed,Object? originator = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? dataFiltered = null,Object? search = freezed,Object? plant = freezed,Object? originator = freezed,}) {
   return _then(_DoState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as DoStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
 as List<DeliveryOrder?>,dataFiltered: null == dataFiltered ? _self._dataFiltered : dataFiltered // ignore: cast_nullable_to_non_nullable
-as List<DeliveryOrder?>,dataPending: null == dataPending ? _self._dataPending : dataPending // ignore: cast_nullable_to_non_nullable
-as List<DeliveryOrder?>,dataApproved: null == dataApproved ? _self._dataApproved : dataApproved // ignore: cast_nullable_to_non_nullable
 as List<DeliveryOrder?>,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
 as String?,plant: freezed == plant ? _self.plant : plant // ignore: cast_nullable_to_non_nullable
 as String?,originator: freezed == originator ? _self.originator : originator // ignore: cast_nullable_to_non_nullable

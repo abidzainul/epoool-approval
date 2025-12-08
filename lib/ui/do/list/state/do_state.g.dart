@@ -29,24 +29,6 @@ _DoState _$DoStateFromJson(Map<String, dynamic> json) => _DoState(
           )
           .toList() ??
       const [],
-  dataPending:
-      (json['dataPending'] as List<dynamic>?)
-          ?.map(
-            (e) => e == null
-                ? null
-                : DeliveryOrder.fromJson(e as Map<String, dynamic>),
-          )
-          .toList() ??
-      const [],
-  dataApproved:
-      (json['dataApproved'] as List<dynamic>?)
-          ?.map(
-            (e) => e == null
-                ? null
-                : DeliveryOrder.fromJson(e as Map<String, dynamic>),
-          )
-          .toList() ??
-      const [],
   search: json['search'] as String?,
   plant: json['plant'] as String?,
   originator: json['originator'] as String?,
@@ -57,8 +39,6 @@ Map<String, dynamic> _$DoStateToJson(_DoState instance) => <String, dynamic>{
   'message': instance.message,
   'data': instance.data,
   'dataFiltered': instance.dataFiltered,
-  'dataPending': instance.dataPending,
-  'dataApproved': instance.dataApproved,
   'search': instance.search,
   'plant': instance.plant,
   'originator': instance.originator,

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:osi/data/api/api_exception.dart';
 import 'package:osi/data/api/client/api_client.dart';
 import 'package:osi/data/model/login/login_user.dart';
-import 'package:osi/data/model/user/user.dart';
 import 'package:osi/data/session/session_manager.dart';
 import 'package:osi/utils/values/res_string.dart';
 import 'package:logging/logging.dart';
@@ -69,7 +68,7 @@ class AuthRepo {
   Future<String> logout() async {
     try {
       String? token = await session.getToken();
-      LoginUser? user = await session.getLoginUser();
+      UserData? user = await session.getUserData();
 
       var params = {
         "id_username": user?.idUsername,
@@ -110,7 +109,7 @@ class AuthRepo {
   Future<LoginData> loginById() async {
     try {
       String? token = await session.getToken();
-      LoginUser? user = await session.getLoginUser();
+      UserData? user = await session.getUserData();
 
       var params = {
         "id_username": user?.idUsername,
@@ -148,47 +147,11 @@ class AuthRepo {
     }
   }
 
-  Future<User> getDataUser() async {
-    try {
-      String? tokenFcm = await session.getFcmToken();
-      LoginUser? user = await session.getLoginUser();
-
-      var params = {
-        "id_username": user?.idUsername,
-        "token_fcm": tokenFcm,
-      };
-
-      final res = await client.post(api.urlGetUser, data: params);
-
-      if (res.statusCode == 200) {
-        Map<String, dynamic> json = {'code': '0'};
-        try{
-          json = jsonDecode(res.toString());
-        } catch(e) {
-          throw ApiException(res.toString());
-        }
-
-        if (json['code'].toString() == '1') {
-          var data = User.fromJson(json['res']['0']);
-          return data.copyWith(urlFoto: json['urlfoto'] ?? '');
-        } else {
-          var msg = json['message'] ?? json['pesan'] ?? 'Login failed';
-          throw ApiException(msg);
-        }
-      } else {
-        var msg = res.data['message'] ?? res.statusMessage ?? 'Login failed';
-        throw ApiException(msg);
-      }
-    } catch (e) {
-      throw ApiException(e.toString());
-    }
-  }
-
   Future<String?> updateFcmToken(String? fcmToken) async {
     if(fcmToken == null) return null;
     try {
       String? token = await session.getToken();
-      LoginUser? user = await session.getLoginUser();
+      UserData? user = await session.getUserData();
 
       var params = {
         "id_username": user?.idUsername,

@@ -17,6 +17,10 @@ abstract class K3Foto with _$K3Foto {
     @JsonKey(name: 'last_edited') @Default('') String lastEdited,
     @JsonKey(name: 'keterangan_originator') @Default('') String keteranganOriginator,
     @JsonKey(name: 'foto_originator') @Default('') String fotoOriginator,
+    @JsonKey(name: 'id_safety_checklist') @Default('') String idSafetyChecklist,
+    @JsonKey(name: 'tipe') @Default('') String tipe,
+    @JsonKey(name: 'id_k3') @Default('') String idK3,
+    @JsonKey(name: 'nama_k3') @Default('') String namaK3,
   }) = _K3Foto;
 
   factory K3Foto.fromJson(Map<String, Object?> json) => _$K3FotoFromJson(json);

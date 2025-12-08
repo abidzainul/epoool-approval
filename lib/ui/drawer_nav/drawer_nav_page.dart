@@ -21,7 +21,7 @@ class DrawerNavigationPage extends ConsumerWidget {
       appBar: AppBar(title: Text(drawerState.selectedItem.title)),
       drawer: sessionAsyncValue.when(
         data: (user) {
-          final user = sessionVM.login;
+          final user = sessionVM.user;
           final hasPhoto = sessionVM.hasUserPhoto();
           final userPhoto = sessionVM.getUserPhoto();
 

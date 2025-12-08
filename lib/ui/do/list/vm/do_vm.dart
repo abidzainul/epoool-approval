@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:osi/data/api/api_exception.dart';
+import 'package:osi/data/model/login/login_user.dart';
 import 'package:osi/data/repo/do_repo.dart';
+import 'package:osi/data/session/session_manager.dart';
 import 'package:osi/ui/do/list/state/do_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -13,6 +17,25 @@ class DoVM extends _$DoVM {
   @override
   DoState build() {
     return DoState();
+  }
+
+  Future<void> setFilterDefault() async {
+    var session = ref.read(sessionProvider);
+    final loginUser = await session.getLoginUser();
+
+    var org = loginUser!.originatorUser.firstWhere(
+      (e) => e.idOriginator == loginUser.user?.idReference,
+      orElse: () => OriginatorUser(),
+    );
+    log("org: ${org.idOriginator}");
+
+    var plant = loginUser.plantUser.firstWhere(
+      (e) => e.idOriginator == loginUser.user?.idReference,
+      orElse: () => PlantUser(),
+    );
+    log("plant: ${plant.idGudang}");
+
+    state = state.copyWith(plant: plant.idGudang, originator: org.noReferensi);
   }
 
   Future<void> loadOrders({String? search, String? plant, String? org}) async {
@@ -35,12 +58,6 @@ class DoVM extends _$DoVM {
         dataFiltered: list
             .where((e) => e.transaction?.safetyCheckOriginatorBy == null)
             .toList(),
-        dataPending: list
-            .where((e) => e.transaction?.safetyCheckOriginator == null)
-            .toList(),
-        dataApproved: list
-            .where((e) => e.transaction?.safetyCheckOriginator != null)
-            .toList(),
         status: DoStatus.success,
         message: null,
       );
@@ -61,12 +78,6 @@ class DoVM extends _$DoVM {
                 ? e?.transaction?.safetyCheckOriginatorBy == null
                 : e?.transaction?.safetyCheckOriginatorBy != null,
           )
-          .toList(),
-      dataPending: state.data
-          .where((e) => e?.transaction?.safetyCheckOriginator == null)
-          .toList(),
-      dataApproved: state.data
-          .where((e) => e?.transaction?.safetyCheckOriginator != null)
           .toList(),
     );
   }

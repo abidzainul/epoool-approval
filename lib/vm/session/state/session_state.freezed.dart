@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SessionState {
 
- LoginUser? get login; User? get user; bool get isLoggedIn;
+ LoginUser? get login; UserData? get user; bool get isLoggedIn;
 /// Create a copy of SessionState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,11 +45,11 @@ abstract mixin class $SessionStateCopyWith<$Res>  {
   factory $SessionStateCopyWith(SessionState value, $Res Function(SessionState) _then) = _$SessionStateCopyWithImpl;
 @useResult
 $Res call({
- LoginUser? login, User? user, bool isLoggedIn
+ LoginUser? login, UserData? user, bool isLoggedIn
 });
 
 
-$LoginUserCopyWith<$Res>? get login;$UserCopyWith<$Res>? get user;
+$LoginUserCopyWith<$Res>? get login;$UserDataCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -66,7 +66,7 @@ class _$SessionStateCopyWithImpl<$Res>
   return _then(_self.copyWith(
 login: freezed == login ? _self.login : login // ignore: cast_nullable_to_non_nullable
 as LoginUser?,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as User?,isLoggedIn: null == isLoggedIn ? _self.isLoggedIn : isLoggedIn // ignore: cast_nullable_to_non_nullable
+as UserData?,isLoggedIn: null == isLoggedIn ? _self.isLoggedIn : isLoggedIn // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -86,12 +86,12 @@ $LoginUserCopyWith<$Res>? get login {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UserCopyWith<$Res>? get user {
+$UserDataCopyWith<$Res>? get user {
     if (_self.user == null) {
     return null;
   }
 
-  return $UserCopyWith<$Res>(_self.user!, (value) {
+  return $UserDataCopyWith<$Res>(_self.user!, (value) {
     return _then(_self.copyWith(user: value));
   });
 }
@@ -176,7 +176,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( LoginUser? login,  User? user,  bool isLoggedIn)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( LoginUser? login,  UserData? user,  bool isLoggedIn)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SessionState() when $default != null:
 return $default(_that.login,_that.user,_that.isLoggedIn);case _:
@@ -197,7 +197,7 @@ return $default(_that.login,_that.user,_that.isLoggedIn);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( LoginUser? login,  User? user,  bool isLoggedIn)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( LoginUser? login,  UserData? user,  bool isLoggedIn)  $default,) {final _that = this;
 switch (_that) {
 case _SessionState():
 return $default(_that.login,_that.user,_that.isLoggedIn);case _:
@@ -217,7 +217,7 @@ return $default(_that.login,_that.user,_that.isLoggedIn);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( LoginUser? login,  User? user,  bool isLoggedIn)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( LoginUser? login,  UserData? user,  bool isLoggedIn)?  $default,) {final _that = this;
 switch (_that) {
 case _SessionState() when $default != null:
 return $default(_that.login,_that.user,_that.isLoggedIn);case _:
@@ -236,7 +236,7 @@ class _SessionState implements SessionState {
   
 
 @override final  LoginUser? login;
-@override final  User? user;
+@override final  UserData? user;
 @override@JsonKey() final  bool isLoggedIn;
 
 /// Create a copy of SessionState
@@ -269,11 +269,11 @@ abstract mixin class _$SessionStateCopyWith<$Res> implements $SessionStateCopyWi
   factory _$SessionStateCopyWith(_SessionState value, $Res Function(_SessionState) _then) = __$SessionStateCopyWithImpl;
 @override @useResult
 $Res call({
- LoginUser? login, User? user, bool isLoggedIn
+ LoginUser? login, UserData? user, bool isLoggedIn
 });
 
 
-@override $LoginUserCopyWith<$Res>? get login;@override $UserCopyWith<$Res>? get user;
+@override $LoginUserCopyWith<$Res>? get login;@override $UserDataCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -290,7 +290,7 @@ class __$SessionStateCopyWithImpl<$Res>
   return _then(_SessionState(
 login: freezed == login ? _self.login : login // ignore: cast_nullable_to_non_nullable
 as LoginUser?,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as User?,isLoggedIn: null == isLoggedIn ? _self.isLoggedIn : isLoggedIn // ignore: cast_nullable_to_non_nullable
+as UserData?,isLoggedIn: null == isLoggedIn ? _self.isLoggedIn : isLoggedIn // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -311,12 +311,12 @@ $LoginUserCopyWith<$Res>? get login {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$UserCopyWith<$Res>? get user {
+$UserDataCopyWith<$Res>? get user {
     if (_self.user == null) {
     return null;
   }
 
-  return $UserCopyWith<$Res>(_self.user!, (value) {
+  return $UserDataCopyWith<$Res>(_self.user!, (value) {
     return _then(_self.copyWith(user: value));
   });
 }

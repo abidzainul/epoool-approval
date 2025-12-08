@@ -41,7 +41,7 @@ final class SplashScreenVMProvider
   }
 }
 
-String _$splashScreenVMHash() => r'a291d3b3167b880e181688012fff41e7ba1e0f04';
+String _$splashScreenVMHash() => r'6c22f2d0e0638db4e7787235ef28634cc9b89213';
 
 abstract class _$SplashScreenVM extends $Notifier<SplashNavigationState> {
   SplashNavigationState build();

@@ -4,11 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'splashscreen_vm.g.dart';
 
-enum SplashNavigationState {
-  initial,
-  toLogin,
-  toHome,
-}
+enum SplashNavigationState { initial, toLogin, toHome }
 
 @riverpod
 class SplashScreenVM extends _$SplashScreenVM {
@@ -24,9 +20,12 @@ class SplashScreenVM extends _$SplashScreenVM {
     try {
       final sessionManager = ref.read(sessionProvider);
       final isLoggedIn = await sessionManager.isLogin();
-      final user = await sessionManager.getLoginUser();
+      final login = await sessionManager.getLoginUser();
 
-      if (isLoggedIn && user != null && user.username.isNotEmpty) {
+      if (isLoggedIn &&
+          login != null &&
+          login.user != null &&
+          login.user!.username.isNotEmpty) {
         state = SplashNavigationState.toHome;
       } else {
         state = SplashNavigationState.toLogin;
@@ -36,5 +35,3 @@ class SplashScreenVM extends _$SplashScreenVM {
     }
   }
 }
-
-

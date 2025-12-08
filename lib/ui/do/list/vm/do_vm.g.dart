@@ -40,7 +40,7 @@ final class DoVMProvider extends $NotifierProvider<DoVM, DoState> {
   }
 }
 
-String _$doVMHash() => r'34f52cd7209dd7c838217120f9e74092d256c5fb';
+String _$doVMHash() => r'ccfff3a0ac3980c4b6d2715c8ab9b8da811f728a';
 
 abstract class _$DoVM extends $Notifier<DoState> {
   DoState build();

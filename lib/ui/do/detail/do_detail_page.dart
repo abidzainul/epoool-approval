@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:grouped_list/grouped_list.dart';
 import 'package:osi/app/routes.dart';
 import 'package:osi/data/model/do/delivery_order.dart';
+import 'package:osi/data/model/k3/k3_checklist.dart';
 import 'package:osi/ui/do/detail/state/do_detail_state.dart';
 import 'package:osi/ui/do/detail/vm/do_detail_vm.dart';
 import 'package:osi/ui/do/detail/widget/k3_checklist_item.dart';
@@ -139,121 +141,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
                 //     return Divider(height: 1, color: Colors.grey);
                 //   },
                 // ),
-                ListView.separated(
-                  itemCount: state.checklist.length,
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  itemBuilder: (c, i) {
-                    final item = state.checklist[i];
-                    final approved =
-                        widget.data?.transaction?.safetyCheckOriginator == "1";
-                    final key = "${item?.id}_${item?.type}";
-
-                    if (approved) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            K3ChecklistItemView(
-                              title: item?.title,
-                              desc: item?.ketOrg,
-                              imageUrlDriver: item?.urlImageDriver,
-                              onTapImage: () {
-                                if (item?.urlImageDriver != null) {
-                                  context.push(
-                                    AppRoute.imageViewer,
-                                    extra: NetworkImage(item!.urlImageDriver!),
-                                  );
-                                }
-                              },
-                              imageOrg: Builder(
-                                builder: (c) {
-                                  if (item?.urlImageOrg != null &&
-                                      item!.urlImageOrg!.isNotEmpty) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius: BorderRadius.circular(
-                                          8.0,
-                                        ),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                          8.0,
-                                        ),
-                                        child: Image.network(
-                                          item!.urlImageOrg!,
-                                          width: 100, // Set desired image width
-                                          height:
-                                              100, // Set desired image height
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Colors.grey,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.asset(
-                                        'assets/images/add_gallery.png',
-                                        width: 100, // Set desired image width
-                                        height: 100, // Set desired image height
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          K3ChecklistItem(
-                            title: item?.title,
-                            controller: item!.tecDescOrg,
-                            imageUrlDriver: item.urlImageDriver,
-                            onTapImage: () {
-                              if (item.urlImageDriver != null) {
-                                context.push(
-                                  AppRoute.imageViewer,
-                                  extra: NetworkImage(item.urlImageDriver!),
-                                );
-                              }
-                            },
-                            imageOrg: _buildImageOrg(key, null),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (c, i) {
-                    return Divider(height: 1, color: Colors.grey);
-                  },
-                ),
+                _buildGroupedListCheclist(),
                 Visibility(
                   visible:
                       widget.data?.transaction?.safetyCheckOriginatorBy == null,
@@ -293,6 +181,224 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildGroupedListCheclist() {
+    final state = ref.watch(doDetailVMProvider);
+
+    return GroupedListView<K3Checklist?, String>(
+      elements: state.checklist,
+      groupBy: (e) => e?.type ?? '',
+      shrinkWrap: true,
+      physics: ScrollPhysics(),
+      separator: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        child: Divider(height: 1),
+      ),
+      groupSeparatorBuilder: (String groupByValue) {
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          decoration: BoxDecoration(color: Colors.grey.shade400),
+          child: Text(
+            groupByValue.toUpperCase(),
+            style: TextStyle(fontSize: 18, fontWeight: .bold),
+          ),
+        );
+      },
+      itemComparator: (item1, item2) => item1!.title.compareTo(item2!.title),
+      order: GroupedListOrder.ASC,
+      itemBuilder: (context, K3Checklist? item) {
+        final approved = widget.data?.transaction?.safetyCheckOriginator == "1";
+        final key = "${item?.id}_${item?.type}";
+
+        if (approved) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                K3ChecklistItemView(
+                  title: item?.title,
+                  desc: item?.ketOrg,
+                  imageUrlDriver: item?.urlImageDriver,
+                  onTapImage: () {
+                    if (item?.urlImageDriver != null) {
+                      context.push(
+                        AppRoute.imageViewer,
+                        extra: NetworkImage(item!.urlImageDriver!),
+                      );
+                    }
+                  },
+                  imageOrg: Builder(
+                    builder: (c) {
+                      if (item?.urlImageOrg != null &&
+                          item!.urlImageOrg!.isNotEmpty) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey, width: 1.0),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.network(
+                              item!.urlImageOrg!,
+                              width: 100, // Set desired image width
+                              height: 100, // Set desired image height
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      }
+                      return Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 1.0),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            'assets/images/add_gallery.png',
+                            width: 100, // Set desired image width
+                            height: 100, // Set desired image height
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              K3ChecklistItem(
+                title: item?.title,
+                controller: item!.tecDescOrg,
+                imageUrlDriver: item.urlImageDriver,
+                onTapImage: () {
+                  if (item.urlImageDriver != null) {
+                    context.push(
+                      AppRoute.imageViewer,
+                      extra: NetworkImage(item.urlImageDriver!),
+                    );
+                  }
+                },
+                imageOrg: _buildImageOrg(key, null),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildListViewChecklist() {
+    final state = ref.watch(doDetailVMProvider);
+
+    return ListView.separated(
+      itemCount: state.checklist.length,
+      shrinkWrap: true,
+      physics: ScrollPhysics(),
+      itemBuilder: (c, i) {
+        final item = state.checklist[i];
+        final approved = widget.data?.transaction?.safetyCheckOriginator == "1";
+        final key = "${item?.id}_${item?.type}";
+
+        if (approved) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                K3ChecklistItemView(
+                  title: item?.title,
+                  desc: item?.ketOrg,
+                  imageUrlDriver: item?.urlImageDriver,
+                  onTapImage: () {
+                    if (item?.urlImageDriver != null) {
+                      context.push(
+                        AppRoute.imageViewer,
+                        extra: NetworkImage(item!.urlImageDriver!),
+                      );
+                    }
+                  },
+                  imageOrg: Builder(
+                    builder: (c) {
+                      if (item?.urlImageOrg != null &&
+                          item!.urlImageOrg!.isNotEmpty) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey, width: 1.0),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.network(
+                              item!.urlImageOrg!,
+                              width: 100, // Set desired image width
+                              height: 100, // Set desired image height
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      }
+                      return Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 1.0),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            'assets/images/add_gallery.png',
+                            width: 100, // Set desired image width
+                            height: 100, // Set desired image height
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              K3ChecklistItem(
+                title: item?.title,
+                controller: item!.tecDescOrg,
+                imageUrlDriver: item.urlImageDriver,
+                onTapImage: () {
+                  if (item.urlImageDriver != null) {
+                    context.push(
+                      AppRoute.imageViewer,
+                      extra: NetworkImage(item.urlImageDriver!),
+                    );
+                  }
+                },
+                imageOrg: _buildImageOrg(key, null),
+              ),
+            ],
+          ),
+        );
+      },
+      separatorBuilder: (c, i) {
+        return Divider(height: 1, color: Colors.grey);
+      },
     );
   }
 

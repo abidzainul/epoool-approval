@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:osi/data/model/login/login_user.dart';
-import 'package:osi/data/model/user/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,12 +26,6 @@ class SessionManager {
     return prefs.setString(_user, json.encode(login));
   }
 
-  Future<bool> setUserData(User login) async {
-    log("$runtimeType: setUserData: ${login.toJson()}");
-    final prefs = await instance;
-    return prefs.setString(_userData, json.encode(login));
-  }
-
   Future<LoginUser?> getLoginUser() async {
     final prefs = await instance;
     var data = prefs.getString(_user);
@@ -45,15 +38,33 @@ class SessionManager {
     }
   }
 
-  Future<User?> getLoginData() async {
-    final prefs = await instance;
-    var data = prefs.getString(_userData);
-    if (data != null) {
-      var map = json.decode(data);
-      log("$runtimeType: getUserData: $map");
-      return User.fromJson(map);
+  Future<UserData?> getUserData() async {
+    final login = await getLoginUser();
+    if (login != null) {
+      // log("$runtimeType: getUser: ${login.toJson()}");
+      return login.user;
     } else {
       return null;
+    }
+  }
+
+  Future<List<OriginatorUser>> getOriginator() async {
+    final login = await getLoginUser();
+    if (login != null) {
+      // log("$runtimeType: getUser: ${login.toJson()}");
+      return login.originatorUser;
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<PlantUser>> getPlant() async {
+    final login = await getLoginUser();
+    if (login != null) {
+      // log("$runtimeType: getUser: ${login.toJson()}");
+      return login.plantUser;
+    } else {
+      return [];
     }
   }
 

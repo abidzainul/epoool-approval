@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$K3Foto {
 
-@JsonKey(name: 'id_foto_k3_truck') String get idFotoK3Truck;@JsonKey(name: 'resi') String get resi;@JsonKey(name: 'id_k3_truck') String get idK3Truck;@JsonKey(name: 'foto') String get foto;@JsonKey(name: 'deleted') String get deleted;@JsonKey(name: 'add_by') String get addBy;@JsonKey(name: 'date_add') String get dateAdd;@JsonKey(name: 'edited_by') String get editedBy;@JsonKey(name: 'last_edited') String get lastEdited;@JsonKey(name: 'keterangan_originator') String get keteranganOriginator;@JsonKey(name: 'foto_originator') String get fotoOriginator;
+@JsonKey(name: 'id_foto_k3_truck') String get idFotoK3Truck;@JsonKey(name: 'resi') String get resi;@JsonKey(name: 'id_k3_truck') String get idK3Truck;@JsonKey(name: 'foto') String get foto;@JsonKey(name: 'deleted') String get deleted;@JsonKey(name: 'add_by') String get addBy;@JsonKey(name: 'date_add') String get dateAdd;@JsonKey(name: 'edited_by') String get editedBy;@JsonKey(name: 'last_edited') String get lastEdited;@JsonKey(name: 'keterangan_originator') String get keteranganOriginator;@JsonKey(name: 'foto_originator') String get fotoOriginator;@JsonKey(name: 'id_safety_checklist') String get idSafetyChecklist;@JsonKey(name: 'tipe') String get tipe;@JsonKey(name: 'id_k3') String get idK3;@JsonKey(name: 'nama_k3') String get namaK3;
 /// Create a copy of K3Foto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $K3FotoCopyWith<K3Foto> get copyWith => _$K3FotoCopyWithImpl<K3Foto>(this as K3F
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is K3Foto&&(identical(other.idFotoK3Truck, idFotoK3Truck) || other.idFotoK3Truck == idFotoK3Truck)&&(identical(other.resi, resi) || other.resi == resi)&&(identical(other.idK3Truck, idK3Truck) || other.idK3Truck == idK3Truck)&&(identical(other.foto, foto) || other.foto == foto)&&(identical(other.deleted, deleted) || other.deleted == deleted)&&(identical(other.addBy, addBy) || other.addBy == addBy)&&(identical(other.dateAdd, dateAdd) || other.dateAdd == dateAdd)&&(identical(other.editedBy, editedBy) || other.editedBy == editedBy)&&(identical(other.lastEdited, lastEdited) || other.lastEdited == lastEdited)&&(identical(other.keteranganOriginator, keteranganOriginator) || other.keteranganOriginator == keteranganOriginator)&&(identical(other.fotoOriginator, fotoOriginator) || other.fotoOriginator == fotoOriginator));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is K3Foto&&(identical(other.idFotoK3Truck, idFotoK3Truck) || other.idFotoK3Truck == idFotoK3Truck)&&(identical(other.resi, resi) || other.resi == resi)&&(identical(other.idK3Truck, idK3Truck) || other.idK3Truck == idK3Truck)&&(identical(other.foto, foto) || other.foto == foto)&&(identical(other.deleted, deleted) || other.deleted == deleted)&&(identical(other.addBy, addBy) || other.addBy == addBy)&&(identical(other.dateAdd, dateAdd) || other.dateAdd == dateAdd)&&(identical(other.editedBy, editedBy) || other.editedBy == editedBy)&&(identical(other.lastEdited, lastEdited) || other.lastEdited == lastEdited)&&(identical(other.keteranganOriginator, keteranganOriginator) || other.keteranganOriginator == keteranganOriginator)&&(identical(other.fotoOriginator, fotoOriginator) || other.fotoOriginator == fotoOriginator)&&(identical(other.idSafetyChecklist, idSafetyChecklist) || other.idSafetyChecklist == idSafetyChecklist)&&(identical(other.tipe, tipe) || other.tipe == tipe)&&(identical(other.idK3, idK3) || other.idK3 == idK3)&&(identical(other.namaK3, namaK3) || other.namaK3 == namaK3));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,idFotoK3Truck,resi,idK3Truck,foto,deleted,addBy,dateAdd,editedBy,lastEdited,keteranganOriginator,fotoOriginator);
+int get hashCode => Object.hash(runtimeType,idFotoK3Truck,resi,idK3Truck,foto,deleted,addBy,dateAdd,editedBy,lastEdited,keteranganOriginator,fotoOriginator,idSafetyChecklist,tipe,idK3,namaK3);
 
 @override
 String toString() {
-  return 'K3Foto(idFotoK3Truck: $idFotoK3Truck, resi: $resi, idK3Truck: $idK3Truck, foto: $foto, deleted: $deleted, addBy: $addBy, dateAdd: $dateAdd, editedBy: $editedBy, lastEdited: $lastEdited, keteranganOriginator: $keteranganOriginator, fotoOriginator: $fotoOriginator)';
+  return 'K3Foto(idFotoK3Truck: $idFotoK3Truck, resi: $resi, idK3Truck: $idK3Truck, foto: $foto, deleted: $deleted, addBy: $addBy, dateAdd: $dateAdd, editedBy: $editedBy, lastEdited: $lastEdited, keteranganOriginator: $keteranganOriginator, fotoOriginator: $fotoOriginator, idSafetyChecklist: $idSafetyChecklist, tipe: $tipe, idK3: $idK3, namaK3: $namaK3)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $K3FotoCopyWith<$Res>  {
   factory $K3FotoCopyWith(K3Foto value, $Res Function(K3Foto) _then) = _$K3FotoCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'id_foto_k3_truck') String idFotoK3Truck,@JsonKey(name: 'resi') String resi,@JsonKey(name: 'id_k3_truck') String idK3Truck,@JsonKey(name: 'foto') String foto,@JsonKey(name: 'deleted') String deleted,@JsonKey(name: 'add_by') String addBy,@JsonKey(name: 'date_add') String dateAdd,@JsonKey(name: 'edited_by') String editedBy,@JsonKey(name: 'last_edited') String lastEdited,@JsonKey(name: 'keterangan_originator') String keteranganOriginator,@JsonKey(name: 'foto_originator') String fotoOriginator
+@JsonKey(name: 'id_foto_k3_truck') String idFotoK3Truck,@JsonKey(name: 'resi') String resi,@JsonKey(name: 'id_k3_truck') String idK3Truck,@JsonKey(name: 'foto') String foto,@JsonKey(name: 'deleted') String deleted,@JsonKey(name: 'add_by') String addBy,@JsonKey(name: 'date_add') String dateAdd,@JsonKey(name: 'edited_by') String editedBy,@JsonKey(name: 'last_edited') String lastEdited,@JsonKey(name: 'keterangan_originator') String keteranganOriginator,@JsonKey(name: 'foto_originator') String fotoOriginator,@JsonKey(name: 'id_safety_checklist') String idSafetyChecklist,@JsonKey(name: 'tipe') String tipe,@JsonKey(name: 'id_k3') String idK3,@JsonKey(name: 'nama_k3') String namaK3
 });
 
 
@@ -65,7 +65,7 @@ class _$K3FotoCopyWithImpl<$Res>
 
 /// Create a copy of K3Foto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? idFotoK3Truck = null,Object? resi = null,Object? idK3Truck = null,Object? foto = null,Object? deleted = null,Object? addBy = null,Object? dateAdd = null,Object? editedBy = null,Object? lastEdited = null,Object? keteranganOriginator = null,Object? fotoOriginator = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? idFotoK3Truck = null,Object? resi = null,Object? idK3Truck = null,Object? foto = null,Object? deleted = null,Object? addBy = null,Object? dateAdd = null,Object? editedBy = null,Object? lastEdited = null,Object? keteranganOriginator = null,Object? fotoOriginator = null,Object? idSafetyChecklist = null,Object? tipe = null,Object? idK3 = null,Object? namaK3 = null,}) {
   return _then(_self.copyWith(
 idFotoK3Truck: null == idFotoK3Truck ? _self.idFotoK3Truck : idFotoK3Truck // ignore: cast_nullable_to_non_nullable
 as String,resi: null == resi ? _self.resi : resi // ignore: cast_nullable_to_non_nullable
@@ -78,6 +78,10 @@ as String,editedBy: null == editedBy ? _self.editedBy : editedBy // ignore: cast
 as String,lastEdited: null == lastEdited ? _self.lastEdited : lastEdited // ignore: cast_nullable_to_non_nullable
 as String,keteranganOriginator: null == keteranganOriginator ? _self.keteranganOriginator : keteranganOriginator // ignore: cast_nullable_to_non_nullable
 as String,fotoOriginator: null == fotoOriginator ? _self.fotoOriginator : fotoOriginator // ignore: cast_nullable_to_non_nullable
+as String,idSafetyChecklist: null == idSafetyChecklist ? _self.idSafetyChecklist : idSafetyChecklist // ignore: cast_nullable_to_non_nullable
+as String,tipe: null == tipe ? _self.tipe : tipe // ignore: cast_nullable_to_non_nullable
+as String,idK3: null == idK3 ? _self.idK3 : idK3 // ignore: cast_nullable_to_non_nullable
+as String,namaK3: null == namaK3 ? _self.namaK3 : namaK3 // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -163,10 +167,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_foto_k3_truck')  String idFotoK3Truck, @JsonKey(name: 'resi')  String resi, @JsonKey(name: 'id_k3_truck')  String idK3Truck, @JsonKey(name: 'foto')  String foto, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'keterangan_originator')  String keteranganOriginator, @JsonKey(name: 'foto_originator')  String fotoOriginator)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_foto_k3_truck')  String idFotoK3Truck, @JsonKey(name: 'resi')  String resi, @JsonKey(name: 'id_k3_truck')  String idK3Truck, @JsonKey(name: 'foto')  String foto, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'keterangan_originator')  String keteranganOriginator, @JsonKey(name: 'foto_originator')  String fotoOriginator, @JsonKey(name: 'id_safety_checklist')  String idSafetyChecklist, @JsonKey(name: 'tipe')  String tipe, @JsonKey(name: 'id_k3')  String idK3, @JsonKey(name: 'nama_k3')  String namaK3)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _K3Foto() when $default != null:
-return $default(_that.idFotoK3Truck,_that.resi,_that.idK3Truck,_that.foto,_that.deleted,_that.addBy,_that.dateAdd,_that.editedBy,_that.lastEdited,_that.keteranganOriginator,_that.fotoOriginator);case _:
+return $default(_that.idFotoK3Truck,_that.resi,_that.idK3Truck,_that.foto,_that.deleted,_that.addBy,_that.dateAdd,_that.editedBy,_that.lastEdited,_that.keteranganOriginator,_that.fotoOriginator,_that.idSafetyChecklist,_that.tipe,_that.idK3,_that.namaK3);case _:
   return orElse();
 
 }
@@ -184,10 +188,10 @@ return $default(_that.idFotoK3Truck,_that.resi,_that.idK3Truck,_that.foto,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_foto_k3_truck')  String idFotoK3Truck, @JsonKey(name: 'resi')  String resi, @JsonKey(name: 'id_k3_truck')  String idK3Truck, @JsonKey(name: 'foto')  String foto, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'keterangan_originator')  String keteranganOriginator, @JsonKey(name: 'foto_originator')  String fotoOriginator)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id_foto_k3_truck')  String idFotoK3Truck, @JsonKey(name: 'resi')  String resi, @JsonKey(name: 'id_k3_truck')  String idK3Truck, @JsonKey(name: 'foto')  String foto, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'keterangan_originator')  String keteranganOriginator, @JsonKey(name: 'foto_originator')  String fotoOriginator, @JsonKey(name: 'id_safety_checklist')  String idSafetyChecklist, @JsonKey(name: 'tipe')  String tipe, @JsonKey(name: 'id_k3')  String idK3, @JsonKey(name: 'nama_k3')  String namaK3)  $default,) {final _that = this;
 switch (_that) {
 case _K3Foto():
-return $default(_that.idFotoK3Truck,_that.resi,_that.idK3Truck,_that.foto,_that.deleted,_that.addBy,_that.dateAdd,_that.editedBy,_that.lastEdited,_that.keteranganOriginator,_that.fotoOriginator);case _:
+return $default(_that.idFotoK3Truck,_that.resi,_that.idK3Truck,_that.foto,_that.deleted,_that.addBy,_that.dateAdd,_that.editedBy,_that.lastEdited,_that.keteranganOriginator,_that.fotoOriginator,_that.idSafetyChecklist,_that.tipe,_that.idK3,_that.namaK3);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +208,10 @@ return $default(_that.idFotoK3Truck,_that.resi,_that.idK3Truck,_that.foto,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id_foto_k3_truck')  String idFotoK3Truck, @JsonKey(name: 'resi')  String resi, @JsonKey(name: 'id_k3_truck')  String idK3Truck, @JsonKey(name: 'foto')  String foto, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'keterangan_originator')  String keteranganOriginator, @JsonKey(name: 'foto_originator')  String fotoOriginator)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id_foto_k3_truck')  String idFotoK3Truck, @JsonKey(name: 'resi')  String resi, @JsonKey(name: 'id_k3_truck')  String idK3Truck, @JsonKey(name: 'foto')  String foto, @JsonKey(name: 'deleted')  String deleted, @JsonKey(name: 'add_by')  String addBy, @JsonKey(name: 'date_add')  String dateAdd, @JsonKey(name: 'edited_by')  String editedBy, @JsonKey(name: 'last_edited')  String lastEdited, @JsonKey(name: 'keterangan_originator')  String keteranganOriginator, @JsonKey(name: 'foto_originator')  String fotoOriginator, @JsonKey(name: 'id_safety_checklist')  String idSafetyChecklist, @JsonKey(name: 'tipe')  String tipe, @JsonKey(name: 'id_k3')  String idK3, @JsonKey(name: 'nama_k3')  String namaK3)?  $default,) {final _that = this;
 switch (_that) {
 case _K3Foto() when $default != null:
-return $default(_that.idFotoK3Truck,_that.resi,_that.idK3Truck,_that.foto,_that.deleted,_that.addBy,_that.dateAdd,_that.editedBy,_that.lastEdited,_that.keteranganOriginator,_that.fotoOriginator);case _:
+return $default(_that.idFotoK3Truck,_that.resi,_that.idK3Truck,_that.foto,_that.deleted,_that.addBy,_that.dateAdd,_that.editedBy,_that.lastEdited,_that.keteranganOriginator,_that.fotoOriginator,_that.idSafetyChecklist,_that.tipe,_that.idK3,_that.namaK3);case _:
   return null;
 
 }
@@ -219,7 +223,7 @@ return $default(_that.idFotoK3Truck,_that.resi,_that.idK3Truck,_that.foto,_that.
 @JsonSerializable()
 
 class _K3Foto implements K3Foto {
-  const _K3Foto({@JsonKey(name: 'id_foto_k3_truck') this.idFotoK3Truck = '', @JsonKey(name: 'resi') this.resi = '', @JsonKey(name: 'id_k3_truck') this.idK3Truck = '', @JsonKey(name: 'foto') this.foto = '', @JsonKey(name: 'deleted') this.deleted = '', @JsonKey(name: 'add_by') this.addBy = '', @JsonKey(name: 'date_add') this.dateAdd = '', @JsonKey(name: 'edited_by') this.editedBy = '', @JsonKey(name: 'last_edited') this.lastEdited = '', @JsonKey(name: 'keterangan_originator') this.keteranganOriginator = '', @JsonKey(name: 'foto_originator') this.fotoOriginator = ''});
+  const _K3Foto({@JsonKey(name: 'id_foto_k3_truck') this.idFotoK3Truck = '', @JsonKey(name: 'resi') this.resi = '', @JsonKey(name: 'id_k3_truck') this.idK3Truck = '', @JsonKey(name: 'foto') this.foto = '', @JsonKey(name: 'deleted') this.deleted = '', @JsonKey(name: 'add_by') this.addBy = '', @JsonKey(name: 'date_add') this.dateAdd = '', @JsonKey(name: 'edited_by') this.editedBy = '', @JsonKey(name: 'last_edited') this.lastEdited = '', @JsonKey(name: 'keterangan_originator') this.keteranganOriginator = '', @JsonKey(name: 'foto_originator') this.fotoOriginator = '', @JsonKey(name: 'id_safety_checklist') this.idSafetyChecklist = '', @JsonKey(name: 'tipe') this.tipe = '', @JsonKey(name: 'id_k3') this.idK3 = '', @JsonKey(name: 'nama_k3') this.namaK3 = ''});
   factory _K3Foto.fromJson(Map<String, dynamic> json) => _$K3FotoFromJson(json);
 
 @override@JsonKey(name: 'id_foto_k3_truck') final  String idFotoK3Truck;
@@ -233,6 +237,10 @@ class _K3Foto implements K3Foto {
 @override@JsonKey(name: 'last_edited') final  String lastEdited;
 @override@JsonKey(name: 'keterangan_originator') final  String keteranganOriginator;
 @override@JsonKey(name: 'foto_originator') final  String fotoOriginator;
+@override@JsonKey(name: 'id_safety_checklist') final  String idSafetyChecklist;
+@override@JsonKey(name: 'tipe') final  String tipe;
+@override@JsonKey(name: 'id_k3') final  String idK3;
+@override@JsonKey(name: 'nama_k3') final  String namaK3;
 
 /// Create a copy of K3Foto
 /// with the given fields replaced by the non-null parameter values.
@@ -247,16 +255,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _K3Foto&&(identical(other.idFotoK3Truck, idFotoK3Truck) || other.idFotoK3Truck == idFotoK3Truck)&&(identical(other.resi, resi) || other.resi == resi)&&(identical(other.idK3Truck, idK3Truck) || other.idK3Truck == idK3Truck)&&(identical(other.foto, foto) || other.foto == foto)&&(identical(other.deleted, deleted) || other.deleted == deleted)&&(identical(other.addBy, addBy) || other.addBy == addBy)&&(identical(other.dateAdd, dateAdd) || other.dateAdd == dateAdd)&&(identical(other.editedBy, editedBy) || other.editedBy == editedBy)&&(identical(other.lastEdited, lastEdited) || other.lastEdited == lastEdited)&&(identical(other.keteranganOriginator, keteranganOriginator) || other.keteranganOriginator == keteranganOriginator)&&(identical(other.fotoOriginator, fotoOriginator) || other.fotoOriginator == fotoOriginator));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _K3Foto&&(identical(other.idFotoK3Truck, idFotoK3Truck) || other.idFotoK3Truck == idFotoK3Truck)&&(identical(other.resi, resi) || other.resi == resi)&&(identical(other.idK3Truck, idK3Truck) || other.idK3Truck == idK3Truck)&&(identical(other.foto, foto) || other.foto == foto)&&(identical(other.deleted, deleted) || other.deleted == deleted)&&(identical(other.addBy, addBy) || other.addBy == addBy)&&(identical(other.dateAdd, dateAdd) || other.dateAdd == dateAdd)&&(identical(other.editedBy, editedBy) || other.editedBy == editedBy)&&(identical(other.lastEdited, lastEdited) || other.lastEdited == lastEdited)&&(identical(other.keteranganOriginator, keteranganOriginator) || other.keteranganOriginator == keteranganOriginator)&&(identical(other.fotoOriginator, fotoOriginator) || other.fotoOriginator == fotoOriginator)&&(identical(other.idSafetyChecklist, idSafetyChecklist) || other.idSafetyChecklist == idSafetyChecklist)&&(identical(other.tipe, tipe) || other.tipe == tipe)&&(identical(other.idK3, idK3) || other.idK3 == idK3)&&(identical(other.namaK3, namaK3) || other.namaK3 == namaK3));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,idFotoK3Truck,resi,idK3Truck,foto,deleted,addBy,dateAdd,editedBy,lastEdited,keteranganOriginator,fotoOriginator);
+int get hashCode => Object.hash(runtimeType,idFotoK3Truck,resi,idK3Truck,foto,deleted,addBy,dateAdd,editedBy,lastEdited,keteranganOriginator,fotoOriginator,idSafetyChecklist,tipe,idK3,namaK3);
 
 @override
 String toString() {
-  return 'K3Foto(idFotoK3Truck: $idFotoK3Truck, resi: $resi, idK3Truck: $idK3Truck, foto: $foto, deleted: $deleted, addBy: $addBy, dateAdd: $dateAdd, editedBy: $editedBy, lastEdited: $lastEdited, keteranganOriginator: $keteranganOriginator, fotoOriginator: $fotoOriginator)';
+  return 'K3Foto(idFotoK3Truck: $idFotoK3Truck, resi: $resi, idK3Truck: $idK3Truck, foto: $foto, deleted: $deleted, addBy: $addBy, dateAdd: $dateAdd, editedBy: $editedBy, lastEdited: $lastEdited, keteranganOriginator: $keteranganOriginator, fotoOriginator: $fotoOriginator, idSafetyChecklist: $idSafetyChecklist, tipe: $tipe, idK3: $idK3, namaK3: $namaK3)';
 }
 
 
@@ -267,7 +275,7 @@ abstract mixin class _$K3FotoCopyWith<$Res> implements $K3FotoCopyWith<$Res> {
   factory _$K3FotoCopyWith(_K3Foto value, $Res Function(_K3Foto) _then) = __$K3FotoCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id_foto_k3_truck') String idFotoK3Truck,@JsonKey(name: 'resi') String resi,@JsonKey(name: 'id_k3_truck') String idK3Truck,@JsonKey(name: 'foto') String foto,@JsonKey(name: 'deleted') String deleted,@JsonKey(name: 'add_by') String addBy,@JsonKey(name: 'date_add') String dateAdd,@JsonKey(name: 'edited_by') String editedBy,@JsonKey(name: 'last_edited') String lastEdited,@JsonKey(name: 'keterangan_originator') String keteranganOriginator,@JsonKey(name: 'foto_originator') String fotoOriginator
+@JsonKey(name: 'id_foto_k3_truck') String idFotoK3Truck,@JsonKey(name: 'resi') String resi,@JsonKey(name: 'id_k3_truck') String idK3Truck,@JsonKey(name: 'foto') String foto,@JsonKey(name: 'deleted') String deleted,@JsonKey(name: 'add_by') String addBy,@JsonKey(name: 'date_add') String dateAdd,@JsonKey(name: 'edited_by') String editedBy,@JsonKey(name: 'last_edited') String lastEdited,@JsonKey(name: 'keterangan_originator') String keteranganOriginator,@JsonKey(name: 'foto_originator') String fotoOriginator,@JsonKey(name: 'id_safety_checklist') String idSafetyChecklist,@JsonKey(name: 'tipe') String tipe,@JsonKey(name: 'id_k3') String idK3,@JsonKey(name: 'nama_k3') String namaK3
 });
 
 
@@ -284,7 +292,7 @@ class __$K3FotoCopyWithImpl<$Res>
 
 /// Create a copy of K3Foto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? idFotoK3Truck = null,Object? resi = null,Object? idK3Truck = null,Object? foto = null,Object? deleted = null,Object? addBy = null,Object? dateAdd = null,Object? editedBy = null,Object? lastEdited = null,Object? keteranganOriginator = null,Object? fotoOriginator = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? idFotoK3Truck = null,Object? resi = null,Object? idK3Truck = null,Object? foto = null,Object? deleted = null,Object? addBy = null,Object? dateAdd = null,Object? editedBy = null,Object? lastEdited = null,Object? keteranganOriginator = null,Object? fotoOriginator = null,Object? idSafetyChecklist = null,Object? tipe = null,Object? idK3 = null,Object? namaK3 = null,}) {
   return _then(_K3Foto(
 idFotoK3Truck: null == idFotoK3Truck ? _self.idFotoK3Truck : idFotoK3Truck // ignore: cast_nullable_to_non_nullable
 as String,resi: null == resi ? _self.resi : resi // ignore: cast_nullable_to_non_nullable
@@ -297,6 +305,10 @@ as String,editedBy: null == editedBy ? _self.editedBy : editedBy // ignore: cast
 as String,lastEdited: null == lastEdited ? _self.lastEdited : lastEdited // ignore: cast_nullable_to_non_nullable
 as String,keteranganOriginator: null == keteranganOriginator ? _self.keteranganOriginator : keteranganOriginator // ignore: cast_nullable_to_non_nullable
 as String,fotoOriginator: null == fotoOriginator ? _self.fotoOriginator : fotoOriginator // ignore: cast_nullable_to_non_nullable
+as String,idSafetyChecklist: null == idSafetyChecklist ? _self.idSafetyChecklist : idSafetyChecklist // ignore: cast_nullable_to_non_nullable
+as String,tipe: null == tipe ? _self.tipe : tipe // ignore: cast_nullable_to_non_nullable
+as String,idK3: null == idK3 ? _self.idK3 : idK3 // ignore: cast_nullable_to_non_nullable
+as String,namaK3: null == namaK3 ? _self.namaK3 : namaK3 // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

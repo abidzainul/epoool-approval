@@ -18,6 +18,10 @@ _K3Foto _$K3FotoFromJson(Map<String, dynamic> json) => _K3Foto(
   lastEdited: json['last_edited'] as String? ?? '',
   keteranganOriginator: json['keterangan_originator'] as String? ?? '',
   fotoOriginator: json['foto_originator'] as String? ?? '',
+  idSafetyChecklist: json['id_safety_checklist'] as String? ?? '',
+  tipe: json['tipe'] as String? ?? '',
+  idK3: json['id_k3'] as String? ?? '',
+  namaK3: json['nama_k3'] as String? ?? '',
 );
 
 Map<String, dynamic> _$K3FotoToJson(_K3Foto instance) => <String, dynamic>{
@@ -32,4 +36,8 @@ Map<String, dynamic> _$K3FotoToJson(_K3Foto instance) => <String, dynamic>{
   'last_edited': instance.lastEdited,
   'keterangan_originator': instance.keteranganOriginator,
   'foto_originator': instance.fotoOriginator,
+  'id_safety_checklist': instance.idSafetyChecklist,
+  'tipe': instance.tipe,
+  'id_k3': instance.idK3,
+  'nama_k3': instance.namaK3,
 };

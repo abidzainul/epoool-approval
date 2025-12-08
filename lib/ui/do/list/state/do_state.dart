@@ -13,8 +13,6 @@ abstract class DoState with _$DoState {
     String? message,
     @Default([]) List<DeliveryOrder?> data,
     @Default([]) List<DeliveryOrder?> dataFiltered,
-    @Default([]) List<DeliveryOrder?> dataPending,
-    @Default([]) List<DeliveryOrder?> dataApproved,
     String? search,
     String? plant,
     String? originator,

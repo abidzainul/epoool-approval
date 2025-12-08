@@ -70,11 +70,11 @@ class DoDetailVM extends _$DoDetailVM {
       }
 
       K3Checklist item = K3Checklist(
-        id: element.idK3Truck ?? '',
-        title: element.idFotoK3Truck ?? '',
+        id: element.idK3,
+        title: element.namaK3,
         urlImageDriver: fotoUrlDriver,
         urlImageOrg: fotoUrlDrg,
-        type: type,
+        type: element.tipe,
         tecDescOrg: TextEditingController(text: element.keteranganOriginator),
       );
       checklist.add(item);
@@ -142,6 +142,7 @@ class DoDetailVM extends _$DoDetailVM {
       );
       checklist.add(item);
     }
+
     return checklist;
   }
 
