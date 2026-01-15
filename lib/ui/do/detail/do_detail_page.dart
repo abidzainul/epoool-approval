@@ -283,6 +283,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
                 title: item?.title,
                 controller: item!.tecDescOrg,
                 imageUrlDriver: item.urlImageDriver,
+                notes: item.ketOrg,
                 onTapImage: () {
                   if (item.urlImageDriver != null) {
                     context.push(
@@ -577,6 +578,11 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
     params.addAll(mapFile);
     params.addAll(mapDesc);
 
+    debugPrint('params:');
+    params.forEach((key, value) {
+      debugPrint('$key: $value');
+    });
+
     log("picked file:$params");
 
     await ref.read(doDetailVMProvider.notifier).approveOrder(params);
@@ -603,7 +609,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
             TextButton(
               onPressed: () {
                 context.pop();
-                context.pop();
+                context.pop("refresh");
               },
               child: const Text('OK'),
             ),

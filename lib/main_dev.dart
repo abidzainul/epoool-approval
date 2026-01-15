@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:osi/app/my_app.dart';
 import 'package:osi/data/api/api_services.dart' as api;
 import 'package:osi/data/api/client/api_client.dart';
@@ -35,7 +36,7 @@ void main() async {
 
   runApp(ProviderScope(
     overrides: [
-      baseUrlProvider.overrideWithValue(api.baseUrlApiDev),
+      baseUrlProvider.overrideWithValue(api.baseUrlApi),
     ],
     child: MyApp(),
   ));

@@ -1,9 +1,9 @@
 import 'dart:developer';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:osi/data/api/dio_helper.dart';
 import 'package:osi/data/api/api_services.dart' as api;
 import 'package:dio/dio.dart';
-import 'package:riverpod/riverpod.dart';
 
 final baseUrlProvider = Provider<String>((ref) => api.baseUrlApi);
 final dioProvider = Provider<Dio>((ref) {
@@ -39,7 +39,7 @@ class ApiClient {
       );
 
       return response;
-    } on Exception catch (e) {
+    } on Exception {
       rethrow;
     }
   }
@@ -92,7 +92,7 @@ class ApiClient {
       );
 
       return response;
-    } on Exception catch (e) {
+    } on Exception {
       rethrow;
     }
   }
@@ -114,8 +114,11 @@ class ApiClient {
       );
 
       return response;
-    } on Exception catch (e) {
+    } on Exception {
       rethrow;
     }
   }
 }
+
+
+

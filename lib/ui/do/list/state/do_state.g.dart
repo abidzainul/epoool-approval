@@ -32,6 +32,23 @@ _DoState _$DoStateFromJson(Map<String, dynamic> json) => _DoState(
   search: json['search'] as String?,
   plant: json['plant'] as String?,
   originator: json['originator'] as String?,
+  startDate: json['startDate'] == null
+      ? null
+      : DateTime.parse(json['startDate'] as String),
+  endDate: json['endDate'] == null
+      ? null
+      : DateTime.parse(json['endDate'] as String),
+  resi: json['resi'] as String?,
+  plantList:
+      (json['plantList'] as List<dynamic>?)
+          ?.map((e) => PlantUser.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+  originatorList:
+      (json['originatorList'] as List<dynamic>?)
+          ?.map((e) => OriginatorUser.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$DoStateToJson(_DoState instance) => <String, dynamic>{
@@ -42,6 +59,11 @@ Map<String, dynamic> _$DoStateToJson(_DoState instance) => <String, dynamic>{
   'search': instance.search,
   'plant': instance.plant,
   'originator': instance.originator,
+  'startDate': instance.startDate?.toIso8601String(),
+  'endDate': instance.endDate?.toIso8601String(),
+  'resi': instance.resi,
+  'plantList': instance.plantList,
+  'originatorList': instance.originatorList,
 };
 
 const _$DoStatusEnumMap = {

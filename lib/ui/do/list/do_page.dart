@@ -8,7 +8,7 @@ import 'package:osi/vm/count/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:osi/vm/session/session_vm.dart';
+import 'package:intl/intl.dart';
 
 class DoPage extends ConsumerStatefulWidget {
   const DoPage({super.key});
@@ -19,28 +19,29 @@ class DoPage extends ConsumerStatefulWidget {
 
 class _DoPageState extends ConsumerState<DoPage> {
   final TextEditingController _tecNopol = TextEditingController();
-  final TextEditingController _tecPlant = TextEditingController();
-  final TextEditingController _tecOrg = TextEditingController();
-  String? selectedPlant;
-  String? selectedOrg;
+  final TextEditingController _tecResi = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(doVMProvider.notifier).setFilterDefault();
+    });
   }
 
   @override
   void dispose() {
     _tecNopol.dispose();
-    _tecPlant.dispose();
-    _tecOrg.dispose();
+    _tecResi.dispose();
     super.dispose();
   }
 
   void _performSearch() {
     final nopol = _tecNopol.text.trim();
-    final plant = _tecPlant.text.trim();
-    final org = _tecOrg.text.trim();
+    final resi = _tecResi.text.trim();
+    final plant = ref.read(doVMProvider).plant;
+    final org = ref.read(doVMProvider).originator;
+    ref.read(doVMProvider.notifier).setResi(resi);
     ref
         .read(doVMProvider.notifier)
         .searchOrder(nopol: nopol, plant: plant, org: org);
@@ -51,23 +52,8 @@ class _DoPageState extends ConsumerState<DoPage> {
     final state = ref.watch(doVMProvider);
     final vm = ref.read(doVMProvider.notifier);
 
-    vm.setFilterDefault();
 
     final counterState = ref.watch(counterProvider);
-
-    if(state.originator != null){
-      _tecOrg.text = state.originator!;
-    }
-
-    if(state.plant != null){
-      _tecPlant.text = state.plant!;
-    }
-
-    // var sessionState = ref.watch(sessionVMProvider);
-    // sessionState.whenData((session) {
-    //   _tecPlant.text = session.login?.idGudang ?? '';
-    //   _tecOrg.text = session.login?.idReference ?? '';
-    // });
 
     return Scaffold(
       body: Column(
@@ -194,6 +180,8 @@ class _DoPageState extends ConsumerState<DoPage> {
   }
 
   Widget _buildFilter() {
+    final state = ref.watch(doVMProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -201,8 +189,7 @@ class _DoPageState extends ConsumerState<DoPage> {
           Row(
             children: [
               Expanded(
-                child: TextField(
-                  controller: _tecPlant,
+                child: InputDecorator(
                   decoration: InputDecoration(
                     hintText: 'Plant',
                     prefixIcon: const Icon(Icons.factory),
@@ -211,15 +198,34 @@ class _DoPageState extends ConsumerState<DoPage> {
                     ),
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16.0,
-                      vertical: 12.0,
+                      vertical: 2.0,
+                    ),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: state.plant,
+                      isExpanded: true,
+                      hint: const Text('Plant'),
+                      items: state.plantList.map((plant) {
+                        return DropdownMenuItem<String>(
+                          value: plant.noReferensi,
+                          child: Text(
+                            plant.namaGudang,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        debugPrint("PlantSelected: $value");
+                        ref.read(doVMProvider.notifier).setPlant(value);
+                      },
                     ),
                   ),
                 ),
               ),
               SizedBox(width: 8),
               Expanded(
-                child: TextField(
-                  controller: _tecOrg,
+                child: InputDecorator(
                   decoration: InputDecoration(
                     hintText: 'Originator',
                     prefixIcon: const Icon(Icons.credit_card_sharp),
@@ -228,7 +234,24 @@ class _DoPageState extends ConsumerState<DoPage> {
                     ),
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16.0,
-                      vertical: 12.0,
+                      vertical: 2.0,
+                    ),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: state.originator,
+                      isExpanded: true,
+                      hint: const Text('Originator'),
+                      items: state.originatorList.map((org) {
+                        return DropdownMenuItem<String>(
+                          value: org.noReferensi,
+                          child: Text(org.nama, overflow: TextOverflow.ellipsis),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        debugPrint("OrgSelected: $value");
+                        ref.read(doVMProvider.notifier).setOrg(value);
+                      },
                     ),
                   ),
                 ),
@@ -239,11 +262,104 @@ class _DoPageState extends ConsumerState<DoPage> {
           Row(
             children: [
               Expanded(
+                child: InkWell(
+                  onTap: () async {
+                    final picked = await showDatePicker(
+                      context: context,
+                      initialDate: state.startDate ?? DateTime.now(),
+                      firstDate: DateTime(2020),
+                      lastDate: DateTime(2100),
+                    );
+                    if (picked != null) {
+                      ref.read(doVMProvider.notifier).setStartDate(picked);
+                    }
+                  },
+                  child: InputDecorator(
+                    decoration: InputDecoration(
+                      hintText: 'Start Date',
+                      prefixIcon: const Icon(Icons.calendar_today),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 12.0,
+                      ),
+                    ),
+                    child: Text(
+                      state.startDate != null
+                          ? DateFormat('dd/MM/yyyy').format(state.startDate!)
+                          : 'Start Date',
+                      style: TextStyle(
+                        color: state.startDate != null ? Colors.black : Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: InkWell(
+                  onTap: () async {
+                    final picked = await showDatePicker(
+                      context: context,
+                      initialDate: state.endDate ?? DateTime.now(),
+                      firstDate: DateTime(2020),
+                      lastDate: DateTime(2100),
+                    );
+                    if (picked != null) {
+                      ref.read(doVMProvider.notifier).setEndDate(picked);
+                    }
+                  },
+                  child: InputDecorator(
+                    decoration: InputDecoration(
+                      hintText: 'End Date',
+                      prefixIcon: const Icon(Icons.calendar_today),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 12.0,
+                      ),
+                    ),
+                    child: Text(
+                      state.endDate != null
+                          ? DateFormat('dd/MM/yyyy').format(state.endDate!)
+                          : 'End Date',
+                      style: TextStyle(
+                        color: state.endDate != null ? Colors.black : Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          TextField(
+            controller: _tecNopol,
+            decoration: InputDecoration(
+              hintText: 'No Plat',
+              prefixIcon: const Icon(Icons.local_shipping),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 12.0,
+              ),
+            ),
+          ),
+          SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
                 child: TextField(
-                  controller: _tecNopol,
+                  controller: _tecResi,
                   decoration: InputDecoration(
-                    hintText: 'No Plat',
-                    prefixIcon: const Icon(Icons.local_shipping),
+                    hintText: 'No Resi',
+                    prefixIcon: const Icon(Icons.receipt_long),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),

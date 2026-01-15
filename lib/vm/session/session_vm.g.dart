@@ -33,7 +33,7 @@ final class SessionVMProvider
   SessionVM create() => SessionVM();
 }
 
-String _$sessionVMHash() => r'73f7386121abc99b4d0c168507aa2488149d258d';
+String _$sessionVMHash() => r'51b6532d14427e810df630aac4d502b3913fbc9c';
 
 abstract class _$SessionVM extends $AsyncNotifier<SessionState> {
   FutureOr<SessionState> build();

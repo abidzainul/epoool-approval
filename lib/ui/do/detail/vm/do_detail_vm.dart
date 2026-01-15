@@ -56,17 +56,19 @@ class DoDetailVM extends _$DoDetailVM {
       String? fotoUrlDrg;
       String type = 'driver';
 
-      if(element.foto.contains('truck')){
+      if (element.foto.contains('truck')) {
         type = 'truck';
       }
 
       if (element.foto.isNotEmpty) {
-        fotoUrlDriver = "${api.baseUrlDev}/berkas/foto_k3/${element.foto}.png";
+        fotoUrlDriver = "${api.baseUrl}/berkas/foto_k3/${element.foto}";
+        // fotoUrlDriver = "${api.baseUrl}/berkas/foto_k3/${element.foto}.jpg";
+        // fotoUrlDriver = "https://dev.epoool.id/berkas/foto_k3/foto_30_driver_26010501440011.png";
       }
 
       if (element.fotoOriginator.isNotEmpty) {
-        fotoUrlDrg =
-            "${api.baseUrlDev}/berkas/foto_k3/${element.fotoOriginator}.png";
+        fotoUrlDrg = "${api.baseUrl}/berkas/foto_k3/${element.fotoOriginator}";
+        // fotoUrlDrg = "${api.baseUrl}/berkas/foto_k3/${element.fotoOriginator}.jpg";
       }
 
       K3Checklist item = K3Checklist(
@@ -75,7 +77,8 @@ class DoDetailVM extends _$DoDetailVM {
         urlImageDriver: fotoUrlDriver,
         urlImageOrg: fotoUrlDrg,
         type: element.tipe,
-        tecDescOrg: TextEditingController(text: element.keteranganOriginator),
+        ketOrg: element.keteranganOriginator,
+        tecDescOrg: TextEditingController(),
       );
       checklist.add(item);
     }
@@ -103,8 +106,7 @@ class DoDetailVM extends _$DoDetailVM {
 
       String? fotoUrlDriver;
       if (fotoDriver.foto.isNotEmpty) {
-        fotoUrlDriver =
-            "${api.baseUrlDev}/berkas/foto_k3/${fotoDriver.foto}.png";
+        fotoUrlDriver = "${api.baseUrl}/berkas/foto_k3/${fotoDriver.foto}";
       }
 
       K3Checklist item = K3Checklist(
@@ -129,8 +131,7 @@ class DoDetailVM extends _$DoDetailVM {
 
       String? fotoUrlDriver;
       if (fotoDriver.foto.isNotEmpty) {
-        fotoUrlDriver =
-            "${api.baseUrlDev}/berkas/foto_k3/${fotoDriver.foto}.png";
+        fotoUrlDriver = "${api.baseUrl}/berkas/foto_k3/${fotoDriver.foto}";
       }
 
       K3Checklist item = K3Checklist(

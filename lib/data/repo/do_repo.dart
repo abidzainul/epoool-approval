@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:osi/data/api/api_exception.dart';
 import 'package:osi/data/api/api_services.dart' as api;
 import 'package:osi/data/api/client/api_client.dart';
@@ -31,6 +32,9 @@ class DoRepo {
     String? nopol,
     String? org,
     String? plant,
+    String? startDate,
+    String? endDate,
+    String? resi,
   }) async {
     try {
       String? tokenFcm = await session.getFcmToken();
@@ -40,15 +44,18 @@ class DoRepo {
         "nopol": nopol,
         "org": org,
         "plant": plant,
+        "date_from": startDate,
+        "date_to": endDate,
+        "resi": resi,
       };
 
       final res = await client.post(api.urlGetOrders, data: maps);
 
       if (res.statusCode == 200) {
         Map<String, dynamic> json = {'code': '0'};
-        try{
+        try {
           json = jsonDecode(res.toString());
-        } catch(e) {
+        } catch (e) {
           throw ApiException(res.toString());
         }
 
@@ -77,14 +84,17 @@ class DoRepo {
 
       params.addAll({'token': tokenFcm});
 
-      // log("params: $params");
+      log("params: $params");
       // return "success";
-      final res = await client.post(api.urlApproveOrder, data: params);
+      final res = await client.post(
+        api.urlApproveOrder,
+        data: FormData.fromMap(params),
+      );
       if (res.statusCode == 200) {
         Map<String, dynamic> json = {'code': '0'};
-        try{
+        try {
           json = jsonDecode(res.toString());
-        } catch(e) {
+        } catch (e) {
           throw ApiException(res.toString());
         }
 
@@ -107,13 +117,15 @@ class DoRepo {
     try {
       String? tokenFcm = await session.getFcmToken();
 
-      final res = await client.post("${api.urlGetK3Driver}/$tokenFcm/$idGudang/$idOrg");
+      final res = await client.post(
+        "${api.urlGetK3Driver}/$tokenFcm/$idGudang/$idOrg",
+      );
 
       if (res.statusCode == 200) {
         Map<String, dynamic> json = {'code': '0'};
-        try{
+        try {
           json = jsonDecode(res.toString());
-        } catch(e) {
+        } catch (e) {
           throw ApiException(res.toString());
         }
 

@@ -8,6 +8,7 @@ class K3ChecklistItem extends StatelessWidget {
   final VoidCallback? onTapImage;
   final Widget? imageOrg;
   final TextEditingController controller;
+  final String? notes;
 
   const K3ChecklistItem({
     super.key,
@@ -18,10 +19,14 @@ class K3ChecklistItem extends StatelessWidget {
     this.onTapImage,
     this.imageOrg,
     required this.controller,
+    this.notes,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (controller.text.isEmpty && notes != null && notes!.isNotEmpty) {
+      controller.text = notes!;
+    }
     return Column(
       mainAxisSize: .min,
       children: [

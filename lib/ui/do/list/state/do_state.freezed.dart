@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DoState {
 
- DoStatus get status; String? get message; List<DeliveryOrder?> get data; List<DeliveryOrder?> get dataFiltered; String? get search; String? get plant; String? get originator;
+ DoStatus get status; String? get message; List<DeliveryOrder?> get data; List<DeliveryOrder?> get dataFiltered; String? get search; String? get plant; String? get originator; DateTime? get startDate; DateTime? get endDate; String? get resi; List<PlantUser> get plantList; List<OriginatorUser> get originatorList;
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $DoStateCopyWith<DoState> get copyWith => _$DoStateCopyWithImpl<DoState>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.data, data)&&const DeepCollectionEquality().equals(other.dataFiltered, dataFiltered)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.originator, originator) || other.originator == originator));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.data, data)&&const DeepCollectionEquality().equals(other.dataFiltered, dataFiltered)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.originator, originator) || other.originator == originator)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.endDate, endDate) || other.endDate == endDate)&&(identical(other.resi, resi) || other.resi == resi)&&const DeepCollectionEquality().equals(other.plantList, plantList)&&const DeepCollectionEquality().equals(other.originatorList, originatorList));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(data),const DeepCollectionEquality().hash(dataFiltered),search,plant,originator);
+int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(data),const DeepCollectionEquality().hash(dataFiltered),search,plant,originator,startDate,endDate,resi,const DeepCollectionEquality().hash(plantList),const DeepCollectionEquality().hash(originatorList));
 
 @override
 String toString() {
-  return 'DoState(status: $status, message: $message, data: $data, dataFiltered: $dataFiltered, search: $search, plant: $plant, originator: $originator)';
+  return 'DoState(status: $status, message: $message, data: $data, dataFiltered: $dataFiltered, search: $search, plant: $plant, originator: $originator, startDate: $startDate, endDate: $endDate, resi: $resi, plantList: $plantList, originatorList: $originatorList)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $DoStateCopyWith<$Res>  {
   factory $DoStateCopyWith(DoState value, $Res Function(DoState) _then) = _$DoStateCopyWithImpl;
 @useResult
 $Res call({
- DoStatus status, String? message, List<DeliveryOrder?> data, List<DeliveryOrder?> dataFiltered, String? search, String? plant, String? originator
+ DoStatus status, String? message, List<DeliveryOrder?> data, List<DeliveryOrder?> dataFiltered, String? search, String? plant, String? originator, DateTime? startDate, DateTime? endDate, String? resi, List<PlantUser> plantList, List<OriginatorUser> originatorList
 });
 
 
@@ -65,7 +65,7 @@ class _$DoStateCopyWithImpl<$Res>
 
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? dataFiltered = null,Object? search = freezed,Object? plant = freezed,Object? originator = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? dataFiltered = null,Object? search = freezed,Object? plant = freezed,Object? originator = freezed,Object? startDate = freezed,Object? endDate = freezed,Object? resi = freezed,Object? plantList = null,Object? originatorList = null,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as DoStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
@@ -74,7 +74,12 @@ as List<DeliveryOrder?>,dataFiltered: null == dataFiltered ? _self.dataFiltered 
 as List<DeliveryOrder?>,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
 as String?,plant: freezed == plant ? _self.plant : plant // ignore: cast_nullable_to_non_nullable
 as String?,originator: freezed == originator ? _self.originator : originator // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,startDate: freezed == startDate ? _self.startDate : startDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,endDate: freezed == endDate ? _self.endDate : endDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,resi: freezed == resi ? _self.resi : resi // ignore: cast_nullable_to_non_nullable
+as String?,plantList: null == plantList ? _self.plantList : plantList // ignore: cast_nullable_to_non_nullable
+as List<PlantUser>,originatorList: null == originatorList ? _self.originatorList : originatorList // ignore: cast_nullable_to_non_nullable
+as List<OriginatorUser>,
   ));
 }
 
@@ -159,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  String? search,  String? plant,  String? originator)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  String? search,  String? plant,  String? originator,  DateTime? startDate,  DateTime? endDate,  String? resi,  List<PlantUser> plantList,  List<OriginatorUser> originatorList)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DoState() when $default != null:
-return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.search,_that.plant,_that.originator);case _:
+return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.search,_that.plant,_that.originator,_that.startDate,_that.endDate,_that.resi,_that.plantList,_that.originatorList);case _:
   return orElse();
 
 }
@@ -180,10 +185,10 @@ return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.s
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  String? search,  String? plant,  String? originator)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  String? search,  String? plant,  String? originator,  DateTime? startDate,  DateTime? endDate,  String? resi,  List<PlantUser> plantList,  List<OriginatorUser> originatorList)  $default,) {final _that = this;
 switch (_that) {
 case _DoState():
-return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.search,_that.plant,_that.originator);case _:
+return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.search,_that.plant,_that.originator,_that.startDate,_that.endDate,_that.resi,_that.plantList,_that.originatorList);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +205,10 @@ return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.s
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  String? search,  String? plant,  String? originator)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DoStatus status,  String? message,  List<DeliveryOrder?> data,  List<DeliveryOrder?> dataFiltered,  String? search,  String? plant,  String? originator,  DateTime? startDate,  DateTime? endDate,  String? resi,  List<PlantUser> plantList,  List<OriginatorUser> originatorList)?  $default,) {final _that = this;
 switch (_that) {
 case _DoState() when $default != null:
-return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.search,_that.plant,_that.originator);case _:
+return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.search,_that.plant,_that.originator,_that.startDate,_that.endDate,_that.resi,_that.plantList,_that.originatorList);case _:
   return null;
 
 }
@@ -215,7 +220,7 @@ return $default(_that.status,_that.message,_that.data,_that.dataFiltered,_that.s
 @JsonSerializable()
 
 class _DoState implements DoState {
-  const _DoState({this.status = DoStatus.initial, this.message, final  List<DeliveryOrder?> data = const [], final  List<DeliveryOrder?> dataFiltered = const [], this.search, this.plant, this.originator}): _data = data,_dataFiltered = dataFiltered;
+  const _DoState({this.status = DoStatus.initial, this.message, final  List<DeliveryOrder?> data = const [], final  List<DeliveryOrder?> dataFiltered = const [], this.search, this.plant, this.originator, this.startDate, this.endDate, this.resi, final  List<PlantUser> plantList = const [], final  List<OriginatorUser> originatorList = const []}): _data = data,_dataFiltered = dataFiltered,_plantList = plantList,_originatorList = originatorList;
   factory _DoState.fromJson(Map<String, dynamic> json) => _$DoStateFromJson(json);
 
 @override@JsonKey() final  DoStatus status;
@@ -237,6 +242,23 @@ class _DoState implements DoState {
 @override final  String? search;
 @override final  String? plant;
 @override final  String? originator;
+@override final  DateTime? startDate;
+@override final  DateTime? endDate;
+@override final  String? resi;
+ final  List<PlantUser> _plantList;
+@override@JsonKey() List<PlantUser> get plantList {
+  if (_plantList is EqualUnmodifiableListView) return _plantList;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_plantList);
+}
+
+ final  List<OriginatorUser> _originatorList;
+@override@JsonKey() List<OriginatorUser> get originatorList {
+  if (_originatorList is EqualUnmodifiableListView) return _originatorList;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_originatorList);
+}
+
 
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
@@ -251,16 +273,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._data, _data)&&const DeepCollectionEquality().equals(other._dataFiltered, _dataFiltered)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.originator, originator) || other.originator == originator));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoState&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._data, _data)&&const DeepCollectionEquality().equals(other._dataFiltered, _dataFiltered)&&(identical(other.search, search) || other.search == search)&&(identical(other.plant, plant) || other.plant == plant)&&(identical(other.originator, originator) || other.originator == originator)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.endDate, endDate) || other.endDate == endDate)&&(identical(other.resi, resi) || other.resi == resi)&&const DeepCollectionEquality().equals(other._plantList, _plantList)&&const DeepCollectionEquality().equals(other._originatorList, _originatorList));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_dataFiltered),search,plant,originator);
+int get hashCode => Object.hash(runtimeType,status,message,const DeepCollectionEquality().hash(_data),const DeepCollectionEquality().hash(_dataFiltered),search,plant,originator,startDate,endDate,resi,const DeepCollectionEquality().hash(_plantList),const DeepCollectionEquality().hash(_originatorList));
 
 @override
 String toString() {
-  return 'DoState(status: $status, message: $message, data: $data, dataFiltered: $dataFiltered, search: $search, plant: $plant, originator: $originator)';
+  return 'DoState(status: $status, message: $message, data: $data, dataFiltered: $dataFiltered, search: $search, plant: $plant, originator: $originator, startDate: $startDate, endDate: $endDate, resi: $resi, plantList: $plantList, originatorList: $originatorList)';
 }
 
 
@@ -271,7 +293,7 @@ abstract mixin class _$DoStateCopyWith<$Res> implements $DoStateCopyWith<$Res> {
   factory _$DoStateCopyWith(_DoState value, $Res Function(_DoState) _then) = __$DoStateCopyWithImpl;
 @override @useResult
 $Res call({
- DoStatus status, String? message, List<DeliveryOrder?> data, List<DeliveryOrder?> dataFiltered, String? search, String? plant, String? originator
+ DoStatus status, String? message, List<DeliveryOrder?> data, List<DeliveryOrder?> dataFiltered, String? search, String? plant, String? originator, DateTime? startDate, DateTime? endDate, String? resi, List<PlantUser> plantList, List<OriginatorUser> originatorList
 });
 
 
@@ -288,7 +310,7 @@ class __$DoStateCopyWithImpl<$Res>
 
 /// Create a copy of DoState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? dataFiltered = null,Object? search = freezed,Object? plant = freezed,Object? originator = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? message = freezed,Object? data = null,Object? dataFiltered = null,Object? search = freezed,Object? plant = freezed,Object? originator = freezed,Object? startDate = freezed,Object? endDate = freezed,Object? resi = freezed,Object? plantList = null,Object? originatorList = null,}) {
   return _then(_DoState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as DoStatus,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
@@ -297,7 +319,12 @@ as List<DeliveryOrder?>,dataFiltered: null == dataFiltered ? _self._dataFiltered
 as List<DeliveryOrder?>,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
 as String?,plant: freezed == plant ? _self.plant : plant // ignore: cast_nullable_to_non_nullable
 as String?,originator: freezed == originator ? _self.originator : originator // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,startDate: freezed == startDate ? _self.startDate : startDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,endDate: freezed == endDate ? _self.endDate : endDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,resi: freezed == resi ? _self.resi : resi // ignore: cast_nullable_to_non_nullable
+as String?,plantList: null == plantList ? _self._plantList : plantList // ignore: cast_nullable_to_non_nullable
+as List<PlantUser>,originatorList: null == originatorList ? _self._originatorList : originatorList // ignore: cast_nullable_to_non_nullable
+as List<OriginatorUser>,
   ));
 }
 

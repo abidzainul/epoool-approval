@@ -60,6 +60,11 @@ class ApiInterceptors extends Interceptor {
   Future onError(DioException err, ErrorInterceptorHandler handler) async {
     if (kDebugMode) {
       log('$runtimeType ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+      log('$runtimeType ERROR TYPE: ${err.type}');
+      log('$runtimeType ERROR MESSAGE: ${err.message}');
+      if (err.error != null) {
+        log('$runtimeType ERROR DETAIL: ${err.error}');
+      }
     }
     super.onError(err, handler);
   }
