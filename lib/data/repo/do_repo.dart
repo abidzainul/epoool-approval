@@ -46,8 +46,11 @@ class DoRepo {
         "plant": plant,
         "date_from": startDate,
         "date_to": endDate,
-        "resi": resi,
       };
+
+      if (resi?.isNotEmpty ?? false) {
+        maps.addAll({"resi": resi});
+      }
 
       final res = await client.post(api.urlGetOrders, data: maps);
 

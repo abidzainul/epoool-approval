@@ -129,14 +129,14 @@ class DrawerNavigationPage extends ConsumerWidget {
                   child: Icon(Icons.error, size: 40, color: Colors.red),
                 ),
               ),
-              ListTile(
-                leading: const Icon(Icons.home),
-                title: const Text('Home'),
-                onTap: () {
-                  drawerVM.selectMenuByKey('home');
-                  Navigator.pop(context);
-                },
-              ),
+              // ListTile(
+              //   leading: const Icon(Icons.home),
+              //   title: const Text('Home'),
+              //   onTap: () {
+              //     drawerVM.selectMenuByKey('home');
+              //     Navigator.pop(context);
+              //   },
+              // ),
               const Divider(),
               ListTile(
                 leading: const Icon(Icons.logout),

@@ -5,7 +5,7 @@ enum DoLvStatus { open, approved, rejected }
 class DoLvItem extends StatelessWidget {
   final String? title;
   final String? subtitle;
-  final String? resi;
+  final String? qty;
   final String? date;
   final VoidCallback? onTap;
   final Color? avatarColor;
@@ -18,7 +18,7 @@ class DoLvItem extends StatelessWidget {
     Key? key,
     required this.title,
     required this.subtitle,
-    required this.resi,
+    required this.qty,
     required this.date,
     this.onTap,
     this.avatarColor,
@@ -64,18 +64,22 @@ class DoLvItem extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 4),
-              Text(
-                subtitle ?? '',
-                maxLines: 1,
-                overflow: .ellipsis,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
-                ),
+              Row(
+                children: [
+                  Icon(Icons.person, size: 18, color: Colors.grey.shade700,),
+                  Expanded(
+                    child: Text(
+                      subtitle ?? '',
+                      maxLines: 1,
+                      overflow: .ellipsis,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Text('Qty: $resi', style: theme.textTheme.bodySmall),
+                  Text('Qty*1 TO: $qty', style: theme.textTheme.bodySmall),
                   const SizedBox(width: 12),
                   const Icon(
                     Icons.calendar_today,

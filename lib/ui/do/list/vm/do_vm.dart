@@ -29,24 +29,65 @@ class DoVM extends _$DoVM {
     var session = ref.read(sessionProvider);
     final loginUser = await session.getLoginUser();
 
+    // Find default originator where is_default=1
     var org = loginUser!.originatorUser.firstWhere(
-      (e) => e.idOriginator == loginUser.user?.idReference,
-      orElse: () => OriginatorUser(),
+      (e) => e.isDefault == '1',
+      orElse: () => loginUser.originatorUser.isNotEmpty
+          ? loginUser.originatorUser.first
+          : OriginatorUser(),
     );
     log("org: ${org.noReferensi}");
 
-    var plant = loginUser.plantUser.firstWhere(
-      (e) => e.idOriginator == loginUser.user?.idReference,
-      orElse: () => PlantUser(),
+    // Filter plants by selected originator's id_originator
+    final filteredPlants = loginUser.plantUser
+        .where((p) => p.idOriginator == org.idOriginator)
+        .toList();
+
+    // Find default plant where is_default=1 from filtered plants
+    var plant = filteredPlants.firstWhere(
+      (e) => e.isDefault == '1',
+      orElse: () => filteredPlants.isNotEmpty
+          ? filteredPlants.first
+          : PlantUser(),
     );
     log("plant: ${plant.noReferensi}");
+
+    final now = DateTime.now();
+    final yesterday = now.subtract(Duration(days: 1));
+    final tomorrow = now.add(Duration(days: 1));
 
     state = state.copyWith(
       plant: plant.noReferensi,
       originator: org.noReferensi,
-      plantList: loginUser.plantUser,
-      originatorList: loginUser.originatorUser,
+      plantList: createListDropdownPlant(filteredPlants),
+      originatorList: createListDropdownOrg(loginUser.originatorUser),
+      startDate: yesterday,
+      endDate: tomorrow,
     );
+  }
+
+  List<OriginatorUser> createListDropdownOrg(List<OriginatorUser> items) {
+    final Set<String> seenIds = {};
+    List<OriginatorUser> uniqueItems = [];
+    for (var item in items) {
+      if (seenIds.add(item.noReferensi)) {
+        uniqueItems.add(item);
+      }
+    }
+
+    return uniqueItems;
+  }
+
+  List<PlantUser> createListDropdownPlant(List<PlantUser> items) {
+    final Set<String> seenIds = {};
+    List<PlantUser> uniqueItems = [];
+    for (var item in items) {
+      if (seenIds.add(item.noReferensi)) {
+        uniqueItems.add(item);
+      }
+    }
+
+    return uniqueItems;
   }
 
   Future<void> loadOrders({
@@ -126,7 +167,35 @@ class DoVM extends _$DoVM {
 
   Future<void> setOrg(String? o) async {
     final normalized = (o == null || o.trim().isEmpty) ? null : o.trim();
-    state = state.copyWith(originator: normalized);
+
+    // Get login user to filter plants
+    var session = ref.read(sessionProvider);
+    final loginUser = await session.getLoginUser();
+
+    // Find selected originator
+    final selectedOrg = loginUser!.originatorUser.firstWhere(
+      (e) => e.noReferensi == normalized,
+      orElse: () => OriginatorUser(),
+    );
+
+    // Filter plants by selected originator's id_originator
+    final filteredPlants = loginUser.plantUser
+        .where((p) => p.idOriginator == selectedOrg.idOriginator)
+        .toList();
+
+    // Find default plant or first plant from filtered list
+    var defaultPlant = filteredPlants.firstWhere(
+      (e) => e.isDefault == '1',
+      orElse: () => filteredPlants.isNotEmpty
+          ? filteredPlants.first
+          : PlantUser(),
+    );
+
+    state = state.copyWith(
+      originator: normalized,
+      plantList: createListDropdownPlant(filteredPlants),
+      plant: defaultPlant.noReferensi,
+    );
   }
 
   Future<void> setStartDate(DateTime? date) async {
@@ -144,8 +213,11 @@ class DoVM extends _$DoVM {
 
   Future<void> searchOrder({String? nopol, String? plant, String? org}) async {
     await setSearch(nopol);
-    await setPlant(plant);
-    await setOrg(org);
-    loadOrders();
+
+    loadOrders(
+      search: nopol,
+      plant: plant ?? state.plant,
+      org: org ?? state.originator,
+    );
   }
 }

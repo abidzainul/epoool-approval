@@ -210,7 +210,9 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
       itemComparator: (item1, item2) => item1!.title.compareTo(item2!.title),
       order: GroupedListOrder.ASC,
       itemBuilder: (context, K3Checklist? item) {
-        final approved = widget.data?.transaction?.safetyCheckOriginator == "1";
+        final approved =
+            widget.data?.transaction?.safetyCheckOriginator == "1" ||
+            widget.data?.transaction?.safetyCheckOriginator == "2";
         final key = "${item?.id}_${item?.type}";
 
         if (approved) {
@@ -573,7 +575,7 @@ class _DoDetailPageState extends ConsumerState<DoDetailPage> {
 
     Map<String, dynamic> params = {
       'resi': widget.data?.transaction?.resi,
-      'status': status == "approve" ? "1" : "0",
+      'status': status == "approve" ? "1" : "2",
     };
     params.addAll(mapFile);
     params.addAll(mapDesc);

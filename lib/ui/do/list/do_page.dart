@@ -1,4 +1,5 @@
 import 'package:osi/app/routes.dart';
+import 'package:osi/data/model/login/login_user.dart';
 import 'package:osi/ui/do/list/state/do_state.dart';
 import 'package:osi/ui/do/list/vm/do_vm.dart';
 import 'package:osi/ui/do/list/widget/do_lv_item.dart';
@@ -51,7 +52,6 @@ class _DoPageState extends ConsumerState<DoPage> {
   Widget build(BuildContext context) {
     final state = ref.watch(doVMProvider);
     final vm = ref.read(doVMProvider.notifier);
-
 
     final counterState = ref.watch(counterProvider);
 
@@ -141,11 +141,14 @@ class _DoPageState extends ConsumerState<DoPage> {
                           itemCount: state.dataFiltered.length,
                           itemBuilder: (c, i) {
                             final item = state.dataFiltered[i]?.transaction;
+                            final truck = state.dataFiltered[i]?.truck;
+                            final driver = state.dataFiltered[i]?.driver;
                             return DoLvItem(
                               title: item?.resi,
-                              subtitle: item?.namaJamMuat,
-                              resi: item?.totalQty,
-                              date: item?.dateAdd,
+                              subtitle:
+                                  " ${driver?.namaDriver} | ${truck?.noPlat}",
+                              qty: item?.totalQty,
+                              date: item?.tanggalAccept,
                               status: item?.safetyCheckOriginatorBy == null
                                   ? DoLvStatus.open
                                   : item?.safetyCheckOriginator == "1"
@@ -186,77 +189,69 @@ class _DoPageState extends ConsumerState<DoPage> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: InputDecorator(
-                  decoration: InputDecoration(
-                    hintText: 'Plant',
-                    prefixIcon: const Icon(Icons.factory),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 2.0,
-                    ),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: state.plant,
-                      isExpanded: true,
-                      hint: const Text('Plant'),
-                      items: state.plantList.map((plant) {
-                        return DropdownMenuItem<String>(
-                          value: plant.noReferensi,
-                          child: Text(
-                            plant.namaGudang,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (value) {
-                        debugPrint("PlantSelected: $value");
-                        ref.read(doVMProvider.notifier).setPlant(value);
-                      },
-                    ),
-                  ),
-                ),
+          InputDecorator(
+            decoration: InputDecoration(
+              hintText: 'Originator',
+              prefixIcon: const Icon(Icons.credit_card_sharp),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
               ),
-              SizedBox(width: 8),
-              Expanded(
-                child: InputDecorator(
-                  decoration: InputDecoration(
-                    hintText: 'Originator',
-                    prefixIcon: const Icon(Icons.credit_card_sharp),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 2.0,
-                    ),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: state.originator,
-                      isExpanded: true,
-                      hint: const Text('Originator'),
-                      items: state.originatorList.map((org) {
-                        return DropdownMenuItem<String>(
-                          value: org.noReferensi,
-                          child: Text(org.nama, overflow: TextOverflow.ellipsis),
-                        );
-                      }).toList(),
-                      onChanged: (value) {
-                        debugPrint("OrgSelected: $value");
-                        ref.read(doVMProvider.notifier).setOrg(value);
-                      },
-                    ),
-                  ),
-                ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 2.0,
               ),
-            ],
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                value: state.originator,
+                isExpanded: true,
+                hint: const Text('Originator'),
+                items: state.originatorList.map((org) {
+                  return DropdownMenuItem<String>(
+                    value: org.noReferensi,
+                    child: Text(org.nama, overflow: TextOverflow.ellipsis),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  debugPrint("OrgSelected: $value");
+                  ref.read(doVMProvider.notifier).setOrg(value);
+                },
+              ),
+            ),
+          ),
+          SizedBox(height: 8),
+          InputDecorator(
+            decoration: InputDecoration(
+              hintText: 'Plant',
+              prefixIcon: const Icon(Icons.factory),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 2.0,
+              ),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                value: state.plant,
+                isExpanded: true,
+                hint: const Text('Plant'),
+                items: state.plantList.map((plant) {
+                  return DropdownMenuItem<String>(
+                    value: plant.noReferensi,
+                    child: Text(
+                      '${plant.noReferensi} - ${plant.namaGudang}',
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  debugPrint("PlantSelected: $value");
+                  ref.read(doVMProvider.notifier).setPlant(value);
+                },
+              ),
+            ),
           ),
           SizedBox(height: 8),
           Row(
@@ -291,7 +286,9 @@ class _DoPageState extends ConsumerState<DoPage> {
                           ? DateFormat('dd/MM/yyyy').format(state.startDate!)
                           : 'Start Date',
                       style: TextStyle(
-                        color: state.startDate != null ? Colors.black : Colors.grey,
+                        color: state.startDate != null
+                            ? Colors.black
+                            : Colors.grey,
                       ),
                     ),
                   ),
@@ -328,7 +325,9 @@ class _DoPageState extends ConsumerState<DoPage> {
                           ? DateFormat('dd/MM/yyyy').format(state.endDate!)
                           : 'End Date',
                       style: TextStyle(
-                        color: state.endDate != null ? Colors.black : Colors.grey,
+                        color: state.endDate != null
+                            ? Colors.black
+                            : Colors.grey,
                       ),
                     ),
                   ),
